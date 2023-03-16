@@ -1,7 +1,9 @@
-const siteAPI = require('./API/siteAPI');
+const userAPI = require('./API/userAPI');
 
 function router(server) {
-    server.use('/api', siteAPI);
+    server.use('/api/user', userAPI);
 }
+
+
 
 module.exports = router;
