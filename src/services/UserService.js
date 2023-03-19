@@ -61,6 +61,11 @@ class UserService {
          return {...data.toJSON(), token};
        });
    }
+
+   //Cập nhật user
+   updateUser = async (user, conditionObj) => {
+    return await User.update(user, { where: conditionObj })
+}
 }
 
 module.exports = new UserService();

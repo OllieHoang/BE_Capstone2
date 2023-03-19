@@ -14,6 +14,18 @@ class RoleController {
               return res.status(400).json(err);
           })
   }
+      //Lấy thông tin role theo roleName
+    //GET: /:roleName/get
+    getRoleByRoleName = async (req, res, next) => {
+        const roleName = req.params.roleName;
+        await roleService.getRoleByRoleName(roleName)
+            .then(data =>{
+                return res.status(200).json(data);
+            })
+            .catch(err=>{
+                return res.status(400).json(err);
+            })
+    }
 }
 
 module.exports = new RoleController();
