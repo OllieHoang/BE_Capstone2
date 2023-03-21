@@ -24,6 +24,18 @@ class userController {
             res.status(400).send(err)
         })
     }
+
+    // GET user JSON
+    getAllUser = async (req, res)=>{
+        return await userService.getAllUser()
+        .then(data=>{
+            if(data){
+                res.status(200).json(data);
+            }else res.status(400).send([]);
+        }).catch(err=>{
+            res.status(500).send(err.message);
+        })
+    }
     
     //POST: /update/:userId
     updateUser = async (req, res, next) => {

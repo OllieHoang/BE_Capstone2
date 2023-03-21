@@ -64,8 +64,12 @@ class UserService {
 
    //Cập nhật user
    updateUser = async (user, conditionObj) => {
-    return await User.update(user, { where: conditionObj })
+    return await database.User.update(user, { where: conditionObj })
 }
+    // All user
+    getAllUser = async ()=>{
+      return await database.User.findAll({raw: true})
+    }
 }
 
 module.exports = new UserService();
