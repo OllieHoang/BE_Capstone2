@@ -21,8 +21,13 @@ const User = sequelize.define("user", {
         type: DataTypes.STRING(100),
         // allowNull: false
     },
+    verificationCode: DataTypes.STRING,
     IDcard: DataTypes.STRING(20),
     phone: DataTypes.STRING(11),
+    isVerified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },  
 })
 
 const initUser = async () => {
