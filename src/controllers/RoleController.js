@@ -2,9 +2,9 @@ const roleService = require('../services/RoleService');
 
 //api: /api/role/
 class RoleController {
-   addRole = async (req, res, next) => {
-      const roleName = req.body.roleName;
-      await roleService.addRole(roleName)
+   addRole = async (req, res) => {
+      const e = req.body;
+      await roleService.addRole(e)
           .then(data =>{
               if(data)
                   return res.status(200).json(data);

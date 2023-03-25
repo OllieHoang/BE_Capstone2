@@ -8,6 +8,7 @@ class UserService {
    registerAccount = async (value) => {
     const verificationCode = generateVerify();
     const hardPassword = bcrypt.hashSync(value.password, 10);
+    const role = await database.Role.findOne({where:{roleName:"customer"}})
     const defaults = {
       fullName: value.fullName,
       email: value.email,
@@ -16,13 +17,14 @@ class UserService {
       phone: value.phone,
       dateOfBirth: value.dateOfBirth,
       verificationCode: verificationCode,
+      roleName : role.roleName,
+      roleId: role.roleId,
     }
       const userdata = await database.User.findOrCreate({
          where: { email: value.email },
          defaults,
          raw: true
      })
-  
      let check = userdata.find(userEle => {
          return typeof userEle === 'boolean';
      })

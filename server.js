@@ -9,7 +9,7 @@ let PORT = process.env.PORT || 8000;
 
 initWebRouter(server);
 db.connect();
-// postgres.initAll();
+postgres.initAll();
 server.use(express.static(path.join(__dirname,"")));
 
 server.listen(PORT, console.log("Hosting Port: "+ PORT));

@@ -10,5 +10,5 @@ const initAll = async () => {
 module.exports = {
    User,
    Role,
-   // initAll,
+   initAll,
 }

@@ -5,10 +5,10 @@ const sequelize = new Sequelize(POSTGRESQL_DEVELOPMENT_HOST);
 
 const Role = sequelize.define("role", {
     roleId: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
+        autoIncrement: true
     },
     roleName: {
         type: DataTypes.STRING(10),

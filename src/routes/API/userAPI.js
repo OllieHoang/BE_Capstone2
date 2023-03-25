@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../../controllers/UserController');
+const roleController = require('../../controllers/RoleController');
+
 
 router.get('/', userController.getAllUser)
+
+router.post('/addrole', roleController.addRole);
+
 
 router.post('/register', userController.register);
 router.post('/verify', userController.verifyAccount)
