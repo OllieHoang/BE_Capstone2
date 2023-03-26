@@ -68,7 +68,7 @@ const sendVerifyPassword = async (user) => {
 }
 
 
-module.exports = { sendEmailUser, sendVerifyMail, sendVerifyRegister }
+module.exports = { sendEmailUser, sendVerifyMail, sendVerifyRegister, sendVerifyMailPassword }
 
 /* const info = await database.User.findOne({
       where: {
