@@ -35,7 +35,7 @@ class userController {
     login = async (req,res) => {
       return await userService.login(req.body)
         .then(data=>{
-            data === "Invalid Password!"|| data ==="account Not found"?res.status(400).send("login fail"):res.status(200).send(data);
+            data === "Invalid Password!"|| data ==="account Not found" || data === "unverified account"?res.status(400).send("login fail"):res.status(200).send(data);
         }).catch(err=>{
             res.status(400).send(err)
         })
@@ -100,10 +100,16 @@ class userController {
     }
     forgotPassword = async(req,res) => {
         await userService.forgotPassword(req.body)
-        .then(async data => {
-            data === "account Not found"?res.status(400).send("Không tìm thấy tài khoản"): await sendVerifyPassword(data);
+        .then(data => {
+            data === "account Not found"?res.status(400).send("account not found"):res.status(200).send("Send completed successfully")
         })
 
+    }
+    resetPassword = async(req,res) => {
+        await userService.resetPassword(req.body)
+        .then( data => {
+            data === "invalid verification code"?res.status(400).send("Invalid"): res.status(200).send("complete")
+        })
     }
 }
 

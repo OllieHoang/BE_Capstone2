@@ -58,10 +58,12 @@ class UserService {
              value.password,
            data.password
          );
-         console.log(passwordIsValid);
 
          if (!passwordIsValid) {
              return "Invalid Password!"
+         }
+         if(data.isVerified === false) {
+          return "unverified account"
          }
          const token = jwt.sign({
            id: data.userId
@@ -69,16 +71,6 @@ class UserService {
            expiresIn: config.jwtExpiration
          });
          
-        //  const roles = await database.UserRole.findAll({
-        //      where: {userId: user.userId}
-        //  });
-        //  const roleUser =await Promise.all(roles.map(async element => {
-        //      return await database.Role.findOne({
-        //          where: {roleId: element.roleId}
-        //      }).then( rl=>{
-        //        return  rl.roleName;
-        //      });
-        //  }));
          return {...data.toJSON(), token};
        });
    }
@@ -114,7 +106,20 @@ class UserService {
           verificationCode: verificationCode
         }
         await database.User.update(newVCode, {where: data})
-        return data;  
+        await sendVerifyPassword(data);
+      })
+    }
+    resetPassword = async(user) => {
+      return await database.User.findOne({
+        where: {
+          email: user.email,
+          verificationCode: user.verificationCode
+        }
+      }).then( async data => {
+        if(!data) {
+          return "invalid verification code"
+        }
+        await database.User.update({ password: user.password });
       })
     }
 }
