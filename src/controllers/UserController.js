@@ -101,15 +101,15 @@ class userController {
     forgotPassword = async(req,res) => {
         await userService.forgotPassword(req.body)
         .then(data => {
-            data === "account Not found"?res.status(400).send("account not found"):res.status(200).send("Send completed successfully")
+            if(data === "account Not found") {
+                return res.status(400).send("account not found")
+            }
+                return res.status(200).send("Send completed successfully")
+        })
+        .catch(err => {
+            return res.status(400).json(err);
         })
 
-    }
-    resetPassword = async(req,res) => {
-        await userService.resetPassword(req.body)
-        .then( data => {
-            data === "invalid verification code"?res.status(400).send("Invalid"): res.status(200).send("complete")
-        })
     }
 }
 
