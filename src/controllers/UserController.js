@@ -76,7 +76,7 @@ class userController {
       await userService.updateUser(user, conditionObj)
           .then(data => {
               if (data)
-                  return res.status(200).send("Cập nhật user thành công.")
+                  return res.status(200).send(data)
               return res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.");
           })
           .catch(err => {
