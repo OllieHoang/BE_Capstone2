@@ -11,7 +11,7 @@ class userController {
         .then( async data => {
          if(data !== "EMAIL DUPPLICATE")
             {
-            await sendVerifyRegister(data);
+            // await sendVerifyRegister(data);
              return res.status(200).json(data);
             } else {
                 return res.status(400).json("Lỗi, trùng email")
@@ -51,21 +51,30 @@ class userController {
       user_id: userId,
       token: authToken
     }
-  });
-        
+  });       
 }
-
-    // GET user JSON
-    getAllUser = async (req, res)=>{
-        return await userService.getAllUser()
-        .then(data=>{
-            if(data){
-                res.status(200).json(data);
-            }else res.status(400).send([]);
-        }).catch(err=>{
-            res.status(500).send(err.message);
+    //GET /profile
+    profile = async (req,res) => {
+        const user = req.user.id;
+        return await userService.profile(user)
+        .then(data => {
+        data ? res.status(200).json(data) : restatus(400).send([]);
+        })
+        .catch(err => {
+            res.status(500).json(err);
         })
     }
+    // // GET user JSON
+    // getAllUser = async (req, res)=>{
+    //     return await userService.getAllUser()
+    //     .then(data=>{
+    //         if(data){
+    //             res.status(200).json(data);
+    //         }else res.status(400).send([]);
+    //     }).catch(err=>{
+    //         res.status(500).send(err.message);
+    //     })
+    // }
     
     //POST: /update/:userId
     updateUser = async (req, res, next) => {

@@ -27,6 +27,17 @@ class UserService {
          defaults,
          raw: true
      })
+     console.log("userdata");
+     console.log(userdata.id);
+     if(userdata) {
+       const qrCode = await database.QrCode.create({
+        userId: userdata.id,
+        raw: true
+       })
+       console.log("Qrcode");
+       console.log(qrCode);
+     }
+     
      let check = userdata.find(userEle => {
          return typeof userEle === 'boolean';
      })
@@ -87,10 +98,13 @@ class UserService {
     }
     return await database.User.update(newPassword, { where: conditionObj })
 }
-    // All user
-    getAllUser = async ()=>{
-      return await database.User.findAll({raw: true})
+    profile = async (user) => {
+      return await database.User.findByPk({user, raw: true})
     }
+    // // All user
+    // getAllUser = async ()=>{
+    //   return await database.User.findAll({raw: true})
+    // }
     forgotPassword = async ( user )=>{
       return await database.User.findOne({
         where:{
