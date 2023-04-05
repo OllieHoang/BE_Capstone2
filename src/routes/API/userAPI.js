@@ -6,11 +6,11 @@ const userController = require('../../controllers/UserController');
 // router.get('/', userController.getAllUser)
 
 router.post('/register', userController.register);
-router.post('/verify', userController.verifyAccount)
+router.get('/verify', userController.verifyAccount)
 
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
-router.get('/profile', userController.profile)
+router.get('/profile/:userId', userController.profile)
 
 router.post('/update/:userId', userController.updateUser);
 router.post('/password/:userId', userController.changePassword);

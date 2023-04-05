@@ -11,7 +11,7 @@ class userController {
         .then( async data => {
          if(data !== "EMAIL DUPPLICATE")
             {
-            // await sendVerifyRegister(data);
+            await sendVerifyRegister(data);
              return res.status(200).json(data);
             } else {
                 return res.status(400).json("Lỗi, trùng email")
@@ -22,10 +22,12 @@ class userController {
         })
     }
     //POST : /verify
-    verifyAccount = async (req, res) => { 
-        return await userService.verifyAccount(req.body)
+    verifyAccount = async (req, res) => {
+        const verify = req.query.id
+        console.log("Query id:" + verify);
+        return await userService.verifyAccount(verify)
         .then(data => {
-            data === "Invalid verification code"?res.status(400).send("Invalid code"): res.status(200).send(data);
+            data === "Invalid"? res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.") :  res.redirect('http://localhost:3000/login');
         }).catch(err => { 
             res.status(400).send(err)
         })
@@ -55,26 +57,32 @@ class userController {
 }
     //GET /profile
     profile = async (req,res) => {
-        const user = req.user.id;
-        return await userService.profile(user)
+        const conditionObj = {
+            userId: req.params.userId
+        }
+        return await userService.profile(conditionObj)
         .then(data => {
-        data ? res.status(200).json(data) : restatus(400).send([]);
+            console.log(data);
+        data ? res.status(200).json(data) : res.tatus(400).send([]);
         })
         .catch(err => {
             res.status(500).json(err);
         })
     }
-    // // GET user JSON
-    // getAllUser = async (req, res)=>{
-    //     return await userService.getAllUser()
-    //     .then(data=>{
-    //         if(data){
-    //             res.status(200).json(data);
-    //         }else res.status(400).send([]);
-    //     }).catch(err=>{
-    //         res.status(500).send(err.message);
-    //     })
-    // }
+    // GET user JSON
+    getAllUser = async (req, res)=>{
+        const conditionObj = {
+            userId: req.params.userId
+        }
+        return await userService.getAllUser(conditionObj)
+        .then(data=>{
+            if(data){
+                res.status(200).json(data);
+            }else res.status(400).send([]);
+        }).catch(err=>{
+            res.status(500).send(err.message);
+        })
+    }
     
     //POST: /update/:userId
     updateUser = async (req, res, next) => {
@@ -93,6 +101,21 @@ class userController {
           })
   }
     changePassword = async (req,res) => {
+        const password = req.body;
+        const conditionObj = {
+            userId: req.params.userId
+        }
+        await userService.changePassword(password, conditionObj)
+        .then(data => {
+            data === "wrong password!"
+            ? res.status(400).send("Sai thông tin nhập.")
+            : res.status(200).send("Cập nhật mật khẩu thành công.")
+        })
+        .catch(err => {
+            return res.status(500).json(err);
+        })
+    }
+    updatePassword = async (req,res) => {
         const password = req.body;
         const conditionObj = {
             userId: req.params.userId
