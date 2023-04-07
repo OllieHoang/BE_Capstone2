@@ -35,8 +35,18 @@ const sendVerifyMail = (user) => {
             `
       };
    }
+
+   const sendVerifyRegister = async (user) => {
+    const info = {
+        fullName: user.fullName,
+        email: user.email,
+        verificationCode: user.verificationCode,
+    }
+    await sendEmailUser(info, sendVerifyMail);
+}
+
    const sendVerifyMailPassword = (user) => {
-    console.log("Gửi mã code reset password ")
+    console.log("Gửi mật khẩu mới ")
     return {
           from: mailer_config.SCIS_USERNAME,
           to: user.email,
@@ -44,31 +54,23 @@ const sendVerifyMail = (user) => {
           html:`
              Chào ${user.fullName},
              <p>Tôi là hệ thống SCIS từ website Smart card ID services.</p>
-             <span><nobr> Mã xác minh đổi mật khẩu của bạn là: ${user.verificationCode}</span>
+             <span><nobr> Mật khẩu mới của bạn là:<b> ${user.password} </b></span>
              <p>Cảm ơn bạn vì đã sử dụng hệ thống!</p>
              `
        };
     }
 
-const sendVerifyRegister = async (user) => {
+const sendMailPassword = async (user, newPassword) => {
     const info = {
         fullName: user.fullName,
         email: user.email,
-        verificationCode: user.verificationCode,
+        password: newPassword
     }
-    await sendEmailUser(info, sendVerifyMail);
-}
-const sendVerifyPassword = async (user) => {
-    const info = {
-        fullName: user.fullName,
-        email: user.email,
-        verificationCode: user.verificationCode,
-    }
-    await sendEmailUser(info, sendVerifyMail);
+    await sendEmailUser(info, sendVerifyMailPassword);
 }
 
 
-module.exports = { sendEmailUser, sendVerifyMail, sendVerifyRegister, sendVerifyMailPassword }
+module.exports = { sendEmailUser, sendVerifyMail, sendVerifyRegister, sendMailPassword }
 
 /* const info = await database.User.findOne({
       where: {

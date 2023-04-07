@@ -2,7 +2,9 @@ const database = require('../db/postgresql/postgreSQL');
 var jwt = require("jsonwebtoken");
 const config = require("../configs/auth.config");
 const bcrypt = require('bcrypt');
-const generateVerify = require("../helper/generateVerify");
+const { generateVerify, generatePassword } = require("../helper/General");
+const { sendMailPassword } = require("../helper/SendEmail");
+
 
 class UserService {
    registerAccount = async (value) => {
@@ -33,7 +35,6 @@ class UserService {
    verifyAccount = async (value) => {
     return database.User.findOne({
       where: {
-        email: value.email,
         verificationCode: value.verificationCode
       }
     }).then( async (data) => {
@@ -75,7 +76,7 @@ class UserService {
        });
    }
    //Cập nhật user
-   updateUser = async (user, conditionObj) => {
+   updateUser =  async (user, conditionObj) => {
     return await database.User.update(user, { where: conditionObj })
 }
   //Cập nhật mật khẩu
@@ -101,25 +102,13 @@ class UserService {
         if(!data) {
           return "account Not found"
         }
-      const verificationCode = generateVerify();
-        const newVCode = {
-          verificationCode: verificationCode
-        }
-        await database.User.update(newVCode, {where: data})
-        await sendVerifyPassword(data);
-      })
-    }
-    resetPassword = async(user) => {
-      return await database.User.findOne({
-        where: {
-          email: user.email,
-          verificationCode: user.verificationCode
-        }
-      }).then( async data => {
-        if(!data) {
-          return "invalid verification code"
-        }
-        await database.User.update({ password: user.password });
+      const newPassword = generatePassword();
+      const hardPassword = bcrypt.hashSync(newPassword, 10);
+      const password = {
+        password: hardPassword
+      }
+      await database.User.update(password, {where: data})
+      await sendMailPassword(data, newPassword);
       })
     }
 }
