@@ -1,4 +1,4 @@
-const { Role } = require("../db/postgresql/PostgreSQL");
+const database = require("../db/postgresql/postgreSQL");
 
 class RoleService {
 
@@ -6,14 +6,14 @@ class RoleService {
     addRole = async (e) => {
         // let roleId= e.roleID;
         let roleName= e.roleName;
-        const role = await Role.create({
+        const role = await database.Role.create({
             // roleId: roleId,
             roleName: roleName,
         })
         return role;
     }
     getRoleByRoleName = async (roleName) =>{
-        const role = await Role.findOne({
+        const role = await database.Role.findOne({
             where:{
                 roleName
             }, raw: true
@@ -23,4 +23,4 @@ class RoleService {
 
     }
 
-    module.exports = new RoleService();
+module.exports = new RoleService();

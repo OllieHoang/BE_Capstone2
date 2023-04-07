@@ -11,7 +11,7 @@ class RoleController {
               return res.status(400).json("Lỗi thêm role");
           })
           .catch(err=>{
-              return res.status(400).json(err);
+              return res.status(500).json(err);
           })
   }
       //Lấy thông tin role theo roleName
@@ -23,7 +23,7 @@ class RoleController {
                 return res.status(200).json(data);
             })
             .catch(err=>{
-                return res.status(400).json(err);
+                return res.status(500).json(err);
             })
     }
 }

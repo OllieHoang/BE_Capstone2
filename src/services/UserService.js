@@ -40,17 +40,19 @@ class UserService {
       where: {
         verificationCode : value
       }
-    }).then( async (data) => {
+    }).then(async (data) => {
       if(!data) {
         return "Invalid"
       }
       data.isVerified = true;
       await data.save();
-        // const qrCode = await database.QrCode.create({
-        //  userId: data.id,
-        //  raw: true
-        // })
-        // console.log(qrCode);
+
+      await database.QrCode.create({
+        userId: data.userId,
+        qrfullName: data.fullName,
+        qrPhone: data.phone,
+        raw: true
+      })
     })
    }
 
@@ -101,7 +103,7 @@ class UserService {
     if(!passwordIsValid) {
       return "wrong password!"
     }
-    const hardPassword = hardCode(value.oldPassword);
+    const hardPassword = hardCode(value.newPassword);
     const password = {
       password: hardPassword
     }
@@ -109,30 +111,21 @@ class UserService {
 }
 
     //Quên mật khẩu và đổi mật khẩu mới
-    updatePassword = async (value, conditionObj) => {
-      const user = await database.User.findOne(conditionObj)
-      console.log(user)
-      var passwordIsValid = bcrypt.compareSync(
-        value.oldPassword,
-      user.password
-    );
-      if(!passwordIsValid) {
-        return "wrong password!"
-      }
-      const hardPassword = hardCode(value.oldPassword);
+    handlePasswordReset = async (value, conditionObj) => {
+      const hardPassword = hardCode(value.newPassword);
       const password = {
         password: hardPassword
       }
-      await database.User.update(password, { where: conditionObj })
+      return await database.User.update(password, { where: conditionObj })
     }
 
     profile = async (user) => {
-      return await database.User.findOne({user, raw: true})
+      return await database.User.findOne({where: user, raw: true})
     }
 
     // All user
-    getAllUser = async (param)=>{
-      return await database.User.findOne(param, {raw: true})
+    getAllUser = async ()=>{
+      return await database.User.findAll();
     }
 
     forgotPassword = async ( user )=>{
@@ -146,6 +139,7 @@ class UserService {
         if(!data) {
           return "account Not found"
         }
+        console.log(data);
       await sendMailPassword(data);
       })
     }

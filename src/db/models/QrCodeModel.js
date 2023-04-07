@@ -11,6 +11,13 @@ const QrCode = sequelize.define("qrcode", {
         primaryKey: true,
         allowNull: false,
     },
+    qrCodeName: {
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+    },
+    qrfullName: DataTypes.STRING(30),
+    qrPhone: DataTypes.STRING(11),
+    qrNote: DataTypes.STRING,
     userId: {
       type: DataTypes.UUID,
       references: {
