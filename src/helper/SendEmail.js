@@ -29,8 +29,9 @@ const sendVerifyMail = (user) => {
          subject: 'Xác minh tài khoản - SCIS',
          html:`
             Chào ${user.fullName},
-            <p>Tôi là hệ thống SCIS từ website Smart card ID services. Tôi cần bạn xác minh email: </p>
-            <span><nobr> Mã xác minh của bạn là: ${user.verificationCode}</span>
+            <p>Tôi là hệ thống SCIS từ website Smart card ID services.</p>
+            <span><nobr>Tôi cần bạn xác minh tài khoản: vui lòng ấn <a href="http://localhost:8000/api/user/verify?id=${user.verificationCode}
+            ">vào đây</a> để xác minh</span>
             <p>Cảm ơn bạn vì đã sử dụng hệ thống!</p>
             `
       };
@@ -46,7 +47,7 @@ const sendVerifyMail = (user) => {
 }
 
    const sendVerifyMailPassword = (user) => {
-    console.log("Gửi mật khẩu mới ")
+    console.log("xác minh email đổi mật khẩu mới ")
     return {
           from: mailer_config.SCIS_USERNAME,
           to: user.email,
@@ -54,17 +55,18 @@ const sendVerifyMail = (user) => {
           html:`
              Chào ${user.fullName},
              <p>Tôi là hệ thống SCIS từ website Smart card ID services.</p>
-             <span><nobr> Mật khẩu mới của bạn là:<b> ${user.password} </b></span>
-             <p>Cảm ơn bạn vì đã sử dụng hệ thống!</p>
-             `
+             <span><nobr> Vui lòng ấn <a href="http://localhost:8000/api/user/forgot?id=${user.verificationCode}
+            ">vào đây</a> để đổi mật khẩu mới</span>
+            <p>Cảm ơn bạn vì đã sử dụng hệ thống!</p>
+            `
        };
     }
 
-const sendMailPassword = async (user, newPassword) => {
+const sendMailPassword = async (user) => {
     const info = {
         fullName: user.fullName,
         email: user.email,
-        password: newPassword
+        verificationCode: user.verificationCode,
     }
     await sendEmailUser(info, sendVerifyMailPassword);
 }

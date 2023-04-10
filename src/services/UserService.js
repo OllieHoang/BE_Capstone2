@@ -3,13 +3,16 @@ var jwt = require("jsonwebtoken");
 const config = require("../configs/auth.config");
 const bcrypt = require('bcrypt');
 const { generateVerify, generatePassword } = require("../helper/General");
+const { hardCode } = require("../helper/hardPassword");
 const { sendMailPassword } = require("../helper/SendEmail");
-
 
 class UserService {
    registerAccount = async (value) => {
+    console.log(value)
     const verificationCode = generateVerify();
-    const hardPassword = bcrypt.hashSync(value.password, 10);
+    console.log(value.password)
+    const hardPassword = hardCode(value.password);
+    console.log(hardPassword)
     const role = await database.Role.findOne({where:{roleName:"customer"}})
     const defaults = {
       fullName: value.fullName,
@@ -19,7 +22,6 @@ class UserService {
       phone: value.phone,
       dateOfBirth: value.dateOfBirth,
       verificationCode: verificationCode,
-      roleName : role.roleName,
       roleId: role.roleId,
     }
       const userdata = await database.User.findOrCreate({
@@ -32,19 +34,26 @@ class UserService {
      })
      return check ? userdata[0] : "EMAIL DUPPLICATE";
    }
+
    verifyAccount = async (value) => {
     return database.User.findOne({
       where: {
-        verificationCode: value.verificationCode
+        verificationCode : value
       }
     }).then( async (data) => {
       if(!data) {
-        return "Invalid verification code"
+        return "Invalid"
       }
       data.isVerified = true;
       await data.save();
+        // const qrCode = await database.QrCode.create({
+        //  userId: data.id,
+        //  raw: true
+        // })
+        // console.log(qrCode);
     })
    }
+
    login = async(value) => {
       return database.User.findOne({
          where: {
@@ -75,22 +84,57 @@ class UserService {
          return {...data.toJSON(), token};
        });
    }
+
    //Cập nhật user
    updateUser =  async (user, conditionObj) => {
     return await database.User.update(user, { where: conditionObj })
 }
-  //Cập nhật mật khẩu
-  updatePassword = async (user, conditionObj) => {
-    const hardPassword = bcrypt.hashSync(user.password, 10);
-    const newPassword = {
+
+  //Đổi mật khẩu
+  changePassword = async (value, conditionObj) => {
+    const user = await database.User.findOne(conditionObj)
+    console.log(user)
+    var passwordIsValid = bcrypt.compareSync(
+      value.oldPassword,
+    user.password
+  );
+    if(!passwordIsValid) {
+      return "wrong password!"
+    }
+    const hardPassword = hardCode(value.oldPassword);
+    const password = {
       password: hardPassword
     }
-    return await database.User.update(newPassword, { where: conditionObj })
+    await database.User.update(password, { where: conditionObj })
 }
-    // All user
-    getAllUser = async ()=>{
-      return await database.User.findAll({raw: true})
+
+    //Quên mật khẩu và đổi mật khẩu mới
+    updatePassword = async (value, conditionObj) => {
+      const user = await database.User.findOne(conditionObj)
+      console.log("update password: " +user)
+      var passwordIsValid = bcrypt.compareSync(
+        value.oldPassword,
+      user.password
+    );
+      if(!passwordIsValid) {
+        return "wrong password!"
+      }
+      const hardPassword = hardCode(value.oldPassword);
+      const password = {
+        password: hardPassword
+      }
+      await database.User.update(password, { where: conditionObj })
     }
+
+    profile = async (user) => {
+      return await database.User.findOne({where: user, raw: true})
+    }
+
+    // All user
+    getAllUser = async (param)=>{
+      return await database.User.findOne(param, {raw: true})
+    }
+
     forgotPassword = async ( user )=>{
       return await database.User.findOne({
         where:{
@@ -102,13 +146,7 @@ class UserService {
         if(!data) {
           return "account Not found"
         }
-      const newPassword = generatePassword();
-      const hardPassword = bcrypt.hashSync(newPassword, 10);
-      const password = {
-        password: hardPassword
-      }
-      await database.User.update(password, {where: data})
-      await sendMailPassword(data, newPassword);
+      await sendMailPassword(data);
       })
     }
 }

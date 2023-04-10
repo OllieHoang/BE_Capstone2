@@ -7,6 +7,7 @@ const db = require("./src/db/index");
 const initWebRouter = require("./src/routes/index");
 let PORT = process.env.PORT || 8000;
 
+
 initWebRouter(server);
 db.connect();
 // postgres.initAll();

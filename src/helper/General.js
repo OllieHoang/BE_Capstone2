@@ -1,7 +1,10 @@
-function generateVerify() {
-   const code = Math.floor(100000 + Math.random() * 900000);
-  return code.toString();
+const { hardCode } = require("../helper/hardPassword");
+const generateVerify = () => {
+  const verify = generatePassword();
+  var hardVerify = hardCode(verify)
+  return hardVerify;
 }
+
 
 function generatePassword() {
   var length = 8,
