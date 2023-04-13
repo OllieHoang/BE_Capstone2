@@ -1,7 +1,7 @@
 const userAPI = require('./API/userAPI');
 const roleAPI = require('./API/roleAPI');
 const qrcodeAPI = require('./API/qrCodeAPI');
-
+// const informationAPI = require('./API/informationAPI');
 
 function router(server) {
 
@@ -11,7 +11,7 @@ function router(server) {
 
     server.use('/api/qrcode', qrcodeAPI);
 
-
+    // server.user('/api/information', informationAPI)
 }
 
 
