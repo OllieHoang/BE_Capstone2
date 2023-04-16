@@ -21,7 +21,7 @@ class userController {
          return res.status(500).json(err);
         })
     }
-    //POST : /verify
+    //GET : /verify
     verifyAccount = async (req, res) => {
         const verify = req.query.id
         console.log("Query id:" + verify);
@@ -29,7 +29,7 @@ class userController {
         .then(data => {
             data === "Invalid"? res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.") :  res.redirect('http://localhost:3000/login');
         }).catch(err => { 
-            res.status(400).send(err)
+            res.status(500).send(err)
         })
     }
 
@@ -39,7 +39,7 @@ class userController {
         .then(data=>{
             data === "Invalid Password!"|| data ==="account Not found" || data === "unverified account"?res.status(400).send("login fail"):res.status(200).send(data);
         }).catch(err=>{
-            res.status(400).send(err)
+            res.status(500).send(err)
         })
     }
     // POST : /logout
@@ -55,14 +55,15 @@ class userController {
     }
   });       
 }
-    //GET /profile
+    //GET /profile/:userId
     profile = async (req,res) => {
         const conditionObj = {
             userId: req.params.userId
         }
+        console.log("params: "+ req.params.userId)
         return await userService.profile(conditionObj)
         .then(data => {
-            console.log("profile: "+data);
+            console.log(data);
         data ? res.status(200).json(data) : res.tatus(400).send([]);
         })
         .catch(err => {
@@ -71,10 +72,7 @@ class userController {
     }
     // GET user JSON
     getAllUser = async (req, res)=>{
-        const conditionObj = {
-            userId: req.params.userId
-        }
-        return await userService.getAllUser(conditionObj)
+        return await userService.getAllUser()
         .then(data=>{
             if(data){
                 res.status(200).json(data);
@@ -87,8 +85,8 @@ class userController {
     //POST: /update/:userId
     updateUser = async (req, res, next) => {
       const user = req.body;
-      console.log("params: "+ req.params.userId);
-      console.log(req.params);
+    //   console.log("params: "+ req.params.userId);
+    //   console.log(req.params);
       const conditionObj = {
           userId: req.params.userId
       }
@@ -99,9 +97,10 @@ class userController {
               return res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.");
           })
           .catch(err => {
-              return res.status(400).json(err);
+              return res.status(500).json(err);
           })
   }
+  // POST api/user/password/:userId
     changePassword = async (req,res) => {
         const password = req.body;
         const conditionObj = {
@@ -110,26 +109,26 @@ class userController {
         await userService.changePassword(password, conditionObj)
         .then(data => {
             data === "wrong password!"
-            ? res.status(400).send("Sai thông tin nhập.")
+            ? res.status(400).send("Sai mật khẩu cũ.")
             : res.status(200).send("Cập nhật mật khẩu thành công.")
         })
         .catch(err => {
             return res.status(500).json(err);
         })
     }
-    updatePassword = async (req,res) => {
+
+    // POST api/user/forgot/:userId
+    handlePasswordReset = async (req,res) => {
         const password = req.body;
         const conditionObj = {
             userId: req.params.userId
         }
-        await userService.updatePassword(password, conditionObj)
+        await userService.handlePasswordReset(password, conditionObj)
         .then(data => {
-            if (data)
-                return res.status(200).send("Cập nhật mật khẩu thành công.")
-            return res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.");
+            data? res.status(200).send("Cập nhật mật khẩu thành công.") : res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.")
         })
         .catch(err => {
-            return res.status(400).json(err);
+            return res.status(500).json(err);
         })
     }
     forgotPassword = async(req,res) => {
@@ -141,7 +140,7 @@ class userController {
                 return res.status(200).send("Send completed successfully")
         })
         .catch(err => {
-            return res.status(400).json(err);
+            return res.status(500).json(err);
         })
 
     }
