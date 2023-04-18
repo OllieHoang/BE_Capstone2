@@ -1,4 +1,4 @@
-const qrCodeService = require('../services/qrCodeService')
+const qrCodeService = require('../services/QrCodeService')
 
 class qrCodeController {
    //GET api/qrcode/:userId

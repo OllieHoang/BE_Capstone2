@@ -55,7 +55,7 @@ const sendVerifyMail = (user) => {
           html:`
              Chào ${user.fullName},
              <p>Tôi là hệ thống SCIS từ website Smart card ID services.</p>
-             <span><nobr> Vui lòng ấn <a href="http://localhost:8000/api/user/forgot?id=${user.userId}
+             <span><nobr> Vui lòng ấn <a href="http://localhost:8000/api/user/handleForgot?token=${user.token}
             ">vào đây</a> để đổi mật khẩu mới</span>
             <p>Cảm ơn bạn vì đã sử dụng hệ thống!</p>
             `
@@ -66,7 +66,7 @@ const sendMailPassword = async (user) => {
     const info = {
         fullName: user.fullName,
         email: user.email,
-        userId: user.userId,
+        token: user.verificationCode,
     }
     await sendEmailUser(info, sendVerifyMailPassword);
 }

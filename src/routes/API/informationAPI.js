@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const inforController = require("../../controllers/inforController")
+const inforController = require("../../controllers/InforController")
 
-router.get('/:userId', inforController.getInformation)
+router.get('/:qrCodeId', inforController.getInformation)
 
 module.exports = router

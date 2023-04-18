@@ -1,9 +1,9 @@
 const inforService = require('../services/inforService')
 
 class inforController {
-   getInfor = async (req,res) => {
+   getInformation = async (req,res) => {
       const qrName = req.params.qrCodeId;
-      await inforService.getInfor(qrName)
+      await inforService.getInformation(qrName)
    }
 }
 

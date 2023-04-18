@@ -14,8 +14,9 @@ router.get('/profile/:userId', userController.profile)
 
 router.post('/update/:userId', userController.updateUser);
 router.post('/password/:userId', userController.changePassword);
+
 router.post('/forgot', userController.forgotPassword);
-router.get('/forgot', userController.handlePasswordReset);
-router.post('/forgot/:userId', userController.handlePasswordReset);
+router.get('/handleForgot', userController.handlePasswordReset);
+router.post('/forgot/:userId', userController.newPasswordReset);
 
 module.exports = router;

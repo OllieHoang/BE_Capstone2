@@ -112,15 +112,6 @@ class UserService {
     await database.User.update(password, { where: conditionObj })
 }
 
-    //Quên mật khẩu và đổi mật khẩu mới
-    handlePasswordReset = async (value, conditionObj) => {
-      const hardPassword = hardCode(value.newPassword);
-      const password = {
-        password: hardPassword
-      }
-      return await database.User.update(password, { where: conditionObj })
-    }
-
     profile = async (user) => {
       return await database.User.findOne({where: user, raw: true})
     }
@@ -133,16 +124,37 @@ class UserService {
     forgotPassword = async ( user )=>{
       return await database.User.findOne({
         where:{
-          email: user.email
+          email: user.email,
+          isVerified: true,
         },
         raw:true
       })
-      .then( async data => {
+      .then(async data => {
         if(!data) {
           return "account Not found"
         }
-      await sendMailPassword(data);
+        const verificationCode = generateVerify();
+        const verify = {
+          verificationCode : verificationCode
+        }
+        const _id = {
+          userId : data.userId,
+        }
+        await database.User.update(verify, { where: _id })
+        const updatedUser = await database.User.findOne({ where: _id });
+        await sendMailPassword(updatedUser);
       })
+    }
+    handlePasswordReset = async(value) => {
+      return await database.User.findOne({ where:value })
+    }
+    //Quên mật khẩu và đổi mật khẩu mới
+    newPasswordReset = async (value, conditionObj) => {
+      const hardPassword = hardCode(value.newPassword);
+      const password = {
+        password: hardPassword
+      }
+      return await database.User.update(password, { where: conditionObj })
     }
 }
 

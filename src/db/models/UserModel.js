@@ -22,6 +22,10 @@ const User = sequelize.define("user", {
         type: DataTypes.STRING(100),
         // allowNull: false
     },
+    avatar: {
+        type: DataTypes.STRING,
+        defaultValue: 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg',
+    },
     verificationCode: DataTypes.STRING,
     IDcard: DataTypes.STRING(20),
     phone: DataTypes.STRING(11),
@@ -29,9 +33,6 @@ const User = sequelize.define("user", {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     },  
-    roleName:{
-        type: DataTypes.STRING(20),
-    }
 })
 User.belongsTo(Role,{foreignKey: "roleId"})
 const initUser = async () => {
