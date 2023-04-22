@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { POSTGRESQL_DEVELOPMENT_HOST } = require("../configs/dbconfig");
 const { Role } = require("./RoleModel");
+const { TypeCustomer } = require("./TypeCustomer");
 const sequelize = new Sequelize(POSTGRESQL_DEVELOPMENT_HOST);
 
 
@@ -28,12 +29,12 @@ const User = sequelize.define("user", {
     isVerified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-    },  
-    roleName:{
-        type: DataTypes.STRING(20),
-    }
+    }, 
+
 })
 User.belongsTo(Role,{foreignKey: "roleId"})
+User.belongsTo(TypeCustomer,{foreignKey:"userTypeId"})
+
 const initUser = async () => {
     return User.sync({ alter: true })
 }

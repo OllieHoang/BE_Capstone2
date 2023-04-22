@@ -2,7 +2,7 @@ const database = require('../db/postgresql/postgreSQL');
 
 class qrCodeService {
    getQrinformation = async (param) => {
-      return await database.QrCode.findOne(param, {raw: true})
+      return await database.QrCode.findOne({where: param, raw: true})
    }
    updateQrCode = async (data, param) => {
     return await database.QrCode.update(data, { where: param})

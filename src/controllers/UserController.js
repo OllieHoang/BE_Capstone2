@@ -27,7 +27,7 @@ class userController {
         console.log("Query id:" + verify);
         return await userService.verifyAccount(verify)
         .then(data => {
-            data === "Invalid"? res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.") :  res.redirect('http://localhost:3000/login');
+            data === "Invalid" || data === "Verified"? res.status(400).send("Không tìm thấy dữ liệu cần cập nhật hoặc đã cập nhật") :  res.redirect('http://localhost:3000/login');
         }).catch(err => { 
             res.status(500).send(err)
         })
@@ -116,7 +116,7 @@ class userController {
             return res.status(500).json(err);
         })
     }
-
+    
     // POST api/user/forgot/:userId
     handlePasswordReset = async (req,res) => {
         const password = req.body;

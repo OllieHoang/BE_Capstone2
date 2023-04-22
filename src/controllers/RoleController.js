@@ -1,4 +1,5 @@
 const roleService = require('../services/RoleService');
+const database = require("../db/postgresql/postgreSQL");
 
 //api: /api/role/
 class RoleController {
@@ -14,6 +15,25 @@ class RoleController {
               return res.status(500).json(err);
           })
   }
+  // thay đổi role api/role/changerole
+  changeRole = async (req, res) =>{
+    try {
+        const { userId, newRoleId } = req.body;
+        console.log(userId , newRoleId);
+        await database.User.update({ roleId: newRoleId }, {
+          where: { userId: userId }
+        }).then(data =>{
+            res.status(200).json({
+                message: 'Role updated successfully',
+                  
+              });
+        })
+       
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    }
       //Lấy thông tin role theo roleName
     //GET: /:roleName/get
     getRoleByRoleName = async (req, res, next) => {
