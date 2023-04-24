@@ -133,7 +133,7 @@ class UserService {
         if(!data) {
           return "account Not found"
         }
-        const verificationCode = generateVerify();
+        const verificationCode = generateRandom();
         const verify = {
           verificationCode : verificationCode
         }
@@ -144,9 +144,6 @@ class UserService {
         const updatedUser = await database.User.findOne({ where: _id });
         await sendMailPassword(updatedUser);
       })
-    }
-    handlePasswordReset = async(value) => {
-      return await database.User.findOne({ where:value })
     }
     //Quên mật khẩu và đổi mật khẩu mới
     newPasswordReset = async (value, conditionObj) => {

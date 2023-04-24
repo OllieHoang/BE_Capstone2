@@ -132,30 +132,11 @@ class userController {
 
     }
 
-    //GET api/user/forgot
-    handlePasswordReset = async (req,res) => {
-        const token = {
-            verificationCode: req.query.token
-        }
-        console.log("query: " + req.query.token);
-        await userService.handlePasswordReset(token)
-        .then(data => {
-            console.log(data)
-            !data ? res.status(400).send("Không rõ")
-            : res.status(200).json(data);
-        })
-        .catch(err => {
-            return res.status(500).json(err)
-        })
-
-    }
-
     // POST api/user/forgot/:userId
     newPasswordReset = async (req,res) => {
         const password = req.body;
-        const conditionObj = {
-            userId: req.params.userId
-        }
+        console.log(req.params)
+        const conditionObj = req.params
         await userService.newPasswordReset(password, conditionObj)
         .then(data => {
             data? res.status(200).send("Cập nhật mật khẩu thành công.") : res.status(400).send("Không tìm thấy dữ liệu cần cập nhật.")

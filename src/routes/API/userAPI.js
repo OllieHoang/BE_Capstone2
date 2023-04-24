@@ -16,7 +16,6 @@ router.post('/update/:userId', userController.updateUser);
 router.post('/password/:userId', userController.changePassword);
 
 router.post('/forgot', userController.forgotPassword);
-router.get('/handleForgot', userController.handlePasswordReset);
-router.post('/forgot/:userId', userController.newPasswordReset);
+router.post('/forgot/:verificationCode', userController.newPasswordReset);
 
 module.exports = router;
