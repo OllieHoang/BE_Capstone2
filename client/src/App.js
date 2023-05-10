@@ -54,6 +54,7 @@ import { login, logout } from "./redux/actions/auth";
 import { setCart } from "./redux/actions/cart";
 
 import { roleEnum } from "./layouts/components/SideBar/routes"
+import Card from "./pages/Card";
 
 function App() {
 
@@ -118,7 +119,8 @@ function App() {
           <Route path="/thanh-toan" element={<Checkout />} />
           <Route path="/san-pham/the-loai/:genre" element={<GenreDetail />} />
           <Route path="/tim-kiem" element={<Search />} />
-
+          <Route path="/card" element={<Card />} />
+          
           <Route path="/thanhtoan/momo/callback" element={<MoMoCallback />}></Route>
           <Route path="/thanhtoan/paypal/callback" element={<PayPalCheckout />}></Route>
 
