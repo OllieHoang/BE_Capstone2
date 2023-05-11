@@ -1,47 +1,83 @@
-import { memo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { memo, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes } from "react-icons/fa";
 
-
-import styles from './NavBar.module.css';
+import styles from "./NavBar.module.css";
 function NavBar() {
-    return (
-        <div className={`navbar ${styles.navbar}`}>
-            <div className={styles.navItem}>
-                <NavLink to="/" className={({ isActive }) => isActive ? `${styles.active}` : null}>Product</NavLink>
-            </div>
-            {/* <div className={styles.navItem}>
-                <NavLink to="/san-pham" className={({isActive}) => isActive ? `${styles.active}` : null}>Sản phẩm</NavLink>
-            </div> */}
-            <div className={styles.navItem}>
-                <NavLink to="/khuyen-mai" className={({ isActive }) => isActive ? `${styles.active}` : null}>Promotion</NavLink>
-            </div>
-        </div>
-    )
+  return (
+    <div className={`navbar ${styles.navbar}`}>
+      <div className={styles.navItem}>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+        >
+          Product
+        </NavLink>
+      </div>
+      <div className={styles.navItem}>
+        <NavLink
+          to="/link"
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+        >
+          Link
+        </NavLink>
+      </div>
+      <div className={styles.navItem}>
+        <NavLink
+          to="/card"
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+        >
+          Card
+        </NavLink>
+      </div>
 
+      <div className={styles.navItem}>
+        <NavLink
+          to="/khuyen-mai"
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+        >
+          Promotion
+        </NavLink>
+      </div>
+    </div>
+  );
 }
 
 export function NavBarMobile() {
+  const [show, setShow] = useState(false);
 
-    const [show, setShow] = useState(false)
-
-    return (
-        <div className={`navbar ${styles.navbarMobile}`}>
-            <div className={styles.iconBar} onClick={() => setShow(!show)}>{show ? <FaTimes /> : <FaBars />}</div>
-            <div className={`${styles.menu} ${show && styles.active}`} onClick={() => setShow(false)}>
-                <div className={styles.navItem}>
-                    <NavLink to="/" className={({ isActive }) => isActive ? `${styles.active}` : null}>Products</NavLink>
-                </div>
-                {/* <div className={styles.navItem}>
+  return (
+    <div className={`navbar ${styles.navbarMobile}`}>
+      <div className={styles.iconBar} onClick={() => setShow(!show)}>
+        {show ? <FaTimes /> : <FaBars />}
+      </div>
+      <div
+        className={`${styles.menu} ${show && styles.active}`}
+        onClick={() => setShow(false)}
+      >
+        <div className={styles.navItem}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+          >
+            Products
+          </NavLink>
+        </div>
+        {/* <div className={styles.navItem}>
                     <NavLink to="/san-pham" className={({ isActive }) => isActive ? `${styles.active}` : null}>Sản phẩm</NavLink>
                 </div> */}
-                <div className={styles.navItem}>
-                    <NavLink to="/khuyen-mai" className={({ isActive }) => isActive ? `${styles.active}` : null}>Promotion</NavLink>
-                </div>
-            </div>
+        <div className={styles.navItem}>
+          <NavLink
+            to="/khuyen-mai"
+            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+          >
+            Promotion
+          </NavLink>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default memo(NavBar)
+export default memo(NavBar);
