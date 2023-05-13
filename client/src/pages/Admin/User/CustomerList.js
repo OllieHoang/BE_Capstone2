@@ -38,12 +38,12 @@ export default function CustomerList() {
             { email: { "$regex": searchString, "$options": "$i" } },
             { phoneNumber: { "$regex": searchString, "$options": "$i" } },
           ],
-          role: 0
+          role: 2
         }
         const { data, pagination } = await userApi.getAll({
           page,
           limit: 10,
-          query
+          query: {role: 1},
         });
         setLoading(false);
         setCustomerData({ list: data, totalPage: pagination.totalPage });
