@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Container, Row, Col, NavLink, Breadcrumb } from "react-bootstrap";
 import PaginationBookStore from "../../components/PaginationBookStore";
 import BookItem from "../../components/Shop/BookItem";
-import Loading from "../../components/Loading/"
+import Loading from "../../components/Loading/";
 
 import bookApi from "../../api/bookApi";
 import genreApi from "../../api/genreApi";
@@ -10,36 +10,35 @@ import genreApi from "../../api/genreApi";
 import styles from "./Product.module.css";
 
 export default function Product() {
-
-  const [bookData, setBookData] = useState({})
-  const [genreList, setGenreList] = useState([])
+  const [bookData, setBookData] = useState({});
+  const [genreList, setGenreList] = useState([]);
   const [page, setPage] = useState(1);
 
-  const [sortString, setSortString] = useState("createdAt|-1")
-  const [genresChecked, setGenresChecked] = useState([])
+  const [sortString, setSortString] = useState("createdAt|-1");
+  const [genresChecked, setGenresChecked] = useState([]);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sortArr = sortString.split('|')
+        const sortArr = sortString.split("|");
         const query = {
-          genre: { "$in": genresChecked }
-        }
-        setLoading(true)
+          genre: { $in: genresChecked },
+        };
+        setLoading(true);
         const { data, pagination } = await bookApi.getAll({
           limit: 8,
           page: page,
           query,
           sort: {
-            [sortArr[0]]: parseInt(sortArr[1])
-          }
+            [sortArr[0]]: parseInt(sortArr[1]),
+          },
         });
         setBookData({ books: data, totalPage: pagination.totalPage });
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         console.log(error);
       }
     };
@@ -64,23 +63,31 @@ export default function Product() {
   }, []);
 
   const handleChangeGenre = (e) => {
-    const id = e.target.value
-    setPage(1)
-    setGenresChecked(pre => {
+    const id = e.target.value;
+    setPage(1);
+    setGenresChecked((pre) => {
       if (pre.includes(id)) {
-        return pre.filter(genre => genre !== id)
+        return pre.filter((genre) => genre !== id);
       } else {
-        return [...pre, id]
+        return [...pre, id];
       }
-    })
-  }
+    });
+  };
 
   return (
-    <div className="main">
+    <div className="main h-screen">
       <Container>
         <Breadcrumb>
-          <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-          <Breadcrumb.Item active linkAs={NavLink} linkProps={{ to: "/san-pham" }}>Product</Breadcrumb.Item>
+          <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item
+            active
+            linkAs={NavLink}
+            linkProps={{ to: "/san-pham" }}
+          >
+            Product
+          </Breadcrumb.Item>
         </Breadcrumb>
         <div className={styles.genre_body}>
           <Row>
@@ -129,13 +136,15 @@ export default function Product() {
               </div>
               <div className={styles.products}>
                 <Row>
-                  {!loading && bookData.books && bookData.books.length > 0
-                    ? bookData.books.map((book) => (
+                  {!loading && bookData.books && bookData.books.length > 0 ? (
+                    bookData.books.map((book) => (
                       <Col xl={3} key={book._id}>
                         <BookItem data={book} />
                       </Col>
                     ))
-                    : <Loading />}
+                  ) : (
+                    <Loading />
+                  )}
                 </Row>
               </div>
               <div className={styles.pagination}>

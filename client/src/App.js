@@ -55,6 +55,9 @@ import { setCart } from "./redux/actions/cart";
 import { roleEnum } from "./layouts/components/SideBar/routes";
 import Demo from "./pages/Demo";
 import CreateLinkAccount from "./pages/CreateLinkAccount";
+import Card from "./components/Card";
+import HomePage from "./pages/HomePage";
+import Containt from "./components/Containt";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -112,6 +115,7 @@ function App() {
         <Route path="/quen-mat-khau" element={<ForgotPassword />} />
         <Route path="/dat-lai-mat-khau/:token" element={<ResetPassword />} />
         <Route path="/" element={<DefaultLayout />}>
+          <Route path="/home" element={<Containt />}></Route>
           <Route path="/" element={<Home />} />
           <Route path="/gio-hang" element={<Cart />} />
           <Route path="/khuyen-mai" element={<Discount />} />
@@ -121,6 +125,7 @@ function App() {
           <Route path="/thanh-toan" element={<Checkout />} />
           <Route path="/san-pham/the-loai/:genre" element={<GenreDetail />} />
           <Route path="/tim-kiem" element={<Search />} />
+          <Route path="/card" element={<Card />} />
           <Route path="/link" element={<CreateLinkAccount />} />
 
           <Route

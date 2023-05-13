@@ -5,6 +5,10 @@ import { IoAdd } from "react-icons/io5";
 import imgtt from "../../assets/images/icontiktok.svg";
 import imgtw from "../../assets/images/icontw.svg";
 import imgpinter from "../../assets/images/iconpinterest.svg";
+import imgfb from "../../assets/images/iconfb.jpg";
+import imgspotify from "../../assets/images/iconspotify.svg";
+import iconlinkedin from "../../assets/images/iconlinkedin.webp";
+
 import { ModalContext } from "../../contexts/ModalContext";
 import ContentLinkAccount from "./ContentLinkAccount";
 import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContext";
@@ -75,6 +79,7 @@ const CreateLink = () => {
                     if (isLink) {
                       handleAddToCart();
                       setIsActive(!isActive);
+                      setIsLink(false);
                     }
                   }}
                 >
@@ -100,8 +105,9 @@ const CreateLink = () => {
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg  antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
                     onClick={() => {
-                      handleAddToCart();
-                      setIsActive(!isActive);
+                      const a = "https://www.tiktok.com/";
+                      setUrlInput(a);
+                      setIsLink(true);
                     }}
                   >
                     <div
@@ -125,6 +131,11 @@ const CreateLink = () => {
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
+                    onClick={() => {
+                      const a = "https://twitter.com/";
+                      setUrlInput(a);
+                      setIsLink(true);
+                    }}
                   >
                     <div
                       className="flex justify-center items-center"
@@ -147,6 +158,11 @@ const CreateLink = () => {
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
+                    onClick={() => {
+                      const a = "https://pinterest.com/";
+                      setUrlInput(a);
+                      setIsLink(true);
+                    }}
                   >
                     <div
                       className="flex justify-center items-center"
@@ -163,6 +179,60 @@ const CreateLink = () => {
                   </button>
                   <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
                     Pinterest
+                  </p>
+                </div>
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+                  <button
+                    className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
+                    aria-label="Pinterest"
+                    onClick={() => {
+                      const a = "https://spotify.com/";
+                      setUrlInput(a);
+                      setIsLink(true);
+                    }}
+                  >
+                    <div
+                      className="flex justify-center items-center"
+                      aria-hidden="true"
+                    >
+                      <div className="rounded-sm overflow-hidden">
+                        <img
+                          src={imgspotify}
+                          alt=""
+                          className="w-10 h-10 object-contain"
+                        />
+                      </div>
+                    </div>
+                  </button>
+                  <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
+                    Spotify
+                  </p>
+                </div>
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+                  <button
+                    className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
+                    aria-label="Pinterest"
+                    onClick={() => {
+                      const a = "https://linkedin.com/";
+                      setUrlInput(a);
+                      setIsLink(true);
+                    }}
+                  >
+                    <div
+                      className="flex justify-center items-center"
+                      aria-hidden="true"
+                    >
+                      <div className="rounded-sm overflow-hidden">
+                        <img
+                          src={iconlinkedin}
+                          alt=""
+                          className="w-10 h-10 object-contain"
+                        />
+                      </div>
+                    </div>
+                  </button>
+                  <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
+                    Linkedin
                   </p>
                 </div>
               </div>

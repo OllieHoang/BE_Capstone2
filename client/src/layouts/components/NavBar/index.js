@@ -9,10 +9,10 @@ function NavBar() {
     <div className={`navbar ${styles.navbar}`}>
       <div className={styles.navItem}>
         <NavLink
-          to="/"
+          to="/home"
           className={({ isActive }) => (isActive ? `${styles.active}` : null)}
         >
-          Product
+          Home
         </NavLink>
       </div>
       <div className={styles.navItem}>
@@ -29,6 +29,14 @@ function NavBar() {
           className={({ isActive }) => (isActive ? `${styles.active}` : null)}
         >
           Card
+        </NavLink>
+      </div>
+      <div className={styles.navItem}>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+        >
+          Product
         </NavLink>
       </div>
 

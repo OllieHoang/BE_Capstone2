@@ -1,50 +1,49 @@
 export const roleEnum = {
-  Customer: 0,
+  Customer: 1,
   Staff: 2,
-  Admin: 3
-}
+  Admin: 3,
+};
 
 export const routes = [
   {
-    title: 'Overview',
-    path: '/admin',
+    title: "Overview",
+    path: "/admin",
     exactly: true,
-    permissions: [roleEnum.Staff, roleEnum.Admin]
-
+    permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: 'Card Management',
-    path: '/admin/book',
+    title: "Card Management",
+    path: "/admin/book",
     subMenu: [
       {
-        title: 'Thêm thẻ mới',
-        path: '/admin/book/add',
+        title: "Thêm thẻ mới",
+        path: "/admin/book/add",
       },
       {
-        title: 'Order Management',
-        path: '/admin/author',
+        title: "Order Management",
+        path: "/admin/author",
       },
     ],
-    permissions: [roleEnum.Staff, roleEnum.Admin]
+    permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: 'Order Management',
-    path: '/admin/order',
-    permissions: [roleEnum.Staff, roleEnum.Admin]
+    title: "Order Management",
+    path: "/admin/order",
+    permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: 'Discount code',
-    path: '/admin/voucher',
-    permissions: [roleEnum.Staff, roleEnum.Admin]
+    title: "Discount code",
+    path: "/admin/voucher",
+    permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: 'Client',
-    path: '/admin/customer',
-    permissions: [roleEnum.Staff, roleEnum.Admin]
+    title: "Client",
+    path: "/admin/customer",
+    permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: 'Nhân viên',
-    path: '/admin/staff',
-    permissions: [roleEnum.Admin]
+    title: "Nhân viên",
+    path: "/admin/staff",
+    permissions: [roleEnum.Admin],
   },
 ];

@@ -66,7 +66,7 @@ const ContentLinkAccount = ({ isActive }) => {
                               onChange={(e) =>
                                 updateTitle(item.id, e.target.value)
                               }
-                              className="outline-none py-2 text-base"
+                              className="outline-none py-2 text-base w-full"
                             />
                           </div>
                           <div className="flex gap-x-4 ">
@@ -108,6 +108,12 @@ const ContentLinkAccount = ({ isActive }) => {
           )}
         </Droppable>
       </DragDropContext>
+      <div
+        onClick={() => {}}
+        className="bg-violet-700 text-white px-2 py-2 rounded-2xl flex justify-center cursor-pointer items-center font-medium gap-x-2 mt-8"
+      >
+        <button>Update</button>
+      </div>
     </div>
   );
 };

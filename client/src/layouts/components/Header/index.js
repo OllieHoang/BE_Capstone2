@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,16 @@ import Search from "../Search";
 import authApi from "../../../api/authApi";
 import { logout } from "../../../redux/actions/auth";
 import { destroy } from "../../../redux/actions/cart";
+import {
+  RiAccountBoxLine,
+  RiMoneyDollarCircleLine,
+  RiQuestionAnswerLine,
+} from "react-icons/ri";
+import {
+  AiOutlinePlus,
+  AiOutlineQuestionCircle,
+  AiFillCaretDown,
+} from "react-icons/ai";
 
 import styles from "./Header.module.css";
 
@@ -33,19 +43,32 @@ function Header() {
     }
     navigate({ pathname: "/" });
   };
-
+  const [isAction2, setIsAction2] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      window.scrollY > 60 ? setIsAction2(true) : setIsAction2(false);
+      // window.scrollY = 0 ? setIsAction2(false) : setIsAction2(false);
+    });
+  });
   return (
-    <header className={styles.header}>
+    <div
+      className={`${
+        isAction2
+          ? "bg-white py-2 lg:px-24 shadow-md"
+          : "bg-none py-2 shadow-md lg:px-24  "
+      }  z-20 w-full fixed`}
+    >
       <div className={styles.headerCenter}>
         <Container>
           <div className={styles.headerRow}>
             <NavBarMobile />
-            <div className="text-2xl text-red-800 font-medium">
-              <Link to={`'/'}`}>SCIS.com.vn</Link>
-              {/* <Link to={`/`}>SCIS.com.vn</Link> */}
-            </div>
-            <div className={styles.search}>
-              <Search />
+            <div className="flex gap-x-4">
+              <div className="text-2xl text-red-800 font-medium">
+                <Link to={"/home"}>SCIS.com.vn</Link>
+              </div>
+              <div className={styles.search}>
+                <Search />
+              </div>
             </div>
             <NavBar />
 
@@ -61,17 +84,45 @@ function Header() {
                       alt=""
                     />
                     <p>{currentUser.fullName}</p>
-                    <div className={styles.accountPopup}>
-                      {currentUser.role === 0 && (
-                        <>
-                          <div className={styles.item}>
-                            <Link className={styles.popupLink} to="/tai-khoan">
-                              My account
-                            </Link>
+                    <div
+                      className={` md:max-h-[calc(100vh-10px)] px-6 absolute right-0  shadow-max-elevation-light text-left bg-white rounded-t-lg md:rounded-lg overflow-auto opacity-100 translate-y-0 shadow-3xl ${styles.accountPopup} pb-4`}
+                    >
+                      {currentUser.role === 1 && (
+                        <div className="pt-4 px-2 ">
+                          <div className=" flex flex-col  rounded-lg bg-white md:-mx-4 md:rounded-md gap-x-2 ">
+                            <div className="text-concrete text-sm mb-2 font-semibold">
+                              Account
+                            </div>
+                            <div
+                              className={`flex  items-center ${styles.item}`}
+                            >
+                              <RiAccountBoxLine className="w-4" />
+                              <Link
+                                className={styles.popupLink}
+                                to="/tai-khoan"
+                              >
+                                My account
+                              </Link>
+                            </div>
                           </div>
-                        </>
+                          <div className="flex flex-col my-3 rounded-lg bg-white md:-mx-4 md:rounded-md gap-x-2 ">
+                            <div className="text-concrete text-sm mb-3 font-semibold">
+                              Support
+                            </div>
+                            <div className="flex gap-y-4 flex-col">
+                              <div className="flex gap-x-2 items-center">
+                                <AiOutlineQuestionCircle className="w-4" />
+                                <div>Ask a question</div>
+                              </div>
+                              <div className="flex gap-x-2 items-center ">
+                                <RiQuestionAnswerLine className="w-4" />
+                                <div>Submit feedback</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       )}
-                      {currentUser.role > 0 && (
+                      {currentUser.role > 1 && (
                         <>
                           <div className={styles.item}>
                             <Link className={styles.popupLink} to="/admin">
@@ -82,11 +133,11 @@ function Header() {
                       )}
                       <div className={styles.item}>
                         <p
-                          className={styles.popupLink}
+                          className={` flex justify-center items-end bg-[#38B2AC] w-[90px] h-full rounded px-2 py-1 text-white text-sm gap-x-2 cursor-pointer mb-2`}
                           onClick={handleLogout}
                           to=""
                         >
-                          log out
+                          Log out
                         </p>
                       </div>
                     </div>
@@ -114,7 +165,7 @@ function Header() {
           <Search />
         </Container>
       </div>
-    </header>
+    </div>
   );
 }
 

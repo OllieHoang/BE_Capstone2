@@ -41,7 +41,7 @@ const Appearance = () => {
 
   return (
     <section>
-      <div className=" py-2 flex justify-around relative pb-20 flex-col gap-y-4">
+      <div className=" py-2 flex justify-around relative  flex-col gap-y-4">
         <div className="text-xl font-medium">Profile</div>
         <div className="w-full h-full mt-4  placeholder:">
           <div className="flex flex-col gap-y-4">

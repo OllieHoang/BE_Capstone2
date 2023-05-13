@@ -85,8 +85,8 @@ const CreateLinkAccount = () => {
   const [qrCodeName, setQrCodeName] = useState("");
 
   return (
-    <section>
-      <div className="text-base font-medium pt-20 mx-24 flex justify-between border-b-2 py-2">
+    <section className="pt-20 pb-20">
+      <div className="text-base font-medium mx-24  flex justify-between border-b-2 py-2 ">
         <div className="flex gap-x-6">
           {tabs.map((tab) => (
             <div
@@ -213,7 +213,7 @@ const CreateLinkAccount = () => {
                     </div>
                     <div
                       className="flex justify-between items-center pb-4 pt-8 cursor-pointer"
-                      // onClick={downloadQRCode}
+                      onClick={downloadQRCode}
                     >
                       <div>
                         <div>Dowload .PNG</div>
@@ -241,8 +241,8 @@ const CreateLinkAccount = () => {
                     <CiShare2 /> Share
                 </div> */}
       </div>
-      <div className="max-h-full py-2 flex  pb-20 flex-col justify-around  lg:flex-row  ">
-        <div className="w-[600px] lg:w-[650px] xl:w-[700px] max-h-full  mt-4 border-r px-12 placeholder ">
+      <div className="max-h-full py-2 flex flex-col justify-around  lg:flex-row  ">
+        <div className="w-[600px] lg:w-[650px] xl:w-[700px] mt-4 border-r px-12 ">
           {type === "Link" ? <CreateLink /> : <Appearance />}
         </div>
         <div className="flex justify-center mt-5  relative w-[280px] h-[560px]">
