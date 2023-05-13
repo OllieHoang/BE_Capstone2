@@ -119,7 +119,7 @@ export default function Register() {
           <div className=" flex-auto flex-col gap-y-3 ml-10 ">
             <div className="py-10">
               <Link
-                to={"/"}
+                to={"/home"}
                 className="text-red-600 text-xl font-semibold mt-4"
               >
                 SISS.com.vn

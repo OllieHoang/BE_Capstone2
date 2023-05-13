@@ -97,7 +97,12 @@ const CreateLinkAccountProvider = ({ children }) => {
     items.splice(result.destination.index, 0, reorderedItem);
     setCart(items);
   };
+  const [type, setType] = "navbar1";
 
+  // themes
+  const [color, setColor] = useState("");
+  const [background, setBackground] = useState("");
+  const [mo, setMo] = useState("");
   return (
     <CreateLinkAccountContext.Provider
       value={{
@@ -111,6 +116,15 @@ const CreateLinkAccountProvider = ({ children }) => {
         checked,
         selectedFile,
         imageSrc,
+        type,
+        setType,
+        color,
+
+        setColor,
+        background,
+        mo,
+        setMo,
+        setBackground,
         handleOnDragEnd,
         removeFileInputChange,
         handleFileInputChange,

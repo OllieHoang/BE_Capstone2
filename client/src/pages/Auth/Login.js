@@ -30,7 +30,7 @@ function Login() {
       localStorage.setItem("accessToken", token);
       const { email, fullName, phoneNumber, userId, avatar, role } = user;
       dispatch(login({ email, fullName, phoneNumber, avatar, userId, role }));
-      navigate({ pathname: "/" });
+      navigate({ pathname: "/home" });
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +64,7 @@ function Login() {
     dispatch(
       login({ email, fullName: name, phoneNumber, avatar, userId, role })
     );
-    navigate({ pathname: "/" });
+    navigate({ pathname: "/home" });
   };
 
   const responseFailureFacebook = (response) => {
@@ -74,7 +74,7 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      navigate({ pathname: "/" });
+      navigate({ pathname: "/home" });
     }
   }, [navigate]);
 
@@ -90,7 +90,7 @@ function Login() {
       localStorage.setItem("accessToken", token);
       const { fullName, phoneNumber, userId, avatar, role } = user;
       dispatch(login({ email, fullName, phoneNumber, avatar, userId, role }));
-      navigate({ pathname: "/" });
+      navigate({ pathname: "/home" });
     } catch (error) {
       setLoading(false);
       console.log(error.response.data.error);
@@ -105,7 +105,7 @@ function Login() {
     try {
       const { error } = await authApi.requestActiveAccount({ email });
       if (!error) {
-        alert("Vui lòng kiểm tra email để kích hoạt tài khoản!");
+        alert("Please check your email to activate your account!");
         setShowModal(false);
       }
     } catch (error) {
@@ -134,7 +134,7 @@ function Login() {
           <div className="flex h-screen items-centerflex flex-col justify-between mt-[20px] xl:flex-row xl:mt-0 ">
             <div className=" w-[640px] flex flex-col gap-y-3 ml-10 ">
               <Link
-                to={"/"}
+                to={"/home"}
                 className="text-red-600 text-xl font-semibold mt-4"
               >
                 SCSS.com.vn

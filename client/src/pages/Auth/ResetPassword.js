@@ -53,7 +53,7 @@ function ResetPassword() {
   return (
     <div className="h-screen ">
       <div className="px-10 py-10 ">
-        <Link to={"/"} className="text-red-600 text-xl font-semibold mt-4">
+        <Link to={"/home"} className="text-red-600 text-xl font-semibold mt-4">
           SISS.com.vn
         </Link>
       </div>

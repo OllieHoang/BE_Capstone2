@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,7 +26,6 @@ import styles from "./Header.module.css";
 
 function Header() {
   console.log("header Render");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.auth);
@@ -41,7 +40,7 @@ function Header() {
     if (token) {
       localStorage.removeItem("accessToken");
     }
-    navigate({ pathname: "/" });
+    navigate({ pathname: "/dang-nhap" });
   };
   const [isAction2, setIsAction2] = useState(false);
   useEffect(() => {
@@ -50,27 +49,28 @@ function Header() {
       // window.scrollY = 0 ? setIsAction2(false) : setIsAction2(false);
     });
   });
+
   return (
     <div
       className={`${
         isAction2
           ? "bg-white py-2 lg:px-24 shadow-md"
-          : "bg-none py-2 shadow-md lg:px-24  "
+          : "bg-none py-2 shadow-md lg:px-24 w-full  "
       }  z-20 w-full fixed`}
     >
       <div className={styles.headerCenter}>
         <Container>
           <div className={styles.headerRow}>
             <NavBarMobile />
-            <div className="flex gap-x-4">
+            <div className=" flex justify-between gap-x-4 w-[966px]">
               <div className="text-2xl text-red-800 font-medium">
                 <Link to={"/home"}>SCIS.com.vn</Link>
               </div>
-              <div className={styles.search}>
+              {/* <div className={` {styles.search}`}>
                 <Search />
-              </div>
+              </div> */}
+              <NavBar />
             </div>
-            <NavBar />
 
             <div className={`${styles.headerCenterRight} d-flex`}>
               <div className={styles.headerIcon}>
@@ -123,13 +123,21 @@ function Header() {
                         </div>
                       )}
                       {currentUser.role > 1 && (
-                        <>
-                          <div className={styles.item}>
-                            <Link className={styles.popupLink} to="/admin">
-                              Manage Siss
-                            </Link>
+                        <div className="pt-4 px-2 pb-2">
+                          <div className=" flex flex-col  rounded-lg bg-white md:-mx-4 md:rounded-md gap-x-2 ">
+                            <div className="text-concrete text-sm mb-2 font-semibold">
+                              Account
+                            </div>
+                            <div
+                              className={`flex  items-center ${styles.item}`}
+                            >
+                              <RiAccountBoxLine className="w-4" />
+                              <Link className={styles.popupLink} to="/admin">
+                                Manage Siss
+                              </Link>
+                            </div>
                           </div>
-                        </>
+                        </div>
                       )}
                       <div className={styles.item}>
                         <p
@@ -143,7 +151,10 @@ function Header() {
                     </div>
                   </div>
                 ) : (
-                  <Link to="/dang-nhap">
+                  <Link
+                    to="/dang-nhap"
+                    className="flex flex-col justify-center items-center"
+                  >
                     <BsPerson />
                     <p>Account</p>
                   </Link>

@@ -88,7 +88,7 @@ function AccountSideBar() {
         <img src={avatar?.url} alt="Error photo" />
         <span className={styles.sideBarTitle}>{fullName}</span>
       </div>
-      <div className={` flex flex-col gap-y-10 `}>
+      <div className={` flex flex-col gap-y-4 mt-4 `}>
         <div className={styles.navItem}>
           <NavLink
             className={({ isActive }) =>
@@ -107,6 +107,16 @@ function AccountSideBar() {
             to="/don-hang"
           >
             Order
+          </NavLink>
+        </div>
+        <div className={styles.navItem}>
+          <NavLink
+            className={({ isActive }) =>
+              [styles.navLink, isActive ? styles.active : null].join(" ")
+            }
+            to="/changePW"
+          >
+            Change password
           </NavLink>
         </div>
         <div className={styles.navItem}>

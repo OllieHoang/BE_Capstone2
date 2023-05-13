@@ -5,6 +5,16 @@ import avatar from "../../assets/images/avtar.jpg";
 import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContext";
 import { useRef } from "react";
 
+const THEMES = [
+  { color: "text-white", background: "bg-black", mo: "bg-slate-300" },
+  { color: "text-black", background: "bg-white", mo: "bg-slate-300" },
+  {
+    color: "text-black",
+    background: "bg-red-800",
+    mo: "bg-slate-300",
+  },
+];
+
 const Appearance = () => {
   const {
     profileTitle,
@@ -15,6 +25,11 @@ const Appearance = () => {
     handleFileInputChange,
     imageSrc,
     removeFileInputChange,
+    color,
+    setColor,
+    mo,
+    setBackground,
+    setMo,
   } = useContext(CreateLinkAccountContext);
 
   const [isFocus, setIsFocus] = useState(false);
@@ -143,20 +158,32 @@ const Appearance = () => {
 
         <div className="text-xl font-medium mt-10">Themes</div>
         <div className="flex gap-4 h-full ">
-          <div className="w-[130px] h-[200px] border-black border rounded-md bg-slate-400 text-white">
-            <div className="w-full h-full flex flex-col items-center justify-center gap-y-1">
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-            </div>
-          </div>
-          <div className="w-[130px] h-[200px] border-black border rounded-md bg-slate-400 text-white">
-            <div className="w-full h-full flex flex-col items-center justify-center gap-y-1">
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-              <div className="w-[80%] h-6 rounded-lg bg-slate-300 text-black flex items-center justify-center"></div>
-            </div>
-          </div>
+          {THEMES.map((item) => {
+            return (
+              <div
+                key={item.background}
+                className={`w-[130px] h-[200px] border-black border rounded-md ${item.background} ${item.backgroundBlendMode} ${item.color}`}
+                onClick={() => {
+                  setBackground(item.background);
+                  setColor(item.color);
+                  console.log(item.mo);
+                  setMo(item.mo);
+                }}
+              >
+                <div className="w-full h-full flex flex-col items-center justify-center gap-y-1">
+                  <div
+                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                  ></div>
+                  <div
+                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                  ></div>
+                  <div
+                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                  ></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
