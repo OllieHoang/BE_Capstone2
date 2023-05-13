@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import axios from "axios";
 
-import PreviewImage from "../../../components/PreviewImage";
+import PreviewImage from "../../../components/PreviewImage"
 
-import { updateAvatar } from "../../../redux/actions/auth";
+import { updateAvatar } from "../../../redux/actions/auth"
 import userApi from "../../../api/userApi";
 
 import styles from "./AccountSideBar.module.css";
@@ -81,15 +81,12 @@ function AccountSideBar() {
           </form>
         </Modal.Body>
       </Modal>
-      <div
-        className="d-flex align-items-center"
-        onClick={() => setShowModal(true)}
-      >
+      <div className="d-flex align-items-center" onClick={() => setShowModal(true)}>
         <img src={avatar?.url} alt="Error photo" />
         <span className={styles.sideBarTitle}>{fullName}</span>
       </div>
-      <div className={` flex flex-col gap-y-10 `}>
-        <div className={styles.navItem}>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
           <NavLink
             className={({ isActive }) =>
               [styles.navLink, isActive ? styles.active : null].join(" ")
@@ -98,8 +95,18 @@ function AccountSideBar() {
           >
             Account information
           </NavLink>
-        </div>
-        <div className={styles.navItem}>
+        </li>
+        <li className={styles.navItem}>
+          <NavLink
+            className={({ isActive }) =>
+              [styles.navLink, isActive ? styles.active : null].join(" ")
+            }
+            to="/change-password"
+          >
+            Change Password
+          </NavLink>
+        </li>
+        <li className={styles.navItem}>
           <NavLink
             className={({ isActive }) =>
               [styles.navLink, isActive ? styles.active : null].join(" ")
@@ -108,8 +115,8 @@ function AccountSideBar() {
           >
             Order
           </NavLink>
-        </div>
-        <div className={styles.navItem}>
+        </li>
+        <li className={styles.navItem}>
           <NavLink
             className={({ isActive }) =>
               [styles.navLink, isActive ? styles.active : null].join(" ")
@@ -118,8 +125,8 @@ function AccountSideBar() {
           >
             Address
           </NavLink>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   );
 }

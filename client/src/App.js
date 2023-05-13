@@ -26,6 +26,7 @@ import Search from "./pages/Search";
 import Profile from "./pages/Account/Profile";
 import Order from "./pages/Account/Order";
 import Address from "./pages/Account/Address";
+import ChangePass from './pages/Account/ChangePass'
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Analytics from "./pages/Admin/Analytics";
@@ -152,6 +153,7 @@ function App() {
                 <Route path="don-hang" element={<Order />} />
                 <Route path="tai-khoan" element={<Profile />} />
                 <Route path="dia-chi" element={<Address />} />
+                <Route path="change-password" element={<ChangePass/>} />
               </Route>
             </Route>
           </Route>
