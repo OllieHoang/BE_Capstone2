@@ -10,6 +10,8 @@ const orderRouter = require('./order')
 const voucherRouter = require('./voucher')
 const analyticRouter = require('./analytics')
 
+const themeRouter = require('./theme')
+
 function routes(app) {
     
     app.use('/api/v1/genres', genreRouter)
@@ -22,6 +24,8 @@ function routes(app) {
     app.use('/api/v1/orders', orderRouter)
     app.use('/api/v1/vouchers', voucherRouter)
     app.use('/api/v1/analytics', analyticRouter)
+
+    app.use('/api/v1/theme', themeRouter)
 
 
     app.use('*', function(req, res) {
