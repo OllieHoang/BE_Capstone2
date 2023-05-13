@@ -1,52 +1,43 @@
-import { memo, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { FaBars, FaTimes } from "react-icons/fa";
 
 import styles from "./NavBar.module.css";
-function NavBar() {
-  return (
-    <div className={`navbar ${styles.navbar}`}>
-      <div className={styles.navItem}>
-        <NavLink
-          to="/home"
-          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-        >
-          Home
-        </NavLink>
-      </div>
-      <div className={styles.navItem}>
-        <NavLink
-          to="/link"
-          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-        >
-          Link
-        </NavLink>
-      </div>
-      <div className={styles.navItem}>
-        <NavLink
-          to="/card"
-          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-        >
-          Card
-        </NavLink>
-      </div>
-      <div className={styles.navItem}>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-        >
-          Product
-        </NavLink>
-      </div>
+import Search from "../Search";
+import { CreateLinkAccountContext } from "../../../contexts/CreateLinkAccountContext";
 
-      <div className={styles.navItem}>
-        <NavLink
-          to="/khuyen-mai"
-          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-        >
-          Promotion
-        </NavLink>
+const MENU = [
+  { path: "home", title: "Home" },
+  { path: "link", title: "Link" },
+  { path: "card", title: "Card" },
+  { path: "", title: "Product" },
+  { path: "khuyen-mai", title: "Promotion" },
+];
+
+function NavBar() {
+  const [isShow, setIsShow] = useState("hidden");
+
+  return (
+    <div className={`navbar  ${styles.navbar}`}>
+      <div className={` flex   ${styles.navItem}`}>
+        <Search isShow={isShow} />
+        {MENU.map((item) => (
+          <NavLink
+            to={`/${item.path}`}
+            className={` flex items-center  justify-center ${({ isActive }) =>
+              isActive ? `${styles.active}` : null}`}
+            onClick={() => {
+              if (item.title === "Product" || item.title === "Promotion") {
+                setIsShow("block");
+              } else {
+                setIsShow("hidden ");
+              }
+            }}
+          >
+            {item.title}
+          </NavLink>
+        ))}
       </div>
     </div>
   );

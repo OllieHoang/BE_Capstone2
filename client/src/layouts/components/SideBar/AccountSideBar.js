@@ -121,6 +121,16 @@ function AccountSideBar() {
             className={({ isActive }) =>
               [styles.navLink, isActive ? styles.active : null].join(" ")
             }
+            to="/changePW"
+          >
+            Change password
+          </NavLink>
+        </li>
+        <li className={styles.navItem}>
+          <NavLink
+            className={({ isActive }) =>
+              [styles.navLink, isActive ? styles.active : null].join(" ")
+            }
             to="/dia-chi"
           >
             Address

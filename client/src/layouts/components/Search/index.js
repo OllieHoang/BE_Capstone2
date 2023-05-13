@@ -11,7 +11,7 @@ import bookApi from "../../../api/bookApi";
 
 import styles from "./Search.module.css";
 
-function Search() {
+function Search({ isShow }) {
   const navigate = useNavigate();
 
   const [key, setKey] = useState("");
@@ -54,7 +54,7 @@ function Search() {
 
   return (
     <form onSubmit={handleSubmitSearch}>
-      <div className={styles.searchWrapper}>
+      <div className={`${styles.searchWrapper} ${isShow}`}>
         <button className={`bookstore-btn  ${styles.searchBtn}`}>
           <BsSearch className="flex items-center justify-center w-full" />
         </button>

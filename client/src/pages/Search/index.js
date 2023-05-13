@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import styles from "./Search.module.css";
 import { useSearchParams } from "react-router-dom";
 
-function Search() {
+function Search({ isShow }) {
   const [searchParams] = useSearchParams();
 
   const key = searchParams.get("key");
@@ -28,8 +28,8 @@ function Search() {
   }, [key]);
 
   return (
-    <div className=" h-screen pt-20">
-      <div className={styles.booksList}>
+    <div className={` h-screen pt-20`}>
+      <div className={`hidden ${styles.booksList}`}>
         <div className={styles.title}>
           <h2 className={styles.titleHeading}>Kết quả</h2>
         </div>
