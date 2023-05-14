@@ -24,6 +24,7 @@ function NavBar() {
         <Search isShow={isShow} />
         {MENU.map((item) => (
           <NavLink
+            key={item.title}
             to={`/${item.path}`}
             className={` flex items-center  justify-center ${({ isActive }) =>
               isActive ? `${styles.active}` : null}`}

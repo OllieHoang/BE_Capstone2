@@ -59,6 +59,7 @@ import Card from "./components/Card";
 import HomePage from "./pages/HomePage";
 import Containt from "./components/Containt";
 import ChangePW from "./pages/Account/ChangePW";
+import Test from "./pages/Test";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -111,6 +112,8 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/demo" element={<Demo />} />
+        <Route path="/test" element={<Test />} />
+
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ki" element={<Register />} />
         <Route path="/quen-mat-khau" element={<ForgotPassword />} />

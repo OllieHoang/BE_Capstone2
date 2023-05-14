@@ -8,6 +8,7 @@ import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContex
 const ViewLinkAccount = () => {
   const {
     cart,
+    border,
     profileTitle,
     inputValueIntroduction,
     imageSrc,
@@ -55,7 +56,7 @@ const ViewLinkAccount = () => {
               key={index}
               to={`${item.urlInput}`}
               id={item.id}
-              className={` rounded-xl w-[90%] min-h-[34px] flex items-center ${mo} `}
+              className={` rounded-xl w-[90%] min-h-[34px] flex items-center ${mo} ${color} ${border} `}
               target="_blank"
             >
               {/* <div className="h-full  flex items-center justify-center"></div> */}

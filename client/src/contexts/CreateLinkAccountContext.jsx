@@ -103,6 +103,7 @@ const CreateLinkAccountProvider = ({ children }) => {
   const [color, setColor] = useState("");
   const [background, setBackground] = useState("");
   const [mo, setMo] = useState("");
+  const [border, setBorder] = useState("");
   return (
     <CreateLinkAccountContext.Provider
       value={{
@@ -110,6 +111,8 @@ const CreateLinkAccountProvider = ({ children }) => {
         urlInput,
         title,
         id,
+        border,
+        setBorder,
         profileTitle,
         inputValueIntroduction,
         maxInputLength,

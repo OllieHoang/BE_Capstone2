@@ -6,12 +6,24 @@ import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContex
 import { useRef } from "react";
 
 const THEMES = [
-  { color: "text-white", background: "bg-black", mo: "bg-slate-300" },
-  { color: "text-black", background: "bg-white", mo: "bg-slate-300" },
+  { color: "text-white", background: "bg-black", mo: "bg-[#222222]" },
+  { color: "text-black", background: "bg-white", mo: "bg-slate-200" },
+  {
+    color: "text-white",
+    background: "bg-red-800",
+    mo: "",
+    border: "border-white border",
+  },
   {
     color: "text-black",
-    background: "bg-red-800",
-    mo: "bg-slate-300",
+    background: "bg-[#ebeef1]",
+    mo: "bg-white",
+  },
+  {
+    color: "text-black",
+    background: "bg-[#e0faee]",
+    mo: "",
+    border: "border-[#b3c9bf] border",
   },
 ];
 
@@ -25,10 +37,9 @@ const Appearance = () => {
     handleFileInputChange,
     imageSrc,
     removeFileInputChange,
-    color,
     setColor,
-    mo,
     setBackground,
+    setBorder,
     setMo,
   } = useContext(CreateLinkAccountContext);
 
@@ -67,7 +78,7 @@ const Appearance = () => {
                   src={imageSrc}
                   type="file"
                   name="file"
-                  className="w-20 h-20 rounded-full object-cover"
+                  className="w-20 h-20 rounded-full object-contain"
                 />
               ) : (
                 <img
@@ -157,7 +168,7 @@ const Appearance = () => {
         </div>
 
         <div className="text-xl font-medium mt-10">Themes</div>
-        <div className="flex gap-4 h-full ">
+        <div className="flex gap-4 h-full w-[600px] flex-wrap">
           {THEMES.map((item) => {
             return (
               <div
@@ -166,19 +177,19 @@ const Appearance = () => {
                 onClick={() => {
                   setBackground(item.background);
                   setColor(item.color);
-                  console.log(item.mo);
                   setMo(item.mo);
+                  setBorder(item.border);
                 }}
               >
                 <div className="w-full h-full flex flex-col items-center justify-center gap-y-1">
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.mo} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.mo} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.mo} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                 </div>
               </div>
