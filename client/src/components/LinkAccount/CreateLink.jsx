@@ -4,10 +4,10 @@ import { GrClose } from "react-icons/gr";
 import { IoAdd } from "react-icons/io5";
 import imgtt from "../../assets/images/icontiktok.svg";
 import imgtw from "../../assets/images/icontw.svg";
-import imgpinter from "../../assets/images/iconpinterest.svg";
 import imgfb from "../../assets/images/iconfb.jpg";
-import imgspotify from "../../assets/images/iconspotify.svg";
 import iconlinkedin from "../../assets/images/iconlinkedin.webp";
+import iconfacebook from "../../assets/images/iconfacebook.png";
+import iconyoutube from "../../assets/images/iconyoutube.png";
 
 import { ModalContext } from "../../contexts/ModalContext";
 import ContentLinkAccount from "./ContentLinkAccount";
@@ -15,8 +15,16 @@ import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContex
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 const CreateLink = () => {
   const { isActive, setIsActive } = useContext(ModalContext);
-  const { cart, setUrlInput, urlInput, handleAddToCart, handleOnDragEnd } =
-    useContext(CreateLinkAccountContext);
+  const {
+    setUrlInput,
+    urlInput,
+    handleAddToCart,
+    title,
+    handleInput,
+    setTitle,
+    iconSocial,
+    setIconSocial,
+  } = useContext(CreateLinkAccountContext);
 
   const [isLink, setIsLink] = useState(false);
 
@@ -47,10 +55,10 @@ const CreateLink = () => {
         <button>Add link</button>
       </div>
       <div className={`${isActive ? " hidden " : " block "}  `}>
-        <div className="w-full h-[350px] z-20 shadow-lg px-8 py-2">
+        <div className="w-full h-[400px] z-20 shadow-lg px-8 py-2">
           <div className={`${isActive ? "hidden " : "block"} `}>
             <div className="flex justify-between pt-4">
-              <div className="font-medium text-sm">Enter Url</div>
+              <div className="font-medium text-sm">Enter Url and Title</div>
               <div
                 onClick={() => {
                   setIsActive(!isActive);
@@ -61,14 +69,23 @@ const CreateLink = () => {
               </div>
             </div>
             <div className="bodyModal w-full border-b py-2">
-              <div className="flex justify-between px-16 items-center gap-x-4">
-                <input
-                  type="url"
-                  placeholder="URL"
-                  value={urlInput}
-                  className="border rounded-xl w-full px-2 h-12 text-sm"
-                  onChange={handleUrlInputChange}
-                />
+              <div className="flex justify-between px-16 items-center gap-x-5">
+                <div className=" flex flex-col w-full gap-y-2">
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    className="border rounded-xl w-full px-2 h-12 text-sm"
+                    onChange={handleInput}
+                  />
+                  <input
+                    type="url"
+                    placeholder="URL"
+                    value={urlInput}
+                    className="border rounded-xl w-full px-2 h-12 text-sm"
+                    onChange={handleUrlInputChange}
+                  />
+                </div>
                 <button
                   className={`w-20 py-3 rounded-3xl font-medium ${
                     isLink
@@ -106,6 +123,8 @@ const CreateLink = () => {
                     aria-label="Pinterest"
                     onClick={() => {
                       const a = "https://www.tiktok.com/";
+                      const title = "Tiktok";
+                      setTitle(title);
                       setUrlInput(a);
                       setIsLink(true);
                     }}
@@ -133,6 +152,8 @@ const CreateLink = () => {
                     aria-label="Pinterest"
                     onClick={() => {
                       const a = "https://twitter.com/";
+                      const title = "Twitter";
+                      setTitle(title);
                       setUrlInput(a);
                       setIsLink(true);
                     }}
@@ -159,7 +180,9 @@ const CreateLink = () => {
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
                     onClick={() => {
-                      const a = "https://pinterest.com/";
+                      const a = "https://facebook.com/";
+                      const title = "Facebook";
+                      setTitle(title);
                       setUrlInput(a);
                       setIsLink(true);
                     }}
@@ -170,7 +193,7 @@ const CreateLink = () => {
                     >
                       <div className="rounded-sm overflow-hidden">
                         <img
-                          src={imgpinter}
+                          src={iconfacebook}
                           alt=""
                           className="w-10 h-10 object-contain"
                         />
@@ -178,7 +201,7 @@ const CreateLink = () => {
                     </div>
                   </button>
                   <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
-                    Pinterest
+                    Facebook
                   </p>
                 </div>
                 <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
@@ -186,7 +209,9 @@ const CreateLink = () => {
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
                     onClick={() => {
-                      const a = "https://spotify.com/";
+                      const a = "https://youtube.com/";
+                      const title = "Youtube";
+                      setTitle(title);
                       setUrlInput(a);
                       setIsLink(true);
                     }}
@@ -197,7 +222,7 @@ const CreateLink = () => {
                     >
                       <div className="rounded-sm overflow-hidden">
                         <img
-                          src={imgspotify}
+                          src={iconyoutube}
                           alt=""
                           className="w-10 h-10 object-contain"
                         />
@@ -205,7 +230,7 @@ const CreateLink = () => {
                     </div>
                   </button>
                   <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
-                    Spotify
+                    Youtube
                   </p>
                 </div>
                 <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
@@ -214,6 +239,8 @@ const CreateLink = () => {
                     aria-label="Pinterest"
                     onClick={() => {
                       const a = "https://linkedin.com/";
+                      const title = "Linkedin";
+                      setTitle(title);
                       setUrlInput(a);
                       setIsLink(true);
                     }}

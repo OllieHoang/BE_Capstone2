@@ -85,7 +85,7 @@ const CreateLinkAccount = () => {
   const [qrCodeName, setQrCodeName] = useState("");
 
   return (
-    <section className="pt-20 pb-20">
+    <section className="pt-20 pb-20 bg-white">
       <div className="text-base font-medium mx-24  flex justify-between border-b-2 py-2 ">
         <div className="flex gap-x-6">
           {tabs.map((tab) => (

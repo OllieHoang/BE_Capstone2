@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { BsArrowsMove } from "react-icons/bs";
+import { MdOutlineModeEdit } from "react-icons/md";
 // import ToggleSwitch from '../../components/Toggle//ToggleSwitch';
 import { useContext } from "react";
 import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContext";
@@ -56,30 +57,42 @@ const ContentLinkAccount = ({ isActive }) => {
                           <BsArrowsMove />
                         </div>
                         <div className="flex flex-col w-[70%] gap-x-4">
-                          <div className="flex gap-x-4 relative">
+                          <div className="flex  ">
                             <input
                               type="text"
-                              id={item.id}
+                              id={item.title}
                               name={item.title}
                               value={item.title}
                               placeholder="title"
                               onChange={(e) =>
                                 updateTitle(item.id, e.target.value)
                               }
-                              className="outline-none py-2 text-base w-full"
+                              className="outline-none py-2 text-base w-[355px]"
                             />
+                            <label
+                              htmlFor={item.title}
+                              className="cursor-pointer w-4 flex items-center justify-center bg-white "
+                            >
+                              <MdOutlineModeEdit />
+                            </label>
                           </div>
-                          <div className="flex gap-x-4 ">
+                          <div className="flex  ">
                             <input
                               type="text"
-                              id={item.id}
+                              id={item.urlInput}
                               placeholder="Url"
                               defaultValue={item.urlInput}
-                              className="outline-none w-full"
+                              className="outline-none text-base w-[355px]"
                               onChange={(e) => {
                                 updateUrl(item.id, e.target.value);
                               }}
                             />
+                            <label
+                              htmlFor={item.urlInput}
+                              className="cursor-pointer w-4 flex items-center justify-center bg-white"
+                            >
+                              <MdOutlineModeEdit />
+                            </label>
                           </div>
 
                           <div className="flex justify-between items-start pt-2 gap-2 text-concrete">

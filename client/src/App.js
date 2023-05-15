@@ -56,10 +56,9 @@ import { roleEnum } from "./layouts/components/SideBar/routes";
 import Demo from "./pages/Demo";
 import CreateLinkAccount from "./pages/CreateLinkAccount";
 import Card from "./components/Card";
-import HomePage from "./pages/HomePage";
 import Containt from "./components/Containt";
-import ChangePW from "./pages/Account/ChangePW";
 import Test from "./pages/Test";
+import ChangePass from "./pages/Account/ChangePass.jsx";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -154,9 +153,9 @@ function App() {
             <Route element={<DefaultLayout />}>
               <Route element={<AccountLayout />}>
                 <Route path="don-hang" element={<Order />} />
-                <Route path="changepw" element={<ChangePW />} />
                 <Route path="tai-khoan" element={<Profile />} />
                 <Route path="dia-chi" element={<Address />} />
+                <Route path="change-password" element={<ChangePass />} />
               </Route>
             </Route>
           </Route>

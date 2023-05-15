@@ -114,7 +114,7 @@ function AccountSideBar() {
             className={({ isActive }) =>
               [styles.navLink, isActive ? styles.active : null].join(" ")
             }
-            to="/changePW"
+            to="/change-password"
           >
             Change password
           </NavLink>
