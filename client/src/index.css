@@ -1,16 +1,149 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-poppins);
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Roboto:wght@300;400;500;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Quicksand:wght@300;400&family=Roboto:wght@300;400;500;700&display=swap'); */
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-poppins: Poppins;
+  --font-inter: Inter;
+  --font-manrope: Manrope;
+
+  /* font sizes */
+  --font-size-mini: 15px;
+  --font-size-base: 16px;
+  --font-size-lgi: 19px;
+  --font-size-29xl: 48px;
+  --font-size-9xl-8: 28.8px;
+  --font-size-xl: 20px;
+  --font-size-21xl: 40px;
+  --font-size-11xl: 30px;
+  --font-size-12xl: 31px;
+  --font-size-sm: 14px;
+  --font-size-3xl-4: 22.4px;
+  --font-size-45xl: 64px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-gray-100: #7a7a7a;
+  --color-gray-200: #1e2330;
+  --color-gray-300: #161c2d;
+  --color-gray-400: #1a1a1a;
+  --color-gray-500: #0e0a0a;
+  --color-whitesmoke-100: #f7f7f7;
+  --color-whitesmoke-200: #f3f3f1;
+  --color-whitesmoke-300: #f2f2f2;
+  --color-red-100: #fa0d0d;
+  --color-red-200: #ff0a0a;
+  --color-red-300: #ff0202;
+  --color-red-400: #ff0000;
+  --color-red-500: #ef0505;
+  --color-red-600: #e20505;
+  --color-indianred: #e36474;
+  --color-brown: #b33737;
+  --color-black: #000;
+  --color-navy: #061492;
+  --color-lightsteelblue: #c8d8f4;
+  --color-cadetblue: #02acc4;
+  --color-thistle: #e9c0e9;
+  --color-maroon: #780016;
+  --color-dimgray-100: #575757;
+  --color-dimgray-200: #4a5568;
+  --color-darkslategray: #383838;
+  --color-lightseagreen: #38b2ac;
+  --color-royalblue: #656ed3;
+  --color-cornflowerblue: rgba(175, 179, 255, 0);
+
+  /* Gaps */
+  --gap-5xs: 8px;
+  --gap-12xs: 1px;
+  --gap-13xl: 32px;
+  --gap-45xl: 64px;
+  --gap-29xl-8: 48.8px;
+  --gap-base-5: 15.5px;
+  --gap-lgi-2: 19.2px;
+  --gap-mini: 15px;
+  --gap-base: 16px;
+  --gap-26xl: 45px;
+
+  /* Paddings */
+  --padding-14xl: 33px;
+  --padding-131xl: 150px;
+  --padding-0: 0px;
+  --padding-xs-2: 11.2px;
+  --padding-5xs: 8px;
+  --padding-lg-3: 18.3px;
+  --padding-lg: 18px;
+  --padding-13xl-8: 32.8px;
+  --padding-xl: 20px;
+  --padding-7xl: 26px;
+  --padding-base: 16px;
+  --padding-21xl: 40px;
+  --padding-125xl: 144px;
+  --padding-85xl: 104px;
+  --padding-29xl-6: 48.6px;
+  --padding-8xl-5: 27.5px;
+  --padding-31xl-4: 50.4px;
+  --padding-20xl-8: 39.8px;
+  --padding-20xl-3: 39.3px;
+  --padding-27xl-4: 46.4px;
+  --padding-26xl-6: 45.6px;
+  --padding-69xl: 88px;
+  --padding-61xl: 80px;
+  --padding-29xl: 48px;
+  --padding-13xl: 32px;
+  --padding-9xl: 28px;
+  --padding-139xl-5: 158.5px;
+  --padding-12xs-8: 0.8px;
+  --padding-11xs: 2px;
+  --padding-14xl-5: 33.5px;
+  --padding-25xl: 44px;
+  --padding-9xl-4: 28.4px;
+  --padding-132xl-5: 151.5px;
+  --padding-230xl-5: 249.5px;
+  --padding-150xl-5: 169.5px;
+  --padding-6xl-5: 25.5px;
+  --padding-4xs: 9px;
+  --padding-2xl-6: 21.6px;
+  --padding-2xl: 21px;
+
+  /* border radiuses */
+  --br-9xs: 4px;
+  --br-13xl: 32px;
+  --br-lgi-2: 19.2px;
+  --br-45xl: 64px;
+  --br-781xl: 800px;
+  --br-141xl: 160px;
+  --br-9981xl: 10000px;
+  --br-9xs-2: 3.2px;
+  --br-31xl: 50px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  font-family: 'Inter', sans-serif;
-   font-size: 16px;
+html,
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
   color: black;
 }
 
@@ -20,7 +153,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -41,10 +174,10 @@ code {
   opacity: 0.9;
 }
 
-
-.bookstore-btn.disabled, .bookstore-btn:disabled{
+.bookstore-btn.disabled,
+.bookstore-btn:disabled {
   pointer-events: none;
-  opacity: .65;
+  opacity: 0.65;
 }
 
 button:hover {
@@ -58,11 +191,11 @@ button.small {
 
 .title {
   font-weight: 500;
-  color: #539E31;
+  color: #539e31;
 }
 
 .subtitle {
-  color: hsla(0,0%,100%,0.5);
+  color: hsla(0, 0%, 100%, 0.5);
 }
 
 a {
@@ -73,7 +206,9 @@ a {
   letter-spacing: normal;
 }
 
-a, a.active, a:hover {
+a,
+a.active,
+a:hover {
   text-decoration: none;
 }
 
@@ -100,7 +235,8 @@ ul {
   display: flex;
 }
 
-p, h1 {
+p,
+h1 {
   margin: 0;
   padding: 0;
 }
@@ -118,7 +254,7 @@ svg {
   font-size: 15px;
   outline: none;
   color: #363636;
-  border: 1px solid #E1E1E1;
+  border: 1px solid #e1e1e1;
 }
 
 .form-control:focus {
@@ -129,7 +265,6 @@ svg {
   /* margin: 200px 0; */
   margin: 60px 0;
 }
-
 
 .table > tbody,
 .table > thead {
@@ -172,7 +307,7 @@ input[type="radio"] ~ label {
 }
 
 table .price {
-	text-align: right;
+  text-align: right;
 }
 
 .table tr label {
@@ -247,7 +382,7 @@ table .price {
   border-radius: 50%;
 }
 
-.admin-content-body .table>:not(:first-child) {
+.admin-content-body .table > :not(:first-child) {
   border-top: 1px solid black;
 }
 
@@ -274,7 +409,6 @@ table .price {
 }
 
 @media (max-width: 576px) {
-
   .main {
     margin: 30px 0;
   }
@@ -283,5 +417,4 @@ table .price {
     width: 100%;
     padding: 6px;
   }
-  
 }

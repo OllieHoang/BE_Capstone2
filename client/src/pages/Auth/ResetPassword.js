@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Container, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -11,11 +11,11 @@ function ResetPassword() {
 
   const { token } = params;
 
-  const [tokenValue, setTokenValue] = useState("")
+  const [tokenValue, setTokenValue] = useState("");
 
   useEffect(() => {
-    if (token) setTokenValue(token)
-  }, [token])
+    if (token) setTokenValue(token);
+  }, [token]);
 
   const formik = useFormik({
     initialValues: {
@@ -33,34 +33,42 @@ function ResetPassword() {
     onSubmit: async () => {
       const { password } = formik.values;
       try {
-        const res = await authApi.resetPassword({password, token: tokenValue})
+        const res = await authApi.resetPassword({
+          password,
+          token: tokenValue,
+        });
         if (!res.error) {
-          alert("Đổi mật khẩu thành công")
+          alert("Đổi mật khẩu thành công");
           navigate({ pathname: "/dang-nhap" });
-          return
+          return;
         } else {
-          alert(res.message)
+          alert(res.message);
         }
       } catch (error) {
-        alert(error)
+        alert(error);
       }
     },
   });
 
   return (
-    <div className="main">
-      <Container>
-        <div className="auth-wrapper">
-          <form onSubmit={formik.handleSubmit}>
-            <h2 className="title text-center">ĐẶT LẠI MẬT KHẨU</h2>
+    <div className="h-screen ">
+      <div className="px-10 py-10 ">
+        <Link to={"/home"} className="text-red-600 text-xl font-semibold mt-4">
+          SISS.com.vn
+        </Link>
+      </div>
+      <div className=" h-full w-full flex justify-center  ">
+        <form onSubmit={formik.handleSubmit}>
+          <div className="flex flex-col gap-y-4 w-[650px]">
+            <div className="text-2xl font-medium ">Reset your password</div>
             <div className={`form-group ${styles.formGroup}`}>
               <input
                 type="password"
                 id="password"
                 name="password"
-                className={`form-control ${styles.formControl} ${
-                  formik.errors.password ? "is-invalid" : ""
-                }`}
+                className={`form-control  border-[#656ED3] border-2 rounded-full px-3 py-2 outline-none${
+                  styles.formControl
+                } ${formik.errors.password ? "is-invalid" : ""}`}
                 autoComplete="on"
                 placeholder="Mật khẩu"
                 value={formik.values.password}
@@ -78,9 +86,9 @@ function ResetPassword() {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                className={`form-control ${styles.formControl} ${
-                  formik.errors.confirmPassword ? "is-invalid" : ""
-                }`}
+                className={`form-control  border-[#656ED3] border-2 rounded-full px-3 py-2 outline-none ${
+                  styles.formControl
+                } ${formik.errors.confirmPassword ? "is-invalid" : ""}`}
                 autoComplete="on"
                 placeholder="Xác nhận mật khẩu"
                 value={formik.values.confirmPassword}
@@ -96,9 +104,9 @@ function ResetPassword() {
             <button className={`bookstore-btn ${styles.submitBtn}`}>
               Đổi mật khẩu
             </button>
-          </form>
-        </div>
-      </Container>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

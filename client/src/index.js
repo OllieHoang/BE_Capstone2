@@ -1,22 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-toastify/dist/ReactToastify.min.css';
-import './index.css';
-import App from './App';
+import "react-toastify/dist/ReactToastify.min.css";
+import "./index.css";
+import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './redux/store.js';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import CreateLinkAccountProvider from "./contexts/CreateLinkAccountContext";
+import ModalProvider from "./contexts/ModalContext";
+import SidebarProvider from "./contexts/SidebarContext";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
+    <SidebarProvider>
+      <ModalProvider>
+        <CreateLinkAccountProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CreateLinkAccountProvider>
+      </ModalProvider>
+    </SidebarProvider>
   </Provider>
 );
 

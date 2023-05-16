@@ -36,7 +36,7 @@ function AccountSideBar() {
       const {
         data: { secure_url, public_id },
       } = await axios.post(
-        "https://api.cloudinary.com/v1_1/dbynglvwk/image/upload",
+        "https://res.cloudinary.com/dtfsciqga/image/upload",
         formData
       );
       if (secure_url && public_id) {
@@ -94,6 +94,16 @@ function AccountSideBar() {
             to="/tai-khoan"
           >
             Account information
+          </NavLink>
+        </li>
+        <li className={styles.navItem}>
+          <NavLink
+            className={({ isActive }) =>
+              [styles.navLink, isActive ? styles.active : null].join(" ")
+            }
+            to="/change-password"
+          >
+            Change Password
           </NavLink>
         </li>
         <li className={styles.navItem}>

@@ -2,27 +2,27 @@ import { Container, Row, Col } from "react-bootstrap";
 import BookItem from "../../components/Shop/BookItem";
 import bookApi from "../../api/bookApi";
 import { useEffect, useState } from "react";
-import styles from './Home.module.css'
-import Loading from "../../components/Loading"
+import styles from "./Home.module.css";
+import Loading from "../../components/Loading";
 
 function Home() {
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await bookApi.getAll({ page: 1, limit: 6 })
-        setBooks(data)
+        const { data } = await bookApi.getAll({ page: 1, limit: 6 });
+        setBooks(data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
-    <div className="main">
+    <div className="h-screen pt-20 px-20">
       <Container>
         <div className={styles.booksList}>
           <div className={styles.title}>
@@ -30,11 +30,14 @@ function Home() {
           </div>
           <Row className={styles.row}>
             {books && books.length > 0 ? (
-              books.map(book =>
+              books.map((book) => (
                 <Col xl={2} xs={6} key={book._id}>
                   <BookItem data={book} />
-                </Col>)
-            ) : <Loading />}
+                </Col>
+              ))
+            ) : (
+              <Loading />
+            )}
           </Row>
         </div>
       </Container>

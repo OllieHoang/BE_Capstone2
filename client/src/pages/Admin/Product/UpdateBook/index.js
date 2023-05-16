@@ -126,7 +126,7 @@ function UpdateBook() {
           const formData = new FormData();
           formData.append("file", image);
           formData.append("upload_preset", "fti6du11");
-          const resCloudinary = await axios.post("https://api.cloudinary.com/v1_1/dbynglvwk/image/upload", formData)
+          const resCloudinary = await axios.post("https://res.cloudinary.com/dtfsciqga/image/upload", formData)
           const { secure_url, public_id } = resCloudinary.data
           if (secure_url && public_id) {
             await bookApi.update(id, {

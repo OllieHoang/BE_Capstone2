@@ -2,37 +2,35 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { routes } from "./routes";
-import logo from '../../../assets/images/logo.png'
+import logo from "../../../assets/images/logo.png";
 import SubMenu from "./SubMenu";
 
 import authApi from "../../../api/authApi";
-import { logout } from '../../../redux/actions/auth';
-import { destroy } from "../../../redux/actions/cart"
+import { logout } from "../../../redux/actions/auth";
+import { destroy } from "../../../redux/actions/cart";
 
 import styles from "./AdminSideBar.module.css";
 
-
 function AdminSideBar() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { role } = useSelector((state) => state.auth)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.auth);
 
   const handleLogout = async () => {
-    const resultLogout = await authApi.logout()
-    console.log(resultLogout)
-    dispatch(logout())
-    dispatch(destroy())
-    const token = localStorage.getItem('accessToken')
+    const resultLogout = await authApi.logout();
+    console.log(resultLogout);
+    dispatch(logout());
+    dispatch(destroy());
+    const token = localStorage.getItem("accessToken");
     if (token) {
-      localStorage.removeItem('accessToken')
+      localStorage.removeItem("accessToken");
     }
-    navigate({ pathname: '/' })
-  }
+    navigate({ pathname: "/" });
+  };
   return (
-
     <div className={styles.adminSideBar}>
       <div className={styles.logo}>
-        <Link to="/">
+        <Link to="/home">
           {/* <img
             src={logo}
             alt=""
@@ -44,7 +42,7 @@ function AdminSideBar() {
         <ul className={styles.navList}>
           {routes.map((item, index) => {
             if (item?.permissions.includes(role)) {
-              return <SubMenu item={item} key={index} />
+              return <SubMenu item={item} key={index} />;
             } else return null;
           })}
         </ul>
@@ -56,7 +54,6 @@ function AdminSideBar() {
             </p>
           </li>
         </ul>
-
       </div>
     </div>
   );
