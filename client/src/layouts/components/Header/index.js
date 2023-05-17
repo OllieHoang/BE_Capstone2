@@ -54,8 +54,8 @@ function Header() {
     <div
       className={`${
         isAction2
-          ? "bg-white py-2 lg:px-24 shadow-md"
-          : "bg-none py-2 shadow-md lg:px-24 w-full  "
+          ? "bg-white py-2 lg:px-4 xl:px-10 2xl:px-20 shadow-md"
+          : "bg-none py-2 shadow-md lg:px-4 xl:px-10 2xl:px-20 w-full  "
       }  z-20 w-full fixed`}
     >
       <div className={styles.headerCenter}>
@@ -76,7 +76,7 @@ function Header() {
               <div className={styles.headerIcon}>
                 {currentUser.email && currentUser.fullName ? (
                   <div
-                    className={`w-[200px] flex items-center justify-center flex-col ${styles.account}`}
+                    className={`w-[200px] xs:w-[50px] flex items-center justify-center flex-col ${styles.account}`}
                   >
                     <img
                       className={styles.avatar}

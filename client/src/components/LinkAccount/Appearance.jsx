@@ -122,10 +122,7 @@ const Appearance = () => {
                   isFocus ? "outline" : ""
                 }`}
               >
-                <label
-                  htmlFor="input-field"
-                  className="text-xs font-extralight"
-                >
+                <label htmlFor="input-field" className="text-xs font-sans">
                   Profile Title
                 </label>
                 <input
@@ -143,10 +140,7 @@ const Appearance = () => {
                   isFocus1 ? "outline" : ""
                 }`}
               >
-                <label
-                  htmlFor="Introduction"
-                  className="text-xs font-extralight"
-                >
+                <label htmlFor="Introduction" className="text-xs font-sans">
                   Introduction
                 </label>
                 <textarea
@@ -195,6 +189,12 @@ const Appearance = () => {
               </div>
             );
           })}
+        </div>
+        <div
+          onClick={() => {}}
+          className="bg-violet-700 text-white px-2 py-2 rounded-2xl flex justify-center cursor-pointer items-center font-medium gap-x-2 mt-8"
+        >
+          <button>Update</button>
         </div>
       </div>
     </section>

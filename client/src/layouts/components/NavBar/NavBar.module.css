@@ -49,7 +49,34 @@
   z-index: 10000;
 }
 
+@media (max-width: 480px) {
+  .navbarMobile .menu {
+    top: 50px;
+  }
+}
+
 @media (max-width: 576px) {
+  .navbarMobile {
+    display: block;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .navbarMobile .menu {
+    flex-direction: column;
+  }
+
+  .navbarMobile .menu.active {
+    transform: translateX(0);
+  }
+
+  .menu .navItem a.active {
+    border-radius: 0;
+  }
+}
+@media (max-width: 768px) {
   .navbarMobile {
     display: block;
   }

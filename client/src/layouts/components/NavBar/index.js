@@ -48,7 +48,7 @@ export function NavBarMobile() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className={`navbar ${styles.navbarMobile}`}>
+    <div className={`navbar xs:pr-4 ${styles.navbarMobile}`}>
       <div className={styles.iconBar} onClick={() => setShow(!show)}>
         {show ? <FaTimes /> : <FaBars />}
       </div>
@@ -56,6 +56,30 @@ export function NavBarMobile() {
         className={`${styles.menu} ${show && styles.active}`}
         onClick={() => setShow(false)}
       >
+        <div className={styles.navItem}>
+          <NavLink
+            to="/home"
+            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+          >
+            Home
+          </NavLink>
+        </div>
+        <div className={styles.navItem}>
+          <NavLink
+            to="/link"
+            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+          >
+            Link
+          </NavLink>
+        </div>
+        <div className={styles.navItem}>
+          <NavLink
+            to="/card"
+            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
+          >
+            Card
+          </NavLink>
+        </div>
         <div className={styles.navItem}>
           <NavLink
             to="/"
