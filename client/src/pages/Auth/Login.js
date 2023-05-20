@@ -137,11 +137,11 @@ function Login() {
                 to={"/home"}
                 className="text-red-600 text-xl font-semibold mt-4"
               >
-                SCSS.com.vn
+                SCIS.com.vn
               </Link>
               <div className="ml-10 flex flex-col gap-y-4">
                 <div className="text-3xl font-bold mt-10 mb-4">
-                  Login to your Scss
+                  Login to your Scis
                 </div>
               </div>
               <form className="form-login" onSubmit={handleLogin}>

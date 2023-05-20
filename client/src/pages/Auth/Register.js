@@ -122,7 +122,7 @@ export default function Register() {
                 to={"/home"}
                 className="text-red-600 text-xl font-semibold mt-4"
               >
-                SISS.com.vn
+                SCIS.com.vn
               </Link>
             </div>
             <div className="px-10 w-[650px]">
