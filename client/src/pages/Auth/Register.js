@@ -107,16 +107,16 @@ export default function Register() {
 
   return (
     <div className=" h-screen w-screen">
-      <Container>
-        <div className="flex  flex-col xl:flex-row ">
-          <div className="flex-2">
+      <div>
+        <div className="flex flex-col lg:flex-row ">
+          <div className=" hidden lg:block lg:w-[600px]">
             <img
               src={register}
               alt=""
               className="h-screen object-cover w-[640px] "
             />
           </div>
-          <div className=" flex-auto flex-col gap-y-3 ml-10 ">
+          <div className="  flex-col gap-y-3 ml-10 ">
             <div className="py-10">
               <Link
                 to={"/home"}
@@ -125,7 +125,7 @@ export default function Register() {
                 SCIS.com.vn
               </Link>
             </div>
-            <div className="px-10 w-[650px]">
+            <div className="px-10 xl:w-[650px] lg:w-[500px]">
               <form onSubmit={formik.handleSubmit}>
                 <h2 className="flex font-semibold text-2xl mb-4">
                   Create your account
@@ -277,7 +277,7 @@ export default function Register() {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

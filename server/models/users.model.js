@@ -19,7 +19,7 @@ const userSchema = new Schema({
     birthday: { type: String },
     phoneNumber: { type: String },
     avatar: { 
-        url: { type: String, default: 'https://res.cloudinary.com/dbynglvwk/image/upload/v1650182653/NHANLAPTOP/istockphoto-666545204-612x612_yu3gcq.jpg' },
+        url: { type: String, default: 'https://res.cloudinary.com/dtfsciqga/image/upload/v1684033250/no-avatar_kitran.png' },
         publicId: { type: String }
      },
     address: [{
@@ -33,7 +33,7 @@ const userSchema = new Schema({
         product: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', require: true },
         quantity: { type: Number, default: 1 },
     }],
-    role: { type: Number, default: 0 },
+    role: { type: Number, default: 1 },
     status: { type: Number, default: 0 }
   
 }, {

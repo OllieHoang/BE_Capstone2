@@ -1,8 +1,7 @@
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Container } from "react-bootstrap";
 import { BsPerson, BsCart2 } from "react-icons/bs";
 
 import NavBar, { NavBarMobile } from "../NavBar";
@@ -11,16 +10,8 @@ import Search from "../Search";
 import authApi from "../../../api/authApi";
 import { logout } from "../../../redux/actions/auth";
 import { destroy } from "../../../redux/actions/cart";
-import {
-  RiAccountBoxLine,
-  RiMoneyDollarCircleLine,
-  RiQuestionAnswerLine,
-} from "react-icons/ri";
-import {
-  AiOutlinePlus,
-  AiOutlineQuestionCircle,
-  AiFillCaretDown,
-} from "react-icons/ai";
+import { RiAccountBoxLine, RiQuestionAnswerLine } from "react-icons/ri";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import styles from "./Header.module.css";
 
@@ -54,12 +45,12 @@ function Header() {
     <div
       className={`${
         isAction2
-          ? "bg-white py-2 lg:px-24 shadow-md"
-          : "bg-none py-2 shadow-md lg:px-24 w-full  "
-      }  z-20 w-full fixed`}
+          ? "bg-white py-2 lg:px-4 xl:px-10 2xl:px-20 shadow-md xs:px-4 "
+          : "bg-none py-2 shadow-md lg:px-4 xl:px-10 2xl:px-20 xs:px-4 "
+      }  z-20  fixed w-full  `}
     >
       <div className={styles.headerCenter}>
-        <Container>
+        <div>
           <div className={styles.headerRow}>
             <NavBarMobile />
             <div className=" flex justify-between gap-x-4 w-[966px]">
@@ -76,7 +67,7 @@ function Header() {
               <div className={styles.headerIcon}>
                 {currentUser.email && currentUser.fullName ? (
                   <div
-                    className={`w-[200px] flex items-center justify-center flex-col ${styles.account}`}
+                    className={` xs:w-[50px] lg:w-[150px] xl:w-[200px] flex items-center justify-center flex-col ${styles.account}`}
                   >
                     <img
                       className={styles.avatar}
@@ -85,7 +76,7 @@ function Header() {
                     />
                     <p>{currentUser.fullName}</p>
                     <div
-                      className={` md:max-h-[calc(100vh-10px)] px-6 absolute right-0  shadow-max-elevation-light text-left bg-white rounded-t-lg md:rounded-lg overflow-auto opacity-100 translate-y-0 shadow-3xl ${styles.accountPopup} pb-4`}
+                      className={`  px-6 absolute right-0  shadow-max-elevation-light text-left bg-white rounded-t-lg md:rounded-lg overflow-auto opacity-100 translate-y-0 shadow-3xl ${styles.accountPopup} `}
                     >
                       {currentUser.role === 1 && (
                         <div className="pt-4 px-2 ">
@@ -119,6 +110,14 @@ function Header() {
                                 <div>Submit feedback</div>
                               </div>
                             </div>
+                            <div className="flex gap-y-4 flex-col mt-4">
+                              <div
+                                onClick={handleLogout}
+                                className="flex justify-center items-end bg-[#38B2AC] w-[90px] h-full rounded px-2 py-1 text-white text-sm gap-x-2 cursor-pointer mb-2"
+                              >
+                                Logout
+                              </div>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -137,17 +136,14 @@ function Header() {
                               </Link>
                             </div>
                           </div>
+                          <div
+                            onClick={handleLogout}
+                            className="flex justify-center items-end bg-[#38B2AC] w-[90px] h-full rounded px-2 py-1 text-white text-sm gap-x-2 cursor-pointer mt-3 mb-2"
+                          >
+                            Log out
+                          </div>
                         </div>
                       )}
-                      <div className={styles.item}>
-                        <p
-                          className={` flex justify-center items-end bg-[#38B2AC] w-[90px] h-full rounded px-2 py-1 text-white text-sm gap-x-2 cursor-pointer mb-2`}
-                          onClick={handleLogout}
-                          to=""
-                        >
-                          Log out
-                        </p>
-                      </div>
                     </div>
                   </div>
                 ) : (
@@ -162,19 +158,21 @@ function Header() {
               </div>
               <div className={`flex items-center ${styles.headerIcon}`}>
                 <Link to="/gio-hang">
-                  <BsCart2 />
+                  <BsCart2 className="2xl:w-[32px] xs:w-[24px]" />
                   <p>Cart</p>
-                  <span className={styles.count}>{cart.list.length}</span>
+                  <span className={` ${styles.count} `}>
+                    {cart.list.length}
+                  </span>
                 </Link>
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
       <div className={styles.searchMobile}>
-        <Container>
+        <div className="2xl:hidden">
           <Search />
-        </Container>
+        </div>
       </div>
     </div>
   );

@@ -1,37 +1,44 @@
 import { useCallback, useEffect, useState } from "react";
-import { Row, Col, Table, Button, Badge, Modal, Spinner } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Table,
+  Button,
+  Badge,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import PaginationBookStore from "../../../components/PaginationBookStore";
 
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 
-import userApi from "../../../api/userApi"
+import userApi from "../../../api/userApi";
 
 export default function StaffList() {
+  const [staffData, setStaffData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [staffData, setStaffData] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(1);
 
-  const [page, setPage] = useState(1)
-
-  const [rerender, setRerender] = useState(false)
+  const [rerender, setRerender] = useState(false);
 
   const [addStaff, setAddStaff] = useState({
     email: "",
     fullName: "",
-    phoneNumber: ""
-  })
+    phoneNumber: "",
+  });
 
-  const [showAddModal, setShowAddModal] = useState(false)
-  
+  const [showAddModal, setShowAddModal] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const { data, pagination } = await userApi.getAll({ 
-          page, 
+        const { data, pagination } = await userApi.getAll({
+          page,
           limit: 10,
-          query: { role: 2 } 
+          query: { role: 2 },
         });
         setLoading(false);
         setStaffData({ list: data, totalPage: pagination.totalPage });
@@ -48,83 +55,127 @@ export default function StaffList() {
   }, []);
 
   const handleSubmitAdd = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      setLoading(true)
-      await userApi.createStaff(addStaff)
-      setLoading(false)
-      alert("Thành công!")
-      setShowAddModal(false)
-      setRerender(!rerender)
+      setLoading(true);
+      await userApi.createStaff(addStaff);
+      setLoading(false);
+      alert("Thành công!");
+      setShowAddModal(false);
+      setRerender(!rerender);
     } catch (error) {
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
     }
-  }
+  };
 
-  const handleUpdateStatus = async ({  _id: userId, status }) => {
-    const newStatus = status === 1 ? 0 : 1
+  const handleUpdateStatus = async ({ _id: userId, status }) => {
+    const newStatus = status === 1 ? 0 : 1;
     try {
-      await userApi.updateStatus(userId, { status:  newStatus })
-      alert("Thành công!")
-      setRerender(!rerender)
+      await userApi.updateStatus(userId, { status: newStatus });
+      alert("Success!");
+      setRerender(!rerender);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <Row>
-      <Modal size="lg" show={showAddModal} onHide={() => setShowAddModal(false)} >
+      <Modal
+        size="lg"
+        show={showAddModal}
+        onHide={() => setShowAddModal(false)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Thêm nhân viên</Modal.Title>
+          <Modal.Title>Add staff</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-              <h5>Thông tin nhân viên</h5>
-              <form onSubmit={handleSubmitAdd}>
-                <Row>
-                  <Col xl={4}>
-                    <label>Tên nhân viên</label>
-                    <input required type="text" value={addStaff?.fullName} className="form-control"
-                      onChange={(e) => setAddStaff((prev) => { return { ...prev, fullName: e.target.value } })}
-                    />
-                  </Col>
-                  <Col xl={4}>
-                    <label>Email</label>
-                    <input required type="email" value={addStaff?.email} className="form-control"
-                      onChange={(e) => setAddStaff((prev) => { return { ...prev, email: e.target.value } })}
-                    />
-                  </Col>
-                  <Col xl={4}>
-                    <label>Điện thoại</label>
-                    <input required type="text" value={addStaff?.phoneNumber} className="form-control"
-                      onChange={(e) => setAddStaff((prev) => { return { ...prev, phoneNumber: e.target.value } })}
-                    />
-                  </Col>
-                </Row>
-                <Button className="mt-4" type="submit" disabled={loading} variant="success">Lưu</Button>
-              </form>
+            <h5>Staff information</h5>
+            <form onSubmit={handleSubmitAdd}>
+              <Row>
+                <Col xl={4}>
+                  <label>Staff's name</label>
+                  <input
+                    required
+                    type="text"
+                    value={addStaff?.fullName}
+                    className="form-control"
+                    onChange={(e) =>
+                      setAddStaff((prev) => {
+                        return { ...prev, fullName: e.target.value };
+                      })
+                    }
+                  />
+                </Col>
+                <Col xl={4}>
+                  <label>Email</label>
+                  <input
+                    required
+                    type="email"
+                    value={addStaff?.email}
+                    className="form-control"
+                    onChange={(e) =>
+                      setAddStaff((prev) => {
+                        return { ...prev, email: e.target.value };
+                      })
+                    }
+                  />
+                </Col>
+                <Col xl={4}>
+                  <label>Phone</label>
+                  <input
+                    required
+                    type="text"
+                    value={addStaff?.phoneNumber}
+                    className="form-control"
+                    onChange={(e) =>
+                      setAddStaff((prev) => {
+                        return { ...prev, phoneNumber: e.target.value };
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
+              <Button
+                className="mt-4"
+                type="submit"
+                disabled={loading}
+                variant="success"
+              >
+                Save
+              </Button>
+            </form>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowAddModal(false)}>Hủy</Button>
+          <Button variant="secondary" onClick={() => setShowAddModal(false)}>
+            Cancel
+          </Button>
         </Modal.Footer>
       </Modal>
       <Col xl={12}>
         <div className="admin-content-wrapper">
-          <div className="admin-content-header">Danh sách nhân viên</div>
+          <div className="admin-content-header">List of staff</div>
           <div className="admin-content-action">
             <div className="d-flex justify-content-between">
               <div className="d-flex">
-                <input className="form-control search" placeholder="Nhập tên, mã nhân viên" />
-                <Button type="button" style={{color: "white"}} variant="info">
+                <input
+                  className="form-control search"
+                  placeholder="Enter name, SN of staff"
+                />
+                <Button type="button" style={{ color: "white" }} variant="info">
                   <FaSearch />
                 </Button>
               </div>
               <div>
-                <button type="button" className="btn btn-success ms-auto" onClick={() => setShowAddModal(true)}>
-                  Thêm nhân viên
+                <button
+                  type="button"
+                  className="btn btn-success ms-auto"
+                  onClick={() => setShowAddModal(true)}
+                >
+                  Add staff
                 </button>
               </div>
             </div>
@@ -133,17 +184,17 @@ export default function StaffList() {
             <Table hover>
               <thead>
                 <tr>
-                  <th>STT</th>
-                  <th>Tên nhân viên</th>
+                  <th>SN</th>
+                  <th>Staff's name</th>
                   <th>Email</th>
-                  <th>SĐT</th>
-                  <th>Ngày tạo</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
+                  <th>Phone</th>
+                  <th>Date created</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-              {loading ? (
+                {loading ? (
                   <tr>
                     <td colSpan={7}>
                       <Spinner animation="border" variant="success" />
@@ -156,18 +207,37 @@ export default function StaffList() {
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td className="text-start">
                           <div className="d-flex align-items-center">
-                            <img className="avatar" src={item?.avatar?.url} alt="" />
-                            <div >{item?.fullName}</div>
+                            <img
+                              className="avatar"
+                              src={item?.avatar?.url}
+                              alt=""
+                            />
+                            <div>{item?.fullName}</div>
                           </div>
                         </td>
-                        
+
                         <td>{item?.email}</td>
                         <td>{item?.phoneNumber}</td>
-                        <td>{<p>{moment(item?.createdAt).format('DD-MM-yyyy HH:mm:ss')}</p>}</td>
-                        <td><Badge bg={item?.status === 1 ? "success" : "danger"}>{item?.status === 1 ? "Đang hoạt động" : "Đã khóa"}</Badge></td>
                         <td>
-                          <Button variant={item?.status === 1 ? "danger" : "success"} onClick={() => handleUpdateStatus(item)}>
-                            {item?.status === 1 ? "Khóa" : "Kích hoạt"}
+                          {
+                            <p>
+                              {moment(item?.createdAt).format(
+                                "DD-MM-yyyy HH:mm:ss"
+                              )}
+                            </p>
+                          }
+                        </td>
+                        <td>
+                          <Badge bg={item?.status === 1 ? "success" : "danger"}>
+                            {item?.status === 1 ? "Active" : "Locked"}
+                          </Badge>
+                        </td>
+                        <td>
+                          <Button
+                            variant={item?.status === 1 ? "danger" : "success"}
+                            onClick={() => handleUpdateStatus(item)}
+                          >
+                            {item?.status === 1 ? "Lock " : "Active "}
                           </Button>
                         </td>
                       </tr>
@@ -175,7 +245,7 @@ export default function StaffList() {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={6}>Không có nhân viên nào!</td>
+                    <td colSpan={6}>No staff!</td>
                   </tr>
                 )}
               </tbody>

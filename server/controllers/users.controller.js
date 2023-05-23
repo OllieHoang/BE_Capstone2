@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const userService = require('../services/user.service')
 const { transporter } = require('../config/nodemailer')
 const { cloudinary } = require('../config/cloudinary')
-
+const User = require('../models/users.model');
 const { RoleEnum } = require('../utils/enum')
 
 const usersController = {
@@ -35,6 +35,7 @@ const usersController = {
             })
         }
     },
+    
     getById: async(req, res) => {
         try {
             const { userId } = req.params
@@ -239,6 +240,7 @@ const usersController = {
             const { avatar } = req.body
             const { userId } = req.params
             const { avatar: { publicId } } = await userService.getById(userId)
+            
             if  (publicId) {
                 await cloudinary.uploader.destroy(publicId)
             }

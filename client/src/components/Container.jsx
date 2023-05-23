@@ -1,6 +1,7 @@
 import React from "react";
 import hero from "../assets/images/hero.png";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Container = () => {
   return (
@@ -13,12 +14,20 @@ const Container = () => {
             traffic. And shorten the URL and custom QR code.
           </div>
           <div className="flex gap-x-10 w-full  items-center ">
-            <div className="px-8 py-2 bg-white rounded cursor-pointer border border-[#2c8c87]">
+            <Link
+              target="_blank"
+              to={"/link"}
+              className="px-8 py-2 bg-white rounded cursor-pointer border border-[#2c8c87]"
+            >
               CREATE NOW
-            </div>
-            <div className="px-8 py-2 bg-white rounded cursor-pointer flex items-center justify-center gap-x-2 border">
+            </Link>
+            <Link
+              target="_blank"
+              to={"/demo"}
+              className="px-8 py-2 bg-white rounded cursor-pointer flex items-center justify-center gap-x-2 border "
+            >
               SAMPLE SCIS <HiOutlineExternalLink />
-            </div>
+            </Link>
           </div>
         </div>
         <div className="flex flex-1">

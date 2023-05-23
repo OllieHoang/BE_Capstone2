@@ -35,7 +35,7 @@ function AdminSideBar() {
             src={logo}
             alt=""
           /> */}
-          <span>Siss</span>
+          <span>SCIS</span>
         </Link>
       </div>
       <div className={styles.sidebarContainer}>
@@ -50,7 +50,7 @@ function AdminSideBar() {
         <ul className={styles.navListBottom}>
           <li className={styles.navItem} onClick={handleLogout}>
             <p className={styles.navLink}>
-              <span>Đăng xuất</span>
+              <span>Log out</span>
             </p>
           </li>
         </ul>

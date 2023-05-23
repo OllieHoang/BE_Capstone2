@@ -6,12 +6,24 @@ import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContex
 import { useRef } from "react";
 
 const THEMES = [
-  { color: "text-white", background: "bg-black", mo: "bg-slate-300" },
-  { color: "text-black", background: "bg-white", mo: "bg-slate-300" },
+  { color: "text-white", background: "bg-black", box: "bg-[#222222]" },
+  { color: "text-black", background: "bg-white", box: "bg-slate-200" },
+  {
+    color: "text-white",
+    background: "bg-red-800",
+    box: "",
+    border: "border-white border",
+  },
   {
     color: "text-black",
-    background: "bg-red-800",
-    mo: "bg-slate-300",
+    background: "bg-[#ebeef1]",
+    box: "bg-white",
+  },
+  {
+    color: "text-black",
+    background: "bg-[#e0faee]",
+    box: "",
+    border: "border-[#b3c9bf] border",
   },
 ];
 
@@ -25,11 +37,10 @@ const Appearance = () => {
     handleFileInputChange,
     imageSrc,
     removeFileInputChange,
-    color,
     setColor,
-    mo,
     setBackground,
-    setMo,
+    setBorder,
+    setBox,
   } = useContext(CreateLinkAccountContext);
 
   const [isFocus, setIsFocus] = useState(false);
@@ -57,7 +68,7 @@ const Appearance = () => {
   return (
     <section>
       <div className=" py-2 flex justify-around relative  flex-col gap-y-4">
-        <div className="text-xl font-medium">Profile</div>
+        <div className="text-xl font-medium">Display</div>
         <div className="w-full h-full mt-4  placeholder:">
           <div className="flex flex-col gap-y-4">
             <div className="flex gap-x-4 ">
@@ -67,7 +78,7 @@ const Appearance = () => {
                   src={imageSrc}
                   type="file"
                   name="file"
-                  className="w-20 h-20 rounded-full object-cover"
+                  className="w-20 h-20 rounded-full object-contain"
                 />
               ) : (
                 <img
@@ -111,10 +122,7 @@ const Appearance = () => {
                   isFocus ? "outline" : ""
                 }`}
               >
-                <label
-                  htmlFor="input-field"
-                  className="text-xs font-extralight"
-                >
+                <label htmlFor="input-field" className="text-xs font-sans">
                   Profile Title
                 </label>
                 <input
@@ -132,10 +140,7 @@ const Appearance = () => {
                   isFocus1 ? "outline" : ""
                 }`}
               >
-                <label
-                  htmlFor="Introduction"
-                  className="text-xs font-extralight"
-                >
+                <label htmlFor="Introduction" className="text-xs font-sans">
                   Introduction
                 </label>
                 <textarea
@@ -157,7 +162,7 @@ const Appearance = () => {
         </div>
 
         <div className="text-xl font-medium mt-10">Themes</div>
-        <div className="flex gap-4 h-full ">
+        <div className="flex gap-4 h-full w-[600px] flex-wrap">
           {THEMES.map((item) => {
             return (
               <div
@@ -166,24 +171,30 @@ const Appearance = () => {
                 onClick={() => {
                   setBackground(item.background);
                   setColor(item.color);
-                  console.log(item.mo);
-                  setMo(item.mo);
+                  setBox(item.box);
+                  setBorder(item.border);
                 }}
               >
                 <div className="w-full h-full flex flex-col items-center justify-center gap-y-1">
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.box} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.box} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                   <div
-                    className={`w-[80%] h-6 rounded-lg ${mo} ${color} flex items-center justify-center`}
+                    className={`w-[80%] h-6 rounded-lg ${item.box} ${item.color} ${item.border} flex items-center justify-center`}
                   ></div>
                 </div>
               </div>
             );
           })}
+        </div>
+        <div
+          onClick={() => {}}
+          className="bg-violet-700 text-white px-2 py-2 rounded-2xl flex justify-center cursor-pointer items-center font-medium gap-x-2 mt-8"
+        >
+          <button>Update</button>
         </div>
       </div>
     </section>

@@ -8,12 +8,13 @@ import { CreateLinkAccountContext } from "../../contexts/CreateLinkAccountContex
 const ViewLinkAccount = () => {
   const {
     cart,
+    border,
     profileTitle,
     inputValueIntroduction,
     imageSrc,
     color,
     background,
-    mo,
+    box,
   } = useContext(CreateLinkAccountContext);
 
   return (
@@ -55,7 +56,7 @@ const ViewLinkAccount = () => {
               key={index}
               to={`${item.urlInput}`}
               id={item.id}
-              className={` rounded-xl w-[90%] min-h-[34px] flex items-center ${mo} `}
+              className={` rounded-xl w-[90%] min-h-[34px] flex items-center ${box} ${color} ${border} `}
               target="_blank"
             >
               {/* <div className="h-full  flex items-center justify-center"></div> */}
@@ -63,7 +64,7 @@ const ViewLinkAccount = () => {
                 onClick={() => {
                   console.log(item.id);
                 }}
-                className={` text-xs flex items-center justify-center w-[240px] ${color} ${mo}`}
+                className={` text-xs flex items-center justify-center w-[240px] ${color} ${box}`}
               >
                 {item.title ? item.title : "Title"}
               </div>

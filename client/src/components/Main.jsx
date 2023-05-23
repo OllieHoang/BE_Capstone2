@@ -143,9 +143,9 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="6 flex  w-full h-[255px]  justify-center my-30 ">
+        <div className="6 flex  w-full h-[255px] xs:h-[750px] justify-center my-30 ">
           <div className=" flex flex-col lg:flex-row justify-around items-center w-full h-full gap-y-4">
-            <div className="w-[275px] h-[150px] px-8 py-4 bg-white rounded flex justify-center  flex-col gap-y-4">
+            <div className="w-[275px] h-[150px] xs:h-[250px] px-8 py-4 bg-white rounded flex justify-center  flex-col gap-y-4">
               <div className=" flex  items-center gap-x-2 bg-slate-100 rounded-sm px-2 py-1">
                 <img src={icpject} alt="" className="w-6 h-5 " />
                 <div className="font-medium text-xl">Project</div>
@@ -154,7 +154,7 @@ const Main = () => {
                 The easiest way to categorize your managed resources.
               </div>
             </div>
-            <div className="w-[290px] h-[150px] px-4 bg-white rounded flex justify-center flex-col gap-y-4">
+            <div className="w-[290px] h-[150px] xs:h-[250px] px-4 bg-white rounded flex justify-center flex-col gap-y-4">
               <div className=" flex  items-center gap-x-2  bg-slate-100 rounded-sm px-2 py-1">
                 <img src={icpixel} alt="" className="w-6 h-5 " />
                 <div className="font-medium text-xl">Pixel tracking </div>
@@ -164,7 +164,7 @@ const Main = () => {
                 Pinterest, Twitter, Quora, TikTok pixel tracking available.
               </div>
             </div>
-            <div className="w-[280px] h-[150px] px-4 bg-white rounded flex justify-center flex-col gap-y-4">
+            <div className="w-[280px] h-[150px] xs:h-[250px] px-4 bg-white rounded flex justify-center flex-col gap-y-4">
               <div className=" flex  items-center gap-x-2 px-5 bg-slate-100 rounded-sm py-1">
                 <img src={icdomain} alt="" className="w-6 h-5 " />
                 <div className="font-medium text-xl">Custom domains </div>
@@ -191,7 +191,7 @@ const Main = () => {
             </div>
           </div>
           <div className="flex lg:flex-row flex-col h-full w-full gap-x-8 gap-y-10 ">
-            <img src={ana5} alt="" />
+            <img src={ana5} alt="" className="xl:w-[60%] xs:w-[100%]" />
             <div className=" flex justify-center lg:justify-end lg:items-end pb-10  ">
               <Link
                 to="/login"

@@ -93,7 +93,7 @@ const Card = () => {
   };
 
   return (
-    <section className="">
+    <section className="h-screen xs:h-full">
       <div className="w-full h-full flex gap-x-10 flex-col gap-y-10 px-24 lg:flex-row xl:px-20 lg:px-40 pb-10 pt-24">
         <div className="flex flex-col flex-auto gap-y-4">
           <form
@@ -102,7 +102,7 @@ const Card = () => {
           >
             {/* img  */}
             <div className="flex flex-col gap-y-2">
-              <div className="text-[#41B60B] text-xl font-medium">
+              <div className=" text-xl font-medium">
                 Choose a photo for the front{" "}
               </div>
               <div className="flex gap-x-4 border border-[#B2BABB] px-2 py-2 items-center rounded">
@@ -111,7 +111,7 @@ const Card = () => {
               </div>
             </div>
             <div className="flex flex-col gap-y-2">
-              <div className="text-[#41B60B] text-xl font-medium">
+              <div className=" text-xl font-medium">
                 Choose a photo for the back side{" "}
               </div>
               <div className="flex gap-x-4 border border-[#B2BABB] px-2 py-2 items-center rounded">
@@ -121,44 +121,9 @@ const Card = () => {
             </div>
 
             {/* link  */}
-            <div className="flex flex-col gap-y-2">
-              <div className="text-[#41B60B] text-xl font-medium">(URL)</div>
-              <div className="flex  gap-x-1 border border-[#B2BABB] px-2 py-2 items-center rounded">
-                <div className="flex gap-x-4 items-center justify-center">
-                  <ImEarth className="text-[#707B7C]" />
-                  <input
-                    type="text"
-                    name="defaultValue"
-                    defaultValue={defaultValue}
-                    readOnly
-                    className="outline-none text-gray-500 w-[230px]"
-                  />
-                </div>
-                <input
-                  className=" outline-none "
-                  name="params"
-                  type="text"
-                  readOnly
-                  defaultValue={qrCodeName} // Giá trị mặc định của input là "params"
-                  onChange={(e) => setQrCodeName(e.target.value)} // Sử dụng onChange để cập nhật giá trị của params khi input thay đổi
-                />
-              </div>
-            </div>
-            {/* name */}
-            <div className="flex flex-col gap-y-2 ">
-              <div className="text-[#41B60B]">Enter your name</div>
-              <div className="flex gap-x-4 border border-[#B2BABB] px-2 py-2 items-center rounded">
-                <input
-                  type="text"
-                  name={inputName}
-                  onChange={handleInputName}
-                  className="w-full outline-none"
-                  placeholder="Enter your name"
-                />
-              </div>
-            </div>
+
             {/* tao qrcode  */}
-            <div className="bg-[#009F52] mt-4 hover:bg-[#35A46E] transition-all duration-500 justify-center rounded text-white flex gap-x-3 items-center w-[230px] h-[40px]">
+            <div className="bg-purple-700 mt-4 hover:bg-purple-500 transition-all duration-500 justify-center rounded text-white flex gap-x-3 items-center w-[230px] h-[40px]">
               <button className=" w-full h-full cursor-pointer flex items-center justify-center gap-x-2  px-4 py-1">
                 <SlReload />
                 Create Card
@@ -217,9 +182,6 @@ const Card = () => {
                 className="w-[450px] h-[310px] relative flex object-cover border border-black"
                 style={{ backgroundImage: `url(${hinhnen})` }}
               >
-                <div className="absolute bottom-10 left-10 text-3xl font-medium text-white">
-                  {inputName ? inputName : "Your Name"}
-                </div>
                 <QRCode
                   value={`${defaultValue}${qrCodeName}`}
                   size={100}

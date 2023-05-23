@@ -85,8 +85,8 @@ const CreateLinkAccount = () => {
   const [qrCodeName, setQrCodeName] = useState("");
 
   return (
-    <section className="pt-20 pb-20">
-      <div className="text-base font-medium mx-24  flex justify-between border-b-2 py-2 ">
+    <div className="pt-20 pb-20 bg-white xs:pt-24 h-screen xs:h-full">
+      <div className="text-base font-medium 2xl:mx-24 flex justify-between border-b-2 py-2 xs:mx-4 ">
         <div className="flex gap-x-6">
           {tabs.map((tab) => (
             <div
@@ -242,14 +242,16 @@ const CreateLinkAccount = () => {
                 </div> */}
       </div>
       <div className="max-h-full py-2 flex flex-col justify-around  lg:flex-row  ">
-        <div className="w-[600px] lg:w-[650px] xl:w-[700px] mt-4 border-r px-12 ">
+        <div className="w-[600px] lg:w-[650px] xl:w-[700px] xs:w-[460px] mt-4 border-r px-12 ">
           {type === "Link" ? <CreateLink /> : <Appearance />}
         </div>
-        <div className="flex justify-center mt-5  relative w-[280px] h-[560px]">
-          <ViewLinkAccount />
+        <div className=" flex justify-center">
+          <div className="flex justify-center mt-5  relative w-[280px] h-[560px] ">
+            <ViewLinkAccount />
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -57,9 +57,8 @@ import { roleEnum } from "./layouts/components/SideBar/routes";
 import Demo from "./pages/Demo";
 import CreateLinkAccount from "./pages/CreateLinkAccount";
 import Card from "./components/Card";
-import HomePage from "./pages/HomePage";
 import Containt from "./components/Containt";
-
+import ChangePass from "./pages/Account/ChangePass.jsx";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -112,6 +111,8 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/demo" element={<Demo />} />
+        <Route path="/test" element={<Test />} />
+
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ki" element={<Register />} />
         <Route path="/quen-mat-khau" element={<ForgotPassword />} />
@@ -154,7 +155,7 @@ function App() {
                 <Route path="don-hang" element={<Order />} />
                 <Route path="tai-khoan" element={<Profile />} />
                 <Route path="dia-chi" element={<Address />} />
-                <Route path="change-password" element={<ChangePass/>} />
+                <Route path="change-password" element={<ChangePass />} />
               </Route>
             </Route>
           </Route>

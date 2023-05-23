@@ -37,12 +37,12 @@ export const routes = [
     permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: "Client",
+    title: "Client Management",
     path: "/admin/customer",
     permissions: [roleEnum.Staff, roleEnum.Admin],
   },
   {
-    title: "Nhân viên",
+    title: "Staff Management",
     path: "/admin/staff",
     permissions: [roleEnum.Admin],
   },

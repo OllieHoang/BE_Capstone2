@@ -131,17 +131,17 @@ function Login() {
           </Modal.Footer>
         </Modal>
         <Container>
-          <div className="flex h-screen items-centerflex flex-col justify-between mt-[20px] xl:flex-row xl:mt-0 ">
-            <div className=" w-[640px] flex flex-col gap-y-3 ml-10 ">
+          <div className="flex h-screen flex-col justify-between mt-[20px] lg:flex-row xl:mt-0 md:items-center">
+            <div className=" w-[640px] flex flex-col gap-y-3 2xl:ml-10 xs:ml-0 xs:w-[460px] lg:w-[630px] lg:mr-2 justify-center">
               <Link
                 to={"/home"}
                 className="text-red-600 text-xl font-semibold mt-4"
               >
-                SCSS.com.vn
+                SCIS.com.vn
               </Link>
               <div className="ml-10 flex flex-col gap-y-4">
                 <div className="text-3xl font-bold mt-10 mb-4">
-                  Login to your Scss
+                  Login to your Scis
                 </div>
               </div>
               <form className="form-login" onSubmit={handleLogin}>
@@ -232,7 +232,7 @@ function Login() {
                 </div>
               </div>
             </div>
-            <div className="">
+            <div className="hidden lg:block mt-6">
               <img
                 src={login2}
                 alt=""

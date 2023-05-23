@@ -7,7 +7,7 @@ const CreateLinkAccountProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [id, setId] = useState(0);
   const [urlInput, setUrlInput] = useState("");
-
+  const [iconSocial, setIconSocial] = useState("");
   //Link
 
   const handleAddToCart = () => {
@@ -15,6 +15,8 @@ const CreateLinkAccountProvider = ({ children }) => {
     setCart(newCart);
     setId(id + 1);
     setUrlInput("");
+    setTitle("");
+    setIconSocial("");
     console.log(newCart);
   };
   const handleUrlInput = (e) => {
@@ -102,7 +104,8 @@ const CreateLinkAccountProvider = ({ children }) => {
   // themes
   const [color, setColor] = useState("");
   const [background, setBackground] = useState("");
-  const [mo, setMo] = useState("");
+  const [box, setBox] = useState("");
+  const [border, setBorder] = useState("");
   return (
     <CreateLinkAccountContext.Provider
       value={{
@@ -110,6 +113,10 @@ const CreateLinkAccountProvider = ({ children }) => {
         urlInput,
         title,
         id,
+        iconSocial,
+        setIconSocial,
+        border,
+        setBorder,
         profileTitle,
         inputValueIntroduction,
         maxInputLength,
@@ -119,11 +126,10 @@ const CreateLinkAccountProvider = ({ children }) => {
         type,
         setType,
         color,
-
         setColor,
         background,
-        mo,
-        setMo,
+        box,
+        setBox,
         setBackground,
         handleOnDragEnd,
         removeFileInputChange,

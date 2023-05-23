@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 
 const authorController = require('../controllers/authors.controller')
+const usersController = require('../controllers/users.controller')
 const { verifyToken, checkRole } = require('../middlewares/auth')
 const { RoleEnum } = require('../utils/enum')
 
 router.get('/', authorController.getAll)
+// router.get('/listuser',checkRole([RoleEnum.Customer]) , usersController.getAllUser)  
 router.get('/:id', authorController.getById)
 router.post('/',  verifyToken, checkRole([RoleEnum.Staff, RoleEnum.Admin]), authorController.create)
 router.put('/:id',  verifyToken, checkRole([RoleEnum.Staff, RoleEnum.Admin]), authorController.updateById)
