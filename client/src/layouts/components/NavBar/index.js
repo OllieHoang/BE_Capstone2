@@ -10,7 +10,7 @@ import { CreateLinkAccountContext } from "../../../contexts/CreateLinkAccountCon
 const MENU = [
   { path: "home", title: "Home" },
   { path: "link", title: "Link" },
-  { path: "card", title: "Card" },
+  // { path: "card", title: "Card" },
   { path: "", title: "Product" },
   { path: "khuyen-mai", title: "Promotion" },
 ];
@@ -72,14 +72,7 @@ export function NavBarMobile() {
             Link
           </NavLink>
         </div>
-        <div className={styles.navItem}>
-          <NavLink
-            to="/card"
-            className={({ isActive }) => (isActive ? `${styles.active}` : null)}
-          >
-            Card
-          </NavLink>
-        </div>
+
         <div className={styles.navItem}>
           <NavLink
             to="/"

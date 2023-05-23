@@ -2,7 +2,7 @@ import styles from "./BookItem.module.css";
 import format from "../../../helper/format";
 import { Link } from "react-router-dom";
 
-function BookItem({ data, boxShadow }) {
+function BookOrigin({ data, boxShadow }) {
   const { price, discount } = data;
   let newPrice = price;
   if (discount > 0) {
@@ -16,7 +16,7 @@ function BookItem({ data, boxShadow }) {
       ) : null}
       <div className={styles.card}>
         <Link
-          to={`/chi-tiet-san-pham/${data.slug}`}
+          to={`/card-origin-detail/${data.slug}`}
           className={styles.bookInfo}
         >
           <img variant="top" src={data.imageUrl} alt="" />
@@ -37,4 +37,4 @@ function BookItem({ data, boxShadow }) {
   );
 }
 
-export default BookItem;
+export default BookOrigin;

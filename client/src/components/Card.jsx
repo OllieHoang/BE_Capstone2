@@ -5,12 +5,14 @@ import { SlReload } from "react-icons/sl";
 import { ImEarth } from "react-icons/im";
 import hinhnen from "../assets/images/hinhnen.jpg";
 import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
 const Card = () => {
   const [inputName, setInputName] = useState("");
   const handleInputName = (e) => {
     setInputName(e.target.value);
   };
+  const navigate = useNavigate();
   //chọn ảnh
   //   const [selectedFile, setSelectedFile] = useState(null);
   //   // const [selectedFile2, setSelectedFile2] = useState(null);
@@ -123,13 +125,16 @@ const Card = () => {
             {/* link  */}
 
             {/* tao qrcode  */}
-            <div className="bg-purple-700 mt-4 hover:bg-purple-500 transition-all duration-500 justify-center rounded text-white flex gap-x-3 items-center w-[230px] h-[40px]">
+            <Link
+              to={"/thanh-toan"}
+              className="bg-purple-700 mt-4 hover:bg-purple-500 transition-all duration-500 justify-center rounded text-white flex gap-x-3 items-center w-[230px] h-[40px]"
+            >
               <button className=" w-full h-full cursor-pointer flex items-center justify-center gap-x-2  px-4 py-1">
                 <SlReload />
                 Create Card
               </button>
               <ToastContainer />
-            </div>
+            </Link>
           </form>
         </div>
         <div className=" flex flex-auto items-center flex-col gap-y-8">
