@@ -4,12 +4,12 @@ const inforService = {
    getInfor: async(id) => {
       return await inforModel.findOne(id);
    },
-   GetCreateInfor: async(data) => {
-      
-   },
-   postInfor: async(id, data) => {
-      console.log(data)
-      return await inforModel.findByIdAndUpdate(id)
+   getById: async(id) => {
+      return await inforModel.findOne({userId: id})
+  },
+
+   putInfor: async(id, data) => {
+      return await inforModel.findByIdAndUpdate(id,data, {new: true})
    }
 }
 

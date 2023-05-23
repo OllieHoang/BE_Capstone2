@@ -10,7 +10,8 @@ const orderRouter = require('./order')
 const voucherRouter = require('./voucher')
 const analyticRouter = require('./analytics')
 
-const themeRouter = require('./theme')
+const linkRouter = require('./link')
+const cardRouter = require('./card')
 const informationRouter = require('./information')
 
 function routes(app) {
@@ -26,9 +27,9 @@ function routes(app) {
     app.use('/api/v1/vouchers', voucherRouter)
     app.use('/api/v1/analytics', analyticRouter)
 
-    app.use('/api/v1/theme', themeRouter)
+    app.use('/api/v1/card', cardRouter)
     app.use('/api/v1/infor', informationRouter)
-
+    app.use('/api/v1/link', linkRouter)
 
     app.use('*', function(req, res) {
         res.status(404).json({

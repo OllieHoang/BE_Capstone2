@@ -8,7 +8,9 @@ const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken, generateVerifyCode } = require('../utils/auth')
 const { transporter } = require('../config/nodemailer')
 const userService = require('../services/user.service')
-const inforModel = require('../models/information.model')
+const linkModel = require('../models/link.model')
+const { generateRandom } = require('../utils/charRandom');
+const informationModel = require('../models/information.model');
 const authController = {
     loginWithGoogle: async (req, res) => {
         try {
@@ -194,20 +196,25 @@ const authController = {
     verifyEmail: async (req, res) => {
         try {
             const { active_code } = req.query
-
+            const randomChar = generateRandom();
+            console.log(randomChar);
             const { email } = jwt.verify(active_code, process.env.JWT_ACCESS_TOKEN_SECRET);
             if (!email) res.status(400).json({ error: "Token không hợp lệ!" })
             const user = await userService.getByEmail(email)
             if (user) {
-                await inforModel.create({
+                console.log("inforId")
+                const inforId = await informationModel.create({
                     userId: user.id,
                 })
-
-                console.log("id: "+user.id);
-                console.log("_id: "+user._id);
+                console.log(inforId)
+                await linkModel.create({
+                    linkName: randomChar,
+                    informationId: inforId.id,
+                    userId: user.id,
+                })
+                console.log("linkModel")
                 await userService.updateStatus(user._id, { status: 1 })
                 return res.status(200).json({ message: "Xác minh tài khoản thành công!!" })
-
             }
             return res.status(400).json({ error: "Không tìm thấy khách hàng!!" })
         } catch (error) {

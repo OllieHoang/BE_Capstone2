@@ -14,12 +14,11 @@ const informationSchema = new Schema({
       title: { type: String},
       url: { type: String },
    }],
-   urlTheme: { type: String},
-   theme: { type:mongoose.Schema.Types.ObjectId,
-      ref: 'theme',
-
+   Theme: {
+      color: {type: String},
+      background:{type: String},
+      backgroundColor: {type: String},
    },
-   
 })
 module.exports = mongoose.model('Information', informationSchema)
 
