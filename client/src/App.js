@@ -26,7 +26,7 @@ import Search from "./pages/Search";
 import Profile from "./pages/Account/Profile";
 import Order from "./pages/Account/Order";
 import Address from "./pages/Account/Address";
-import ChangePass from './pages/Account/ChangePass'
+import ChangePass from "./pages/Account/ChangePass";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Analytics from "./pages/Admin/Analytics";
@@ -58,7 +58,9 @@ import Demo from "./pages/Demo";
 import CreateLinkAccount from "./pages/CreateLinkAccount";
 import Card from "./components/Card";
 import Containt from "./components/Containt";
+import CardOriginDetail from "./pages/ProductDetail/CardOriginDetail";
 
+import CardOrigin from "./pages/Cart/CartOrigin";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -112,7 +114,6 @@ function App() {
       <Routes>
         <Route path="/demo" element={<Demo />} />
 
-
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ki" element={<Register />} />
         <Route path="/quen-mat-khau" element={<ForgotPassword />} />
@@ -130,6 +131,11 @@ function App() {
           <Route path="/tim-kiem" element={<Search />} />
           <Route path="/card" element={<Card />} />
           <Route path="/link" element={<CreateLinkAccount />} />
+          <Route
+            path="/card-origin-detail/:slug"
+            element={<CardOriginDetail />}
+          />
+          <Route path="/gio-hang-origin" element={<CardOrigin />} />
 
           <Route
             path="/thanhtoan/momo/callback"

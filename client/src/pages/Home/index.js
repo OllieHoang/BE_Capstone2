@@ -4,6 +4,7 @@ import bookApi from "../../api/bookApi";
 import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import Loading from "../../components/Loading";
+import BookOrigin from "../../components/Shop/BookItem/BookOrigin";
 
 function Home() {
   const [books, setBooks] = useState([]);
@@ -22,23 +23,40 @@ function Home() {
   }, []);
 
   return (
-    <div className="h-screen pt-20 px-20">
+    <div className=" h-full pt-20 px-20 pb-10 ">
       <Container>
         <div className={styles.booksList}>
           <div className={styles.title}>
-            <h2 className={styles.titleHeading}>Latest product</h2>
+            <h2 className={styles.titleHeading}>Origin card</h2>
           </div>
           <Row className={styles.row}>
+            {/* card origin  */}
             {books && books.length > 0 ? (
               books.map((book) => (
                 <Col xl={2} xs={6} key={book._id}>
-                  <BookItem data={book} />
+                  <BookOrigin data={book} />
                 </Col>
               ))
             ) : (
               <Loading />
             )}
           </Row>
+          <div>
+            <div className={styles.title}>
+              <h2 className={styles.titleHeading}>Latest product</h2>
+            </div>
+            <Row className={styles.row}>
+              {books && books.length > 0 ? (
+                books.map((book) => (
+                  <Col xl={2} xs={6} key={book._id}>
+                    <BookItem data={book} />
+                  </Col>
+                ))
+              ) : (
+                <Loading />
+              )}
+            </Row>
+          </div>
         </div>
       </Container>
     </div>
