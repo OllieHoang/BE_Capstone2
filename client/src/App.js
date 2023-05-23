@@ -58,7 +58,7 @@ import Demo from "./pages/Demo";
 import CreateLinkAccount from "./pages/CreateLinkAccount";
 import Card from "./components/Card";
 import Containt from "./components/Containt";
-import ChangePass from "./pages/Account/ChangePass.jsx";
+
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -111,7 +111,7 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/demo" element={<Demo />} />
-        <Route path="/test" element={<Test />} />
+
 
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ki" element={<Register />} />
