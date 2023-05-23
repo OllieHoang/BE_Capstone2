@@ -154,7 +154,7 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="pt-20 px-20 h-screen">
+    <div className="pt-20 xs:pt-24  px-20 h-screen xs:h-full pb-10 ">
       <Container>
         {!loading ? (
           <Row className={styles.productBriefing}>

@@ -78,7 +78,7 @@ export default function Profile() {
   });
 
   return (
-    <div className="">
+    <div className=" h-full ">
       <form onSubmit={formik.handleSubmit}>
         <div className={`form-group ${styles.formGroup}`}>
           <label className={styles.formLabel}>Email</label>
@@ -132,31 +132,33 @@ export default function Profile() {
           )}
         </div>
 
-        <div className={`form-group ${styles.formGroup}`}>
+        <div className={`form-group flex ${styles.formGroup}`}>
           <label className={styles.formLabel}>Sex</label>
-          <div className={styles.radioItem}>
-            <input
-              type="radio"
-              name="gender"
-              className="form-radio"
-              value="0"
-              checked={parseInt(formik.values.gender) === 0}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />{" "}
-            Men
-          </div>
-          <div className={styles.radioItem}>
-            <input
-              type="radio"
-              name="gender"
-              className="form-radio"
-              value="1"
-              checked={parseInt(formik.values.gender) === 1}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />{" "}
-            Girl
+          <div className="xs:flex flex gap-x-5">
+            <div className={styles.radioItem}>
+              <input
+                type="radio"
+                name="gender"
+                className="form-radio"
+                value="0"
+                checked={parseInt(formik.values.gender) === 0}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              Men
+            </div>
+            <div className={styles.radioItem}>
+              <input
+                type="radio"
+                name="gender"
+                className="form-radio"
+                value="1"
+                checked={parseInt(formik.values.gender) === 1}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />{" "}
+              Girl
+            </div>
           </div>
         </div>
 

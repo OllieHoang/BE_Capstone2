@@ -23,7 +23,7 @@ function Home() {
   }, []);
 
   return (
-    <div className=" h-full pt-20 px-20 pb-10 ">
+    <div className=" h-full pt-20 xs:pt-24 px-20 pb-10 ">
       <Container>
         <div className={styles.booksList}>
           <div className={styles.title}>
@@ -41,7 +41,7 @@ function Home() {
               <Loading />
             )}
           </Row>
-          <div>
+          <div className="pt-10">
             <div className={styles.title}>
               <h2 className={styles.titleHeading}>Latest product</h2>
             </div>
