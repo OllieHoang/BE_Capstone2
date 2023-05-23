@@ -11,6 +11,7 @@ import { updateAvatar } from "../../../redux/actions/auth"
 import userApi from "../../../api/userApi";
 
 import styles from "./AccountSideBar.module.css";
+import data from "../../../pages/Checkout/methodData";
 
 function AccountSideBar() {
   const dispatch = useDispatch();
@@ -27,18 +28,19 @@ function AccountSideBar() {
     if (!["image/png", "image/gif", "image/jpeg"].includes(file?.type)) {
       return toast.info("File không đúng định dạng!", { autoClose: 2000 });
     }
-
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "fti6du11");
+      formData.append("upload_preset", "kczsnfkt");
       setLoading(true);
+
       const {
         data: { secure_url, public_id },
       } = await axios.post(
-        "https://res.cloudinary.com/dtfsciqga/image/upload",
+        "https://api.cloudinary.com/v1_1/dtfsciqga/image/upload",
         formData
       );
+      
       if (secure_url && public_id) {
         const avatar = {
           url: secure_url,
