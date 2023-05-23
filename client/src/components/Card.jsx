@@ -93,7 +93,7 @@ const Card = () => {
   };
 
   return (
-    <section className="h-screen">
+    <section className="h-screen xs:h-full">
       <div className="w-full h-full flex gap-x-10 flex-col gap-y-10 px-24 lg:flex-row xl:px-20 lg:px-40 pb-10 pt-24">
         <div className="flex flex-col flex-auto gap-y-4">
           <form

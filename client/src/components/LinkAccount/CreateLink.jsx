@@ -55,7 +55,7 @@ const CreateLink = () => {
         <button>Add link</button>
       </div>
       <div className={`${isActive ? " hidden " : " block "}  `}>
-        <div className="w-full h-[400px] z-20 shadow-lg px-8 py-2">
+        <div className="w-full h-[400px] z-20 shadow-lg 2xl:px-8 xs:px-2 py-2 ">
           <div className={`${isActive ? "hidden " : "block"} `}>
             <div className="flex justify-between pt-4">
               <div className="font-medium text-sm">Enter Url and Title</div>
@@ -69,7 +69,7 @@ const CreateLink = () => {
               </div>
             </div>
             <div className="bodyModal w-full border-b py-2">
-              <div className="flex justify-between px-16 items-center gap-x-5">
+              <div className="flex justify-between 2xl:px-16 xs:px-4 items-center gap-x-5">
                 <div className=" flex flex-col w-full gap-y-2">
                   <input
                     type="text"
@@ -110,14 +110,14 @@ const CreateLink = () => {
                   Inspired by your interests
                 </div>
                 <div className="flex gap-x-1 items-center font-medium text-[#8129d9] px-2 py-1 cursor-pointer ">
-                  <div className="border-b border-transparent  hover:border-b hover:border-[#8129d9]">
+                  {/* <div className="border-b border-transparent  hover:border-b hover:border-[#8129d9]">
                     View all
                   </div>
-                  <RxCaretRight className="text-xl" />
+                  <RxCaretRight className="text-xl" /> */}
                 </div>
               </div>
-              <div className="flex gap-x-2 px-6">
-                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+              <div className="flex gap-x-2 px-6 xs:px-0 xs:gap-x-1">
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg  antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
@@ -146,36 +146,7 @@ const CreateLink = () => {
                     Tiktok
                   </p>
                 </div>
-                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
-                  <button
-                    className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
-                    aria-label="Pinterest"
-                    onClick={() => {
-                      const a = "https://twitter.com/";
-                      const title = "Twitter";
-                      setTitle(title);
-                      setUrlInput(a);
-                      setIsLink(true);
-                    }}
-                  >
-                    <div
-                      className="flex justify-center items-center"
-                      aria-hidden="true"
-                    >
-                      <div className="rounded-sm overflow-hidden">
-                        <img
-                          src={imgtw}
-                          alt=""
-                          className="w-10 h-10 object-contain"
-                        />
-                      </div>
-                    </div>
-                  </button>
-                  <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
-                    Twitter
-                  </p>
-                </div>
-                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
@@ -204,7 +175,7 @@ const CreateLink = () => {
                     Facebook
                   </p>
                 </div>
-                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
@@ -233,7 +204,36 @@ const CreateLink = () => {
                     Youtube
                   </p>
                 </div>
-                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out first:pl-4 last:pr-4 md:first:pl-0 md:last:pr-0">
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
+                  <button
+                    className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
+                    aria-label="Pinterest"
+                    onClick={() => {
+                      const a = "https://twitter.com/";
+                      const title = "Twitter";
+                      setTitle(title);
+                      setUrlInput(a);
+                      setIsLink(true);
+                    }}
+                  >
+                    <div
+                      className="flex justify-center items-center"
+                      aria-hidden="true"
+                    >
+                      <div className="rounded-sm overflow-hidden">
+                        <img
+                          src={imgtw}
+                          alt=""
+                          className="w-10 h-10 object-contain"
+                        />
+                      </div>
+                    </div>
+                  </button>
+                  <p className="text-black text-xs w-full text-center font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
+                    Twitter
+                  </p>
+                </div>
+                <div className="xs:hidden 2xl:flex my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"
