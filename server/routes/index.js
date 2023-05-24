@@ -2,7 +2,7 @@
 const genreRouter = require('./genre.js')
 const publisherRouter = require('./publisher')
 const authorRouter = require('./author')
-const bookRouter = require('./book')
+const cardRouter = require('./card')
 const userRouter = require('./user')
 const authRouter = require('./auth')
 
@@ -10,14 +10,16 @@ const orderRouter = require('./order')
 const voucherRouter = require('./voucher')
 const analyticRouter = require('./analytics')
 
-const themeRouter = require('./theme')
+const linkRouter = require('./link')
+const cusCardRouter = require('./cusCard')
+const informationRouter = require('./information')
 
 function routes(app) {
     
     app.use('/api/v1/genres', genreRouter)
     app.use('/api/v1/publishers', publisherRouter)
     app.use('/api/v1/authors', authorRouter)
-    app.use('/api/v1/books', bookRouter)
+    app.use('/api/v1/cards', cardRouter)
     app.use('/api/v1/users', userRouter)
     app.use('/api/v1/auth', authRouter)
 
@@ -25,8 +27,9 @@ function routes(app) {
     app.use('/api/v1/vouchers', voucherRouter)
     app.use('/api/v1/analytics', analyticRouter)
 
-    app.use('/api/v1/theme', themeRouter)
-
+    app.use('/api/v1/cusCard', cusCardRouter)
+    app.use('/api/v1/infor', informationRouter)
+    app.use('/api/v1/link', linkRouter)
 
     app.use('*', function(req, res) {
         res.status(404).json({

@@ -8,7 +8,7 @@ const orderSchema = new Schema({
         ref: 'User',
     },
     products: [{
-        product: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', require: true },
+        product: { type: mongoose.Schema.Types.ObjectId, ref: 'card', require: true },
         quantity: { type: Number, default: 1 },
         price: { type: Number },
         totalItem: { type: Number }

@@ -8,7 +8,9 @@ const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken, generateVerifyCode } = require('../utils/auth')
 const { transporter } = require('../config/nodemailer')
 const userService = require('../services/user.service')
-
+const linkModel = require('../models/link.model')
+const { generateRandom } = require('../utils/charRandom');
+const informationModel = require('../models/information.model');
 const authController = {
     loginWithGoogle: async (req, res) => {
         try {
@@ -129,7 +131,6 @@ const authController = {
             const hashPassword = await bcrypt.hash(password, 10)
 
             const result = await userService.register({ email, fullName, password: hashPassword })
-
             const code = generateVerifyCode({ email })
             const host = req.get('origin')
             const link = `${host}/services/user/verify?active_code=${code}`
@@ -137,12 +138,13 @@ const authController = {
                 from: '"Siss" <project.php.nhncomputer@gmail.com>',
                 to: email,
                 subject: `[Siss] Chúc mừng bạn đăng ký thành công!`,
-                html: ` <h3>Xin chào ${fullName},</h3>
+            html: ` <h3>Xin chào ${fullName},</h3>
                         <h3>Bạn vừa tiến hành đăng ký tài khoản tại Siss!</h3>
                         <p>Chúc mừng bạn trở thành thành viên Siss.</p>
                         <p>Username : ${email}</p>
                         <a href="${link}">Nhấn vào đây để kích hoạt</a>`
             })
+            console.log(code)
             const { password: pw, ...data } = result
             res.status(201).json({
                 message: 'success',
@@ -195,14 +197,24 @@ const authController = {
     verifyEmail: async (req, res) => {
         try {
             const { active_code } = req.query
-
+            const randomChar = generateRandom();
             const { email } = jwt.verify(active_code, process.env.JWT_ACCESS_TOKEN_SECRET);
             if (!email) res.status(400).json({ error: "Token không hợp lệ!" })
             const user = await userService.getByEmail(email)
             if (user) {
+                console.log("inforId")
+                const inforId = await informationModel.create({
+                    userId: user.id,
+                })
+                console.log(inforId)
+                await linkModel.create({
+                    linkName: randomChar,
+                    informationId: inforId.id,
+                    userId: user.id,
+                })
+                console.log("linkModel")
                 await userService.updateStatus(user._id, { status: 1 })
                 return res.status(200).json({ message: "Xác minh tài khoản thành công!!" })
-
             }
             return res.status(400).json({ error: "Không tìm thấy khách hàng!!" })
         } catch (error) {

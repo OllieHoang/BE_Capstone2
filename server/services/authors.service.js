@@ -1,5 +1,5 @@
 const Author = require('../models/authors.model')
-const Book = require('../models/books.model')
+const card = require('../models/cards.model')
 
 const authorService = {
     getAll: async({page, limit, sort}) => {
@@ -8,7 +8,7 @@ const authorService = {
 
     },
     getById: async(id) => {
-        return await Promise.all([Author.findById(id), Book.find({author: {$in: id}})])
+        return await Promise.all([Author.findById(id), card.find({author: {$in: id}})])
     },
     create: async({name, year}) => {
         const newAuthor = new Author({name, year})
@@ -19,7 +19,7 @@ const authorService = {
     },
     deleteById: async(id) => {
         //     // Khi xóa 1 tác giả => Cần update lại các sách có tác giả cần xóa = null
-        await Book.updateMany({author: id}, {
+        await card.updateMany({author: id}, {
             $pull: { author: id }
         })
         return await Author.findByIdAndDelete(id)

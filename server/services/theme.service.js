@@ -1,8 +1,10 @@
 const themeModel = require('../models/theme.model');
 
 const themeService = {
-   getTheme: async() => {
-      return await themeModel.find({});
+   getAllTheme: async() => {
+      return await Promise.all([
+         themeModel.countDocuments({}), 
+         themeModel.find({})])
    },
    postTheme: async(data) => {
       return await themeModel.create({

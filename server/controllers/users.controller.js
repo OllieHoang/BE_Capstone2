@@ -123,11 +123,11 @@ const usersController = {
             await userService.createStaff({email, fullName, phoneNumber, password: hash, role: RoleEnum.Staff, status: 1})
 
             const resultSendMail = await transporter.sendMail({
-                from: '"BOOKSTORE" <project.php.nhncomputer@gmail.com>',
+                from: '"SCIS" <project.php.nhncomputer@gmail.com>',
                 to: email,
-                subject: `[BOOKSTORE] Thông tin tài khoản nhân viên của bạn`,
+                subject: `[SCIS] Thông tin tài khoản nhân viên của bạn`,
                 html: ` <h3>Xin chào ${fullName},</h3>
-                        <h3>Chúc mừng bạn vừa được cấp tài khoản quyền nhân viên tại Bookstore!</h3>
+                        <h3>Chúc mừng bạn vừa được cấp tài khoản quyền nhân viên tại SCIS!</h3>
                         <p>Username : ${email}</p>
                         <p>Password : ${password}</p>`
             })

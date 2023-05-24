@@ -6,8 +6,8 @@ mongoose.plugin(slug)
 
 const Schema = mongoose.Schema
 
-const bookSchema = new Schema({
-    bookId: {
+const cardSchema = new Schema({
+    cardId: {
         type: String,
         required: true,
         unique: true
@@ -47,4 +47,4 @@ const bookSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('Book', bookSchema)
+module.exports = mongoose.model('card', cardSchema)

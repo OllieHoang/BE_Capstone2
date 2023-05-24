@@ -1,5 +1,5 @@
 const Genre = require('../models/genres.model')
-const Book = require('../models/books.model')
+const card = require('../models/cards.model')
 
 const genreService = {
     getAll: async({page, limit}) => {
@@ -20,7 +20,7 @@ const genreService = {
     },
     deleteById: async(id) => {
 
-        await Book.updateMany({genre: id}, {
+        await card.updateMany({genre: id}, {
             $pull: { genre: id }
         })
         return await Genre.findByIdAndDelete(id)

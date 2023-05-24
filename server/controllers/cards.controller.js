@@ -1,7 +1,7 @@
-const bookService = require('../services/books.service')
+const cardService = require('../services/cards.service')
 const { cloudinary } = require('../config/cloudinary')
 
-const bookController = {
+const cardController = {
     getAll: async(req, res) => {
         try {
             const page = req.query.page ? parseInt(req.query.page) : 1
@@ -11,7 +11,7 @@ const bookController = {
 
             const queryObj = !!query ? query : {}
             
-            const [count, data] = await bookService.getAll({query: queryObj, page, limit, sort})
+            const [count, data] = await cardService.getAll({query: queryObj, page, limit, sort})
             const totalPage = Math.ceil(count / limit)
             
             res.status(200).json({
@@ -32,10 +32,10 @@ const bookController = {
             })
         }
     },
-    getByBookId: async(req, res) => {
+    getBycardId: async(req, res) => {
         try {
-            const { bookId } = req.params
-            const data = await bookService.getByBookId(bookId) 
+            const { cardId } = req.params
+            const data = await cardService.getBycardId(cardId) 
 
             if (data) {
                 res.status(200).json({
@@ -45,7 +45,7 @@ const bookController = {
                 })
             } else {
                 res.status(200).json({
-                    message: 'Không tìm thấy sách!',
+                    message: 'Không tìm thấy card!',
                     error: 1,
                     data
                 })
@@ -60,7 +60,7 @@ const bookController = {
     getById: async(req, res) => {
         try {
             const { id } = req.params
-           const data = await bookService.getById(id)
+           const data = await cardService.getById(id)
 
             if (data) {
                 res.status(200).json({
@@ -85,7 +85,7 @@ const bookController = {
     getBySlug: async(req, res) => {
         try {
             const { slug } = req.params
-            const data = await bookService.getBySlug(slug)
+            const data = await cardService.getBySlug(slug)
 
             if (data) {
                 res.status(200).json({
@@ -95,7 +95,7 @@ const bookController = {
                 })
             } else {
                 res.status(404).json({
-                    message: 'Không tìm thấy sách!',
+                    message: 'Không tìm thấy card!',
                     error: 1,
                     data
                 })
@@ -109,8 +109,8 @@ const bookController = {
     },
     checkIsOrdered: async(req, res) => {
         try {
-            const { bookId } = req.params
-            const data = await bookService.checkIsOrdered(bookId)
+            const { cardId } = req.params
+            const data = await cardService.checkIsOrdered(cardId)
 
             if (data.length > 0) {
                 res.status(200).json({
@@ -132,12 +132,12 @@ const bookController = {
             })
         }
     },
-    searchBook: async(req, res) => {
+    searchcard: async(req, res) => {
         try {
             const { key } = req.query
             const page = req.query.page ? parseInt(req.query.page) : 1
             const limit = req.query.limit ? parseInt(req.query.limit) : 0
-            const data = await bookService.search({key, page, limit})
+            const data = await cardService.search({key, page, limit})
 
             res.status(200).json({
                 message: 'success',
@@ -154,10 +154,10 @@ const bookController = {
     },
     create: async(req, res) => {
         try {
-            const { bookId } = req.body
-            const isExist = await bookService.getByBookId(bookId)
-            if (isExist) return res.status(400).json({message: "bookId đã tồn tại!", error: 1}) 
-            const data = await bookService.create(req.body)
+            const { cardId } = req.body
+            const isExist = await cardService.getBycardId(cardId)
+            if (isExist) return res.status(400).json({message: "cardId đã tồn tại!", error: 1}) 
+            const data = await cardService.create(req.body)
             return res.status(201).json({
                 message: 'success',
                 error: 0,
@@ -176,14 +176,14 @@ const bookController = {
             const { imageUrl, publicId } = req.body
             let data = null
             if (imageUrl && publicId) {
-                const { data: bookUpdate } = await bookService.getById(id)
-                const publicIdDelete = bookUpdate.publicId
+                const { data: cardUpdate } = await cardService.getById(id)
+                const publicIdDelete = cardUpdate.publicId
                 if (publicIdDelete) {
                     await cloudinary.uploader.destroy(publicIdDelete)
                 }
-                data = await bookService.updateById(id, req.body)
+                data = await cardService.updateById(id, req.body)
             } else {
-                data = await bookService.updateById(id, req.body)
+                data = await cardService.updateById(id, req.body)
             }
          
             if (data) {
@@ -194,7 +194,7 @@ const bookController = {
                 })
             } else {
                 return res.status(404).json({
-                    message: `Không tìm thấy sách có id:${id}`,
+                    message: `Không tìm thấy card có id:${id}`,
                     error: 1,
                     data
                 })
@@ -210,9 +210,9 @@ const bookController = {
     deleteById: async(req, res) => {
         try {
             const { id } = req.params
-            const isOrdered = await bookService.checkIsOrdered(id)
+            const isOrdered = await cardService.checkIsOrdered(id)
             if (isOrdered.length > 0) return res.status(400).json({message: 'Sản phẩm đã được mua!',error: 1})
-            const data = await bookService.deleteById(id)
+            const data = await cardService.deleteById(id)
             if (data) {
                 await cloudinary.uploader.destroy(data?.publicId)
 
@@ -238,4 +238,4 @@ const bookController = {
     }
 }
 
-module.exports = bookController
+module.exports = cardController

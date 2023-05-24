@@ -1,5 +1,5 @@
 const Publisher = require('../models/publishers.model')
-const Book = require('../models/books.model')
+const card = require('../models/cards.model')
 
 const publisherService = {
     getAll: async({page, limit}) => {
@@ -17,7 +17,7 @@ const publisherService = {
     },
     deleteById: async(id) => {
             // Khi xóa 1 NXB=> Cần update lại các sách có NXB cần xóa = null
-        await Book.updateMany({publisher: id }, { publisher: null})
+        await card.updateMany({publisher: id }, { publisher: null})
         return await Publisher.findByIdAndDelete(id)
     }
 }
