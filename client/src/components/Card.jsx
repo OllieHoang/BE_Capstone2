@@ -95,7 +95,7 @@ const Card = () => {
   };
 
   return (
-    <section className="h-screen xs:h-full">
+    <section className="lg:h-screen xs:h-full">
       <div className="w-full h-full flex gap-x-10 flex-col gap-y-10 px-24 lg:flex-row xl:px-20 lg:px-40 pb-10 pt-24">
         <div className="flex flex-col flex-auto gap-y-4">
           <form
@@ -182,7 +182,7 @@ const Card = () => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-2 h-screen">
               <div
                 className="w-[450px] h-[310px] relative flex object-cover border border-black"
                 style={{ backgroundImage: `url(${hinhnen})` }}

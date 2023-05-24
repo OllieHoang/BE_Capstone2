@@ -1,15 +1,23 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Row, Col, Table, Spinner, Modal, Badge, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Table,
+  Spinner,
+  Modal,
+  Badge,
+  Button,
+} from "react-bootstrap";
 
 import { FaEye } from "react-icons/fa";
 import PaginationBookStore from "../../components/PaginationBookStore";
 import OrderDetail from "../../components/OrderDetail";
 import format from "../../helper/format";
 import moment from "moment";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
-import methodData from "../Checkout/methodData"
+import methodData from "../Checkout/methodData";
 import steps from "../../components/OrderProgress/enum";
 import orderApi from "../../api/orderApi";
 
@@ -23,11 +31,11 @@ export default function Order() {
   const [loading, setLoading] = useState(false);
   const [loadingCheckout, setLoadingCheckout] = useState(false);
 
-  const [selectedOrder, setSelectedOrder] = useState({})
-  const [selectedMethod, setSelectedMethod] = useState(1)
+  const [selectedOrder, setSelectedOrder] = useState({});
+  const [selectedMethod, setSelectedMethod] = useState(1);
 
   const [showModal, setShowModal] = useState(false);
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false)
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   const handleChangePage = useCallback((page) => {
     setPage(page);
@@ -69,25 +77,35 @@ export default function Order() {
   const handleCheckout = async () => {
     if (selectedMethod === 1) {
       try {
-        const { cost: { total }, _id } = selectedOrder
-        const paymentId = uuidv4()
-        setLoadingCheckout(true)
-        await orderApi.updatePaymentId(_id, { paymentId })
-        const { payUrl } = await orderApi.getPayUrlMoMo({ amount: total, paymentId })
-        setLoadingCheckout(false)
-        window.location.href = payUrl
+        const {
+          cost: { total },
+          _id,
+        } = selectedOrder;
+        const paymentId = uuidv4();
+        setLoadingCheckout(true);
+        await orderApi.updatePaymentId(_id, { paymentId });
+        const { payUrl } = await orderApi.getPayUrlMoMo({
+          amount: total,
+          paymentId,
+        });
+        setLoadingCheckout(false);
+        window.location.href = payUrl;
       } catch (error) {
-        setLoadingCheckout(false)
-        console.log(error)
+        setLoadingCheckout(false);
+        console.log(error);
       }
     } else {
-      alert("Tính năng đang phát triển!")
+      alert("Tính năng đang phát triển!");
     }
-  }
+  };
 
   return (
     <div>
-      <Modal size="lg" show={showCheckoutModal} onHide={() => setShowCheckoutModal(false)}>
+      <Modal
+        size="lg"
+        show={showCheckoutModal}
+        onHide={() => setShowCheckoutModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Invoice information</Modal.Title>
         </Modal.Header>
@@ -95,41 +113,69 @@ export default function Order() {
           <div>
             <Row>
               <label>Payments</label>
-              {methodData && methodData.map(method => {
-                if (method?.value !== 0) {
-                  return (
-                    <div key={method.value}>
-                      <input type="radio" name="method" value={method.value} id={method.name} checked={+selectedMethod === method.value}
-                        onChange={(e) => setSelectedMethod(+e.target.value)} />
-                      <label htmlFor={method.name}>{method.name}</label>
-                      {method.image && <label htmlFor={method.name}> <img className="icon-method" src={method.image} alt="" /></label>}
-                      <br />
-                    </div>
-                  )
-                } else return null
-              })}
+              {methodData &&
+                methodData.map((method) => {
+                  if (method?.value !== 0) {
+                    return (
+                      <div key={method.value}>
+                        <input
+                          type="radio"
+                          name="method"
+                          value={method.value}
+                          id={method.name}
+                          checked={+selectedMethod === method.value}
+                          onChange={(e) => setSelectedMethod(+e.target.value)}
+                        />
+                        <label htmlFor={method.name}>{method.name}</label>
+                        {method.image && (
+                          <label htmlFor={method.name}>
+                            {" "}
+                            <img
+                              className="icon-method"
+                              src={method.image}
+                              alt=""
+                            />
+                          </label>
+                        )}
+                        <br />
+                      </div>
+                    );
+                  } else return null;
+                })}
             </Row>
-            <Button onClick={handleCheckout} className="mt-4" disabled={loadingCheckout}>{loadingCheckout ? "PAYING..." : "PAYING"}</Button>
+            <Button
+              onClick={handleCheckout}
+              className="mt-4"
+              disabled={loadingCheckout}
+            >
+              {loadingCheckout ? "PAYING..." : "PAYING"}
+            </Button>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowCheckoutModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowCheckoutModal(false)}
+          >
             Cancel
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-w1100">
+      <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        dialogClassName="modal-w1100"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Bill</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {showModal && orderDetail && (
-            <OrderDetail data={orderDetail} />
-          )}
+          {showModal && orderDetail && <OrderDetail data={orderDetail} />}
         </Modal.Body>
       </Modal>
       <div style={{ border: "1px solid #ccc", fontSize: 13 }}>
-        <Table hover>
+        <Table hover responsive>
           <thead>
             <tr>
               <th>STT</th>
@@ -214,8 +260,8 @@ export default function Order() {
                           <button
                             className="btn btn-warning small"
                             onClick={() => {
-                              setSelectedOrder(item)
-                              setShowCheckoutModal(true)
+                              setSelectedOrder(item);
+                              setShowCheckoutModal(true);
                             }}
                           >
                             Pay

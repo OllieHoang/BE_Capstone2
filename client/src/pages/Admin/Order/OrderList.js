@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { Row, Col, Table, Spinner, Modal, Badge, Button } from "react-bootstrap";
-import moment from 'moment'
+import {
+  Row,
+  Col,
+  Table,
+  Spinner,
+  Modal,
+  Badge,
+  Button,
+} from "react-bootstrap";
+import moment from "moment";
 import { FaEdit, FaEye } from "react-icons/fa";
 
 import PaginationBookStore from "../../../components/PaginationBookStore";
@@ -12,7 +20,6 @@ import orderApi from "../../../api/orderApi";
 import format from "../../../helper/format";
 
 export default function OrderList() {
-
   const [orderData, setOrderData] = useState({});
   const [page, setPage] = useState(1);
 
@@ -72,15 +79,17 @@ export default function OrderList() {
 
   const handleCallApiChangeStatus = async () => {
     try {
-      setLoadingUpdate(true)
-      const { data } = await orderApi.updateOrderStatus(orderDetail?._id, { orderStatusCode: +orderDetail?.orderStatus?.code + 1 });
-      setLoadingUpdate(false)
-      const { orderStatus, paymentStatus } = data
+      setLoadingUpdate(true);
+      const { data } = await orderApi.updateOrderStatus(orderDetail?._id, {
+        orderStatusCode: +orderDetail?.orderStatus?.code + 1,
+      });
+      setLoadingUpdate(false);
+      const { orderStatus, paymentStatus } = data;
       setOrderDetail((pre) => {
         return {
           ...pre,
           orderStatus,
-          paymentStatus
+          paymentStatus,
         };
       });
       setOrderData((pre) => {
@@ -97,7 +106,7 @@ export default function OrderList() {
       alert("Update successful!");
     } catch (error) {
       alert("Update failed!");
-      setLoadingUpdate(false)
+      setLoadingUpdate(false);
       console.log(error);
     }
   };
@@ -116,10 +125,18 @@ export default function OrderList() {
         <Modal.Body>
           {showModalUpdate && orderDetail && orderDetail?.orderStatus?.text && (
             <div>
-              <p className="mb-4">Order Status: <b>{orderDetail?.orderStatus?.text}</b></p>
+              <p className="mb-4">
+                Order Status: <b>{orderDetail?.orderStatus?.text}</b>
+              </p>
               <OrderProgress current={orderDetail?.orderStatus?.code} />
               {orderDetail?.orderStatus?.code < steps?.length - 1 && (
-                <Button variant="success" disabled={loadingUpdate} className="mt-4 d-flex" style={{ margin: "0 auto" }} onClick={handleCallApiChangeStatus}>
+                <Button
+                  variant="success"
+                  disabled={loadingUpdate}
+                  className="mt-4 d-flex"
+                  style={{ margin: "0 auto" }}
+                  onClick={handleCallApiChangeStatus}
+                >
                   Move to the next state
                 </Button>
               )}
@@ -139,16 +156,14 @@ export default function OrderList() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {showModal && orderDetail && (
-            <OrderDetail data={orderDetail} />
-          )}
+          {showModal && orderDetail && <OrderDetail data={orderDetail} />}
         </Modal.Body>
       </Modal>
       <Col xl={12}>
         <div className="admin-content-wrapper">
           <div className="admin-content-header">Order List</div>
           <div className="admin-content-body">
-            <Table hover>
+            <Table hover responsive>
               <thead>
                 <tr>
                   <th>STT</th>
@@ -172,21 +187,48 @@ export default function OrderList() {
                       <tr key={item?._id}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td className="text-start">
-                          <p>Receiver: <b>{item?.delivery?.fullName}</b></p>
-                          <p>Email: <b>{item?.delivery?.email}</b></p>
-                          <p>Phone: <b>{item?.delivery?.phoneNumber}</b></p>
-                          <p>Address: <b>{item?.delivery?.address}</b> </p>
+                          <p>
+                            Receiver: <b>{item?.delivery?.fullName}</b>
+                          </p>
+                          <p>
+                            Email: <b>{item?.delivery?.email}</b>
+                          </p>
+                          <p>
+                            Phone: <b>{item?.delivery?.phoneNumber}</b>
+                          </p>
+                          <p>
+                            Address: <b>{item?.delivery?.address}</b>{" "}
+                          </p>
                         </td>
                         <td>
-                          <p>{moment(item?.createdAt).format('DD-MM-yyyy HH:mm:ss')}</p>
-                          {moment(item.createdAt).isSame(moment(), 'day') && (
-                            <span style={{ backgroundColor: "#ff709e" }} className="badge">{moment(item?.createdAt).fromNow()}</span>
+                          <p>
+                            {moment(item?.createdAt).format(
+                              "DD-MM-yyyy HH:mm:ss"
+                            )}
+                          </p>
+                          {moment(item.createdAt).isSame(moment(), "day") && (
+                            <span
+                              style={{ backgroundColor: "#ff709e" }}
+                              className="badge"
+                            >
+                              {moment(item?.createdAt).fromNow()}
+                            </span>
                           )}
                         </td>
                         <td className="price fw-bold">
                           {format.formatPrice(item?.cost?.total)}
                         </td>
-                        <td><span className="badge" style={{ backgroundColor: steps[item?.orderStatus?.code]?.color }}>{item?.orderStatus?.text}</span></td>
+                        <td>
+                          <span
+                            className="badge"
+                            style={{
+                              backgroundColor:
+                                steps[item?.orderStatus?.code]?.color,
+                            }}
+                          >
+                            {item?.orderStatus?.text}
+                          </span>
+                        </td>
                         <td>
                           <button
                             className="btn btn-success"

@@ -1,6 +1,13 @@
-
 import { useCallback, useEffect, useState } from "react";
-import { Badge, Button, Col, Modal, Row, Spinner, Table } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Col,
+  Modal,
+  Row,
+  Spinner,
+  Table,
+} from "react-bootstrap";
 import { FaEye, FaSearch } from "react-icons/fa";
 
 import moment from "moment";
@@ -9,41 +16,40 @@ import format from "../../../helper/format";
 import PaginationBookStore from "../../../components/PaginationBookStore";
 import OrderDetail from "../../../components/OrderDetail";
 import steps from "../../../components/OrderProgress/enum";
-import userApi from "../../../api/userApi"
-import orderApi from "../../../api/orderApi"
+import userApi from "../../../api/userApi";
+import orderApi from "../../../api/orderApi";
 
 export default function CustomerList() {
-  const [customerData, setCustomerData] = useState({})
-  const [orderList, setOrderList] = useState([])
-  const [orderDetail, setOrderDetail] = useState({})
+  const [customerData, setCustomerData] = useState({});
+  const [orderList, setOrderList] = useState([]);
+  const [orderDetail, setOrderDetail] = useState({});
 
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
 
-  const [showModal, setShowModal] = useState(false)
-  const [showOrderDetailModal, setShowOrderDetailModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [showOrderDetailModal, setShowOrderDetailModal] = useState(false);
 
+  const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(false)
-
-  const [searchInput, setSearchInput] = useState("")
-  const [searchString, setSearchString] = useState("")
+  const [searchInput, setSearchInput] = useState("");
+  const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const query = {
-          "$or": [
-            { fullName: { "$regex": searchString, "$options": "$i" } },
-            { email: { "$regex": searchString, "$options": "$i" } },
-            { phoneNumber: { "$regex": searchString, "$options": "$i" } },
+          $or: [
+            { fullName: { $regex: searchString, $options: "$i" } },
+            { email: { $regex: searchString, $options: "$i" } },
+            { phoneNumber: { $regex: searchString, $options: "$i" } },
           ],
-          role: 1
-        }
+          role: 1,
+        };
         const { data, pagination } = await userApi.getAll({
           page,
           limit: 10,
-          query:{query}
+          query: { query },
         });
         setLoading(false);
         setCustomerData({ list: data, totalPage: pagination.totalPage });
@@ -64,13 +70,13 @@ export default function CustomerList() {
       const { data } = await orderApi.getAll({
         userId,
         limit: 10,
-      })
-      setOrderList(data)
-      setShowModal(true)
+      });
+      setOrderList(data);
+      setShowModal(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleGetOrderDetail = async (orderId) => {
     try {
@@ -78,32 +84,39 @@ export default function CustomerList() {
       setOrderDetail(data);
       setShowOrderDetailModal(true);
     } catch (error) {
-      console.log(error)
-
+      console.log(error);
     }
-  }
+  };
 
   return (
     <Row>
-      <Modal size="lg" dialogClassName="modal-w1100" show={showOrderDetailModal} onHide={() => setShowOrderDetailModal(false)}>
+      <Modal
+        size="lg"
+        dialogClassName="modal-w1100"
+        show={showOrderDetailModal}
+        onHide={() => setShowOrderDetailModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             Bill <Badge bg="secondary">{orderDetail?._id}</Badge>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {showModal && orderDetail && (
-            <OrderDetail data={orderDetail} />
-          )}
+          {showModal && orderDetail && <OrderDetail data={orderDetail} />}
         </Modal.Body>
       </Modal>
-      <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-w1100">
+      <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        dialogClassName="modal-w1100"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Transaction history</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div style={{ maxHeight: "500px", overflowY: "scroll" }}>
-            <Table hover>
+            <Table hover responsive>
               <thead>
                 <tr>
                   <th>STT</th>
@@ -127,21 +140,48 @@ export default function CustomerList() {
                       <tr key={item?._id}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td className="text-start">
-                          <p>Receiver: <b>{item?.delivery?.fullName}</b></p>
-                          <p>Email: <b>{item?.delivery?.email}</b></p>
-                          <p>Phone: <b>{item?.delivery?.phoneNumber}</b></p>
-                          <p>Address: <b>{item?.delivery?.address}</b> </p>
+                          <p>
+                            Receiver: <b>{item?.delivery?.fullName}</b>
+                          </p>
+                          <p>
+                            Email: <b>{item?.delivery?.email}</b>
+                          </p>
+                          <p>
+                            Phone: <b>{item?.delivery?.phoneNumber}</b>
+                          </p>
+                          <p>
+                            Address: <b>{item?.delivery?.address}</b>{" "}
+                          </p>
                         </td>
                         <td>
-                          <p>{moment(item?.createdAt).format('DD-MM-yyyy HH:mm:ss')}</p>
-                          {moment(item.createdAt).isSame(moment(), 'day') && (
-                            <span style={{ backgroundColor: "#ff709e" }} className="badge">{moment(item?.createdAt).fromNow()}</span>
+                          <p>
+                            {moment(item?.createdAt).format(
+                              "DD-MM-yyyy HH:mm:ss"
+                            )}
+                          </p>
+                          {moment(item.createdAt).isSame(moment(), "day") && (
+                            <span
+                              style={{ backgroundColor: "#ff709e" }}
+                              className="badge"
+                            >
+                              {moment(item?.createdAt).fromNow()}
+                            </span>
                           )}
                         </td>
                         <td className="price fw-bold">
                           {format.formatPrice(item?.cost?.total)}
                         </td>
-                        <td><span className="badge" style={{ backgroundColor: steps?.[item?.orderStatus?.code]?.color }}>{item?.orderStatus?.text}</span></td>
+                        <td>
+                          <span
+                            className="badge"
+                            style={{
+                              backgroundColor:
+                                steps?.[item?.orderStatus?.code]?.color,
+                            }}
+                          >
+                            {item?.orderStatus?.text}
+                          </span>
+                        </td>
                         <td>
                           <button
                             className="btn btn-primary"
@@ -173,11 +213,19 @@ export default function CustomerList() {
           <div className="admin-content-header">List of customers</div>
           <div className="admin-content-action">
             <div className="d-flex">
-              <input className="form-control search" placeholder="Seacher name, email, phone" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-              <Button type="button" style={{ color: "white" }} variant="info"
+              <input
+                className="form-control search"
+                placeholder="Seacher name, email, phone"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <Button
+                type="button"
+                style={{ color: "white" }}
+                variant="info"
                 onClick={() => {
-                  setSearchString(searchInput)
-                  setPage(1)
+                  setSearchString(searchInput);
+                  setPage(1);
                 }}
               >
                 <FaSearch />
@@ -185,7 +233,7 @@ export default function CustomerList() {
             </div>
           </div>
           <div className="admin-content-body">
-            <Table hover>
+            <Table hover responsive>
               <thead>
                 <tr>
                   <th>STT</th>
@@ -209,18 +257,39 @@ export default function CustomerList() {
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td className="text-start">
                           <div className="d-flex align-items-center">
-                            <img className="avatar" src={item?.avatar?.url} alt="" />
-                            <div >
-                              <p>Họ tên: <b>{item?.fullName}</b></p>
-                              <p>Email: <b>{item?.email}</b></p>
-                              <p>Điện thoại: <b>{item?.phoneNumber}</b></p>
+                            <img
+                              className="avatar"
+                              src={item?.avatar?.url}
+                              alt=""
+                            />
+                            <div>
+                              <p>
+                                Họ tên: <b>{item?.fullName}</b>
+                              </p>
+                              <p>
+                                Email: <b>{item?.email}</b>
+                              </p>
+                              <p>
+                                Điện thoại: <b>{item?.phoneNumber}</b>
+                              </p>
                             </div>
                           </div>
                         </td>
-                        <td><p>{item?.serviceId ? item?.service : "Account Siss"}</p></td>
-                        <td><Badge bg={item?.status === 1 ? "success" : "danger"}>{item?.status === 1 ? "Verified" : "Not verified"}</Badge></td>
                         <td>
-                          <Button variant="warning" onClick={() => getOrderHistory(item?._id)} >
+                          <p>
+                            {item?.serviceId ? item?.service : "Account Siss"}
+                          </p>
+                        </td>
+                        <td>
+                          <Badge bg={item?.status === 1 ? "success" : "danger"}>
+                            {item?.status === 1 ? "Verified" : "Not verified"}
+                          </Badge>
+                        </td>
+                        <td>
+                          <Button
+                            variant="warning"
+                            onClick={() => getOrderHistory(item?._id)}
+                          >
                             Purchase history
                           </Button>
                         </td>

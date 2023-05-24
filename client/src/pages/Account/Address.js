@@ -12,9 +12,9 @@ function Address() {
   const [showAddForm, setShowAddForm] = useState(false);
 
   const [newAddress, setNewAddress] = useState("");
-  const [addressDelete, setAddressDelete] = useState({})
+  const [addressDelete, setAddressDelete] = useState({});
 
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const { userId } = useSelector((state) => state.auth);
 
@@ -24,7 +24,7 @@ function Address() {
         const { data } = await userApi.getAllAddressById(userId);
         setAddressList(data?.address);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
 
@@ -35,17 +35,22 @@ function Address() {
 
   const handleSubmitAddNewAddress = async (e) => {
     e.preventDefault();
-    const { province: { provinceId, provinceName }, district: { districtId, districtName }, ward: { wardId, wardName }, address } = newAddress
+    const {
+      province: { provinceId, provinceName },
+      district: { districtId, districtName },
+      ward: { wardId, wardName },
+      address,
+    } = newAddress;
     try {
       const { data } = await userApi.addAddress(userId, {
         address: {
           address: `${address}, ${wardName}, ${districtName}, ${provinceName}`,
           provinceId,
           districtId,
-          wardId
-        }
+          wardId,
+        },
       });
-      console.log(data)
+      console.log(data);
       setShowAddForm(false);
       setAddressList((preState) => {
         const newArray = [...preState];
@@ -57,30 +62,27 @@ function Address() {
         return newArray;
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const handleCallApiDelete = async () => {
     try {
       await userApi.deleteById(userId, addressDelete?._id);
-      setShowModal(false)
+      setShowModal(false);
       setAddressList((preState) => {
         const newArray = [...preState];
         return newArray.filter((item) => item._id !== addressDelete?._id);
       });
     } catch (error) {
-      setShowModal(false)
-      console.log(error)
+      setShowModal(false);
+      console.log(error);
     }
   };
 
   const handleUpdateDefaultAddress = async (addressId) => {
     try {
-      await userApi.updateDefaultAddressById(
-        userId,
-        addressId
-      );
+      await userApi.updateDefaultAddressById(userId, addressId);
       setAddressList((preState) => {
         const newArray = [...preState];
         return newArray.map((item) => {
@@ -90,13 +92,13 @@ function Address() {
         });
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const handleChangeAddress = useCallback((data) => {
-    setNewAddress(data)
-  }, [])
+    setNewAddress(data);
+  }, []);
 
   return (
     <>
@@ -104,7 +106,10 @@ function Address() {
         <Modal.Header closeButton>
           <Modal.Title>Delete Address</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure to delete this Address <b>{addressDelete && addressDelete?.address}</b>?</Modal.Body>
+        <Modal.Body>
+          Are you sure to delete this Address{" "}
+          <b>{addressDelete && addressDelete?.address}</b>?
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Hủy
@@ -115,7 +120,7 @@ function Address() {
         </Modal.Footer>
       </Modal>
       <div className={styles.addressWrapper}>
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -130,24 +135,35 @@ function Address() {
                   <tr key={item._id}>
                     <td>{index + 1}</td>
                     <td>
-                      {item.address}{" "} {item.isDefault ? (
+                      {item.address}{" "}
+                      {item.isDefault ? (
                         <button className={`bookstore-btn ${styles.btnCheck}`}>
                           <FaCheckCircle />
                         </button>
-                      ) : ("")}
+                      ) : (
+                        ""
+                      )}
                     </td>
                     <td>
                       {!item.isDefault ? (
-                        <Button onClick={() => handleUpdateDefaultAddress(item?._id)} >
+                        <Button
+                          onClick={() => handleUpdateDefaultAddress(item?._id)}
+                          className="text-black"
+                        >
                           Set as default
                         </Button>
-                      ) : ("")}
+                      ) : (
+                        ""
+                      )}
                     </td>
                     <td>
-                      <button className="btn btn-danger" onClick={() => {
-                        setAddressDelete(item)
-                        setShowModal(true)
-                      }}>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setAddressDelete(item);
+                          setShowModal(true);
+                        }}
+                      >
                         Delete
                       </button>
                     </td>

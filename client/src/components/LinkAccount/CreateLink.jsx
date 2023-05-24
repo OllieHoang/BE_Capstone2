@@ -55,7 +55,7 @@ const CreateLink = () => {
         <button>Add link</button>
       </div>
       <div className={`${isActive ? " hidden " : " block "}  `}>
-        <div className="w-full h-[400px] z-20 shadow-lg 2xl:px-8 xs:px-2 py-2 ">
+        <div className="w-full h-[400px] z-20 shadow-lg 2xl:px-8 xs:px-2 py-2 s:px-2 s:h-full">
           <div className={`${isActive ? "hidden " : "block"} `}>
             <div className="flex justify-between pt-4">
               <div className="font-medium text-sm">Enter Url and Title</div>
@@ -116,7 +116,7 @@ const CreateLink = () => {
                   <RxCaretRight className="text-xl" /> */}
                 </div>
               </div>
-              <div className="flex gap-x-2 px-6 xs:px-0 xs:gap-x-1">
+              <div className="grid gap-x-2 lg:px-6 xs:px-0 xs:gap-x-1 s:px-0 lg:grid-rows-5 grid-flow-col s:grid-rows-2 2xl:grid-rows-6 lg:flex">
                 <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg  antialiased text-black overflow-hidden mb-2"
@@ -233,7 +233,7 @@ const CreateLink = () => {
                     Twitter
                   </p>
                 </div>
-                <div className="xs:hidden 2xl:flex my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
+                <div className="my-2 flex flex-col items-center justify-center relative transition duration-75 ease-out ">
                   <button
                     className="hover:ring-sand hover:ring-2 hover:ring-inset active:bg-chalk  focus-visible:outline-black w-[88px] h-[88px] outline-none outline-offset-[-2px] bg-marble rounded-lg border-marble antialiased text-black overflow-hidden mb-2"
                     aria-label="Pinterest"

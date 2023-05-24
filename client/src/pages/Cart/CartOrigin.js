@@ -118,8 +118,8 @@ function CartOrigin() {
   };
 
   return (
-    <div className="h-screen pt-20 px-20">
-      <Container>
+    <div className="h-screen pt-20 lg:px-20 s:pt-24 s:h-full pb-10 s:px-1 xs:px-4 md:px-6">
+      <div>
         <Breadcrumb>
           <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
             Home
@@ -136,7 +136,7 @@ function CartOrigin() {
           <Row>
             <Col xl={9}>
               <div className={styles.cartLeft}>
-                <Table hover style={{ backgroundColor: "white" }}>
+                <Table hover style={{ backgroundColor: "white" }} responsive>
                   <thead
                     style={{
                       backgroundColor: "#343a40",
@@ -146,6 +146,7 @@ function CartOrigin() {
                   >
                     <tr>
                       <th>Product</th>
+                      <th>Name</th>
                       <th>Unit Price</th>
                       <th>Amount</th>
                       <th>To money</th>
@@ -234,7 +235,7 @@ function CartOrigin() {
             </Col>
           </Row>
         )}
-      </Container>
+      </div>
     </div>
   );
 }

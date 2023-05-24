@@ -118,8 +118,8 @@ function Cart() {
   };
 
   return (
-    <div className="h-screen pt-20 px-20">
-      <Container>
+    <div className="lg:h-screen lg:pt-20 px-20 s:pt-24 pb-10 s:h-full s:px-4 xs:px-6 ">
+      <div>
         <Breadcrumb>
           <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
             Home
@@ -136,7 +136,7 @@ function Cart() {
           <Row>
             <Col xl={9}>
               <div className={styles.cartLeft}>
-                <Table hover style={{ backgroundColor: "white" }}>
+                <Table hover style={{ backgroundColor: "white" }} responsive>
                   <thead
                     style={{
                       backgroundColor: "#343a40",
@@ -146,10 +146,11 @@ function Cart() {
                   >
                     <tr>
                       <th>Product</th>
+                      <th>Name</th>
                       <th>Unit Price</th>
                       <th>Amount</th>
                       <th>To money</th>
-                      <th></th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -234,7 +235,7 @@ function Cart() {
             </Col>
           </Row>
         )}
-      </Container>
+      </div>
     </div>
   );
 }

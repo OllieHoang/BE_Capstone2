@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateQuantity, removeItem } from "../../../redux/actions/cart";
 
-import { FaTrashAlt } from "react-icons/fa"
+import { FaTrashAlt } from "react-icons/fa";
 
 import format from "../../../helper/format";
 import styles from "./CartItem.module.css";
@@ -34,8 +34,8 @@ export default function CartItem(props) {
   }
 
   const handleRemoveItem = (productId) => {
-    dispatch(removeItem({productId}));
-  }
+    dispatch(removeItem({ productId }));
+  };
 
   useEffect(() => {
     dispatch(updateQuantity({ productId: props.productId, quantity }));
@@ -43,11 +43,13 @@ export default function CartItem(props) {
 
   return (
     <tr>
-      <td style={{maxWidth: 450, textAlign: "left"}}>
+      <td style={{ maxWidth: 450, textAlign: "left" }}>
         <div className="d-flex align-items-center">
-          <img src={props.imageUrl} alt={props.name} style={{width: 100}} />
-          <p style={{marginLeft: 10}}>{props.name}</p>
+          <img src={props.imageUrl} alt={props.name} style={{ width: 100 }} />
         </div>
+      </td>
+      <td>
+        <p style={{ marginLeft: 10 }}>{props.name}</p>
       </td>
       <td className="price">{format.formatPrice(props.price)}</td>
       <td>
@@ -55,15 +57,28 @@ export default function CartItem(props) {
           <button className={styles.btnChange} onClick={decreaseQuantity}>
             -
           </button>
-          <input type="number" className={styles.inputQuantity} value={quantity} onChange={handleChange} />
+          <input
+            type="number"
+            className={styles.inputQuantity}
+            value={quantity}
+            onChange={handleChange}
+          />
           <button className={styles.btnChange} onClick={increaseQuantity}>
             +
           </button>
         </div>
       </td>
-      <td className="price" style={{fontWeight: "bold"}}>{format.formatPrice(totalPriceItem)}</td>
+      <td className="price" style={{ fontWeight: "bold" }}>
+        {format.formatPrice(totalPriceItem)}
+      </td>
       <td>
-        <Button variant="danger" onClick={() => handleRemoveItem(props.productId)}><FaTrashAlt /></Button>
+        <Button
+          variant="danger"
+          onClick={() => handleRemoveItem(props.productId)}
+          className="text-red-500"
+        >
+          <FaTrashAlt />
+        </Button>
       </td>
     </tr>
   );

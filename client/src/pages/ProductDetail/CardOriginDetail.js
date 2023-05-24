@@ -154,17 +154,16 @@ export default function CardOriginDetail() {
   };
 
   return (
-    <div className="pt-20 px-20 h-screen">
+    <div className="pt-20 px-20 h-screen s:h-full s:pt-24 s:pb-10 s:px-4">
       <Container>
         {!loading ? (
-          <Row className={styles.productBriefing}>
-            <Col xl={4} xs={12}>
+          <Row className={` ${styles.productBriefing}`}>
+            <Col xl={4} lg={4} xs={12}>
               <div className={styles.imgBriefing}>
                 <img src={bookData && bookData.imageUrl} alt="" />
               </div>
             </Col>
-
-            <Col xl={8}>
+            <Col xl={8} lg={8}>
               <div className={styles.infoBriefing}>
                 <div>
                   <h2>{bookData && bookData.name}</h2>
@@ -209,7 +208,7 @@ export default function CardOriginDetail() {
                     />
                   </div>
 
-                  <div className={`d-flex ${styles.itemBriefing}`}>
+                  <div className={`flex s:block ${styles.itemBriefing}`}>
                     <div className={styles.textBold}>Number: </div>
                     <div className="d-flex">
                       <button

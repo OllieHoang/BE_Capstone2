@@ -78,7 +78,7 @@ export default function Profile() {
   });
 
   return (
-    <div className=" h-full ">
+    <div className=" h-full  ">
       <form onSubmit={formik.handleSubmit}>
         <div className={`form-group ${styles.formGroup}`}>
           <label className={styles.formLabel}>Email</label>

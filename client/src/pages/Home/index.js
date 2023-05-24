@@ -23,8 +23,8 @@ function Home() {
   }, []);
 
   return (
-    <div className=" h-full pt-20 xs:pt-24 px-20 pb-10 ">
-      <Container>
+    <div className=" h-full pt-20 xs:pt-24 s:pt-24 lg:px-20 pb-10 w-full s:px-4">
+      <div className="">
         <div className={styles.booksList}>
           <div className={styles.title}>
             <h2 className={styles.titleHeading}>Origin card</h2>
@@ -33,7 +33,7 @@ function Home() {
             {/* card origin  */}
             {books && books.length > 0 ? (
               books.map((book) => (
-                <Col xl={2} xs={6} key={book._id}>
+                <Col xl={2} xs={8} lg={3} sm={6} key={book._id}>
                   <BookOrigin data={book} />
                 </Col>
               ))
@@ -48,7 +48,7 @@ function Home() {
             <Row className={styles.row}>
               {books && books.length > 0 ? (
                 books.map((book) => (
-                  <Col xl={2} xs={6} key={book._id}>
+                  <Col xl={2} xs={8} lg={3} sm={6} key={book._id}>
                     <BookItem data={book} />
                   </Col>
                 ))
@@ -58,7 +58,7 @@ function Home() {
             </Row>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

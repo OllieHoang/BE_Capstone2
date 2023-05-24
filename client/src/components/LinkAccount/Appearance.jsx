@@ -162,7 +162,7 @@ const Appearance = () => {
         </div>
 
         <div className="text-xl font-medium mt-10">Themes</div>
-        <div className="flex gap-4 h-full w-[600px] flex-wrap">
+        <div className="flex xs:gap-4 s:gap-2 lg:gap-6 h-full lg:w-[600px] xs:w-[440px] s:w-[320px] flex-wrap s:grid grid-flow-row grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
           {THEMES.map((item) => {
             return (
               <div

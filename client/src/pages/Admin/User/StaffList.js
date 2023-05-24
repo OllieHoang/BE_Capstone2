@@ -181,7 +181,7 @@ export default function StaffList() {
             </div>
           </div>
           <div className="admin-content-body">
-            <Table hover>
+            <Table hover responsive>
               <thead>
                 <tr>
                   <th>SN</th>

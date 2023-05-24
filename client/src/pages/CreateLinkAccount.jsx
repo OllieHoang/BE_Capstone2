@@ -85,8 +85,8 @@ const CreateLinkAccount = () => {
   const [qrCodeName, setQrCodeName] = useState("");
 
   return (
-    <div className="pt-20 pb-20 bg-white xs:pt-24 h-screen xs:h-full">
-      <div className="text-base font-medium 2xl:mx-24 flex justify-between border-b-2 py-2 xs:mx-4 ">
+    <div className="lg:pt-20 pb-20 bg-white xs:pt-24 h-screen xs:h-full s:pt-20 s:h-full">
+      <div className="text-base font-medium xl:mx-24 flex justify-between border-b-2 py-2 xs:mx-4 ">
         <div className="flex gap-x-6">
           {tabs.map((tab) => (
             <div
@@ -241,8 +241,8 @@ const CreateLinkAccount = () => {
                     <CiShare2 /> Share
                 </div> */}
       </div>
-      <div className="max-h-full py-2 flex flex-col justify-around  lg:flex-row  ">
-        <div className="w-[600px] lg:w-[650px] xl:w-[700px] xs:w-[460px] mt-4 border-r px-12 ">
+      <div className="max-h-full py-2 flex flex-col justify-around  lg:flex-row xs:items-center lg:items-start s:items-center">
+        <div className="w-[600px] lg:w-[650px] xl:w-[700px] xs:w-[460px] s:w-[310px] mt-4 border-r px-12  xs:px-4 s:px-2">
           {type === "Link" ? <CreateLink /> : <Appearance />}
         </div>
         <div className=" flex justify-center">

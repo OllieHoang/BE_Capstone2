@@ -6,7 +6,7 @@ import styles from "./Layout.module.css";
 
 function AccountLayout() {
   return (
-    <div className="h-full pt-24 px-20 pb-20">
+    <div className="h-full pt-24 px-20 pb-20 lg:h-screen">
       <Container>
         <Row>
           <Col xl={3} className="pb-2">

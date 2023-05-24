@@ -45,9 +45,10 @@ function Header() {
     <div
       className={`${
         isAction2
-          ? "bg-white py-2 lg:px-4 xl:px-10 2xl:px-20 shadow-md xs:px-4 "
-          : "bg-none py-2 shadow-md lg:px-4 xl:px-10 2xl:px-20 xs:px-4 "
-      }  z-20  fixed w-full  `}
+          ? "bg-white py-2 lg:px-4 xl:px-10 2xl:px-20 shadow-md "
+          : "bg-none py-2 shadow-md lg:px-4 xl:px-10 2xl:px-20 "
+      }  z-20  fixed w-full xs:px-4 s:px-2
+      `}
     >
       <div className={styles.headerCenter}>
         <div>
@@ -67,7 +68,7 @@ function Header() {
               <div className={styles.headerIcon}>
                 {currentUser.email && currentUser.fullName ? (
                   <div
-                    className={` xs:w-[50px] lg:w-[150px] xl:w-[200px] flex items-center justify-center flex-col ${styles.account}`}
+                    className={` xs:w-[50px] lg:w-[150px] xl:w-[200px] s:w-[30px] flex items-center justify-center flex-col ${styles.account}`}
                   >
                     <img
                       className={styles.avatar}
@@ -158,9 +159,9 @@ function Header() {
               </div>
               <div className={`flex items-center ${styles.headerIcon}`}>
                 <Link to="/gio-hang">
-                  <BsCart2 className="2xl:w-[32px] xs:w-[24px]" />
+                  <BsCart2 className="2xl:w-[32px] xs:w-[24px] s:w-[20px]" />
                   <p>Cart</p>
-                  <span className={` ${styles.count} `}>
+                  <span className={` ${styles.count}  `}>
                     {cart.list.length}
                   </span>
                 </Link>
