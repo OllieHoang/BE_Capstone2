@@ -56,7 +56,7 @@ function Header() {
             <NavBarMobile />
             <div className=" flex justify-between gap-x-4 w-[966px]">
               <div className="text-2xl text-red-800 font-medium">
-                <Link to={"/home"}>SCIS.com.vn</Link>
+                <Link to={"/home"}>SCIS.link</Link>
               </div>
               {/* <div className={` {styles.search}`}>
                 <Search />

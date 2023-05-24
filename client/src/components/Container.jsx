@@ -15,8 +15,7 @@ const Container = () => {
           </div>
           <div className="flex gap-x-10 w-full  items-center ">
             <Link
-              target="_blank"
-              to={"/link"}
+              to={"/dang-nhap"}
               className="px-8 py-2 bg-white rounded cursor-pointer border border-[#2c8c87]"
             >
               CREATE NOW
