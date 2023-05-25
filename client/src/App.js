@@ -55,12 +55,14 @@ import { setCart } from "./redux/actions/cart";
 
 import { roleEnum } from "./layouts/components/SideBar/routes";
 import Demo from "./pages/Demo";
+
 import CreateLinkAccount from "./pages/CreateLinkAccount";
 import Card from "./components/Card";
 import Containt from "./components/Containt";
 import CardOriginDetail from "./pages/ProductDetail/CardOriginDetail";
 
 import CardOrigin from "./pages/Cart/CartOrigin";
+import Demo1 from "./pages/Demo1";
 
 function App() {
   const currentUser = useSelector((state) => state.auth);
@@ -112,7 +114,8 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        <Route path="/demo" element={<Demo />} />
+        <Route path="/demo1" element={<Demo1 />} />
+        <Route path="/demo/:linkname" element={<Demo />} />
 
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ki" element={<Register />} />
@@ -131,6 +134,7 @@ function App() {
           <Route path="/tim-kiem" element={<Search />} />
           <Route path="/card" element={<Card />} />
           <Route path="/link" element={<CreateLinkAccount />} />
+
           <Route
             path="/card-origin-detail/:slug"
             element={<CardOriginDetail />}

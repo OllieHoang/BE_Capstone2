@@ -19,7 +19,6 @@ export default function Profile() {
       try {
         const res = await userApi.getById(currentUser.userId);
         const data = res.data;
-        console.log(data);
         setProfile({
           _id: data._id,
           email: data.email,
