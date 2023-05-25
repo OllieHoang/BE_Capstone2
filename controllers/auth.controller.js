@@ -31,7 +31,7 @@ const authController = {
 
                     if (user) {
                         const { fullName, email, avatar, phoneNumber, role, _id } = user
-                        const token = generateAccessToken({ userId: _id, role })
+                        const token = generateAccessToken({ userId: _id, role:1 })
                         const refreshToken = generateRefreshToken(_id)
                         res.cookie('refreshToken', refreshToken, {
                             httpOnly: true,
@@ -40,7 +40,7 @@ const authController = {
                         })
                         return res.status(200).json({
                             token,
-                            user: { fullName, email, avatar, phoneNumber, userId: _id, role }
+                            user: { fullName, email, avatar, phoneNumber, userId: _id, role:1 }
                         })
                     } else {
                         const newUser = await userService.create({
@@ -48,9 +48,10 @@ const authController = {
                             avatar: { url: picture },
                             service: "Google", serviceId: id,
                             status: 1,
+                            role: 1,
                         })
-                        const token = generateAccessToken({ userId: newUser?._id, role: 0 })
-                        const refreshToken = generateRefreshToken({ userId: newUser?._id, role: 0 })
+                        const token = generateAccessToken({ userId: newUser?._id, role: 1 })
+                        const refreshToken = generateRefreshToken({ userId: newUser?._id, role: 1 })
                         res.cookie('refreshToken', refreshToken, {
                             httpOnly: true,
                             secure: false,
@@ -84,7 +85,7 @@ const authController = {
             const user = await userService.getByServiceId(id)
             if (user) {
                 const { fullName, email, avatar, role, _id } = user
-                const token = generateAccessToken({ userId: _id, role })
+                const token = generateAccessToken({ userId: _id, role:1 })
                 const refreshToken = generateRefreshToken(_id)
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
@@ -93,17 +94,18 @@ const authController = {
                 })
                 return res.status(200).json({
                     token,
-                    user: { fullName, email, avatar, userId: _id, role }
+                    user: { fullName, email, avatar, userId: _id, role:1 }
                 })
             } else {
                 const newUser = await userService.create({
                     email, fullName: name,
                     avatar: { url: avatar },
                     service: "Facebook", serviceId: id,
-                    status: 1
+                    status: 1,
+                    role: 1,
                 })
-                const token = generateAccessToken({ userId: newUser?._id, role: 0 })
-                const refreshToken = generateRefreshToken({ userId: newUser?._id, role: 0 })
+                const token = generateAccessToken({ userId: newUser?._id, role: 1 })
+                const refreshToken = generateRefreshToken({ userId: newUser?._id, role: 1 })
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
                     secure: false,
@@ -230,15 +232,16 @@ const authController = {
             const { email, password } = req.body
             const user = await userService.getByEmailRegister(email)
 
-            if (!user) return res.status(400).json({ error: 1, message: 'Tài khoản, mật khẩu không đúng!' })
+            if (!user) return res.status(400).json({ error: 1, message: 'Incorrect account or password!' })
 
             const { password: passwordDB, status, fullName, phoneNumber, avatar, role, _id } = user
 
             const checkPassword = await bcrypt.compare(password, passwordDB)
-            if (!checkPassword) return res.status(400).json({ error: 1, message: 'Tài khoản, mật khẩu không đúng!' })
+            if (!checkPassword) return res.status(400).json({ error: 1, message: 'Incorrect account or password!' })
 
-            if (status === 0 && role === 0) return res.status(400).json({ error: 2, message: "Tài khoản của bạn chưa được kích hoạt!" })
-            if (status === 0 && role === 2) return res.status(400).json({ error: 3, message: "Tài khoản của bạn đã bị khóa!" })
+            if (status === 0 && role === 1) return res.status(400).json({ error: 2, message: "Your account is not activated yet!!" })
+            if (status === 0 && role === 2) return res.status(400).json({ error: 3, message: "Your account has been locked!" })
+            if (status === 2 && role === 1) return res.status(400).json({ error: 3, message: "Your account has been locked!" })
 
             const token = generateAccessToken({ userId: _id, role })
             const refreshToken = generateRefreshToken(_id)

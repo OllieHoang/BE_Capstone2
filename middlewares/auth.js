@@ -34,7 +34,7 @@ const verifyUser = (req, res, next) => {
     try {
         const id = req.params.userId || req.query.userId
         const { role, userId } = req.user
-        if (role > 0 || id === userId) {
+        if (role === 1 || id === userId) {
             next()
         } else {
             return res.status(403).json({message: '403 Forbidden'})

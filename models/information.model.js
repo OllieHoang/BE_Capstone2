@@ -7,7 +7,7 @@ const informationSchema = new Schema({
     informationPhone: { type: String },
     informationNote: { type: String, },
     informationAvatar: { 
-      url: { type: String },
+      url: { type: String, default: 'https://res.cloudinary.com/dtfsciqga/image/upload/v1684033250/no-avatar_kitran.png' },
       publicId: { type: String }
    },
    informationLink: [{
